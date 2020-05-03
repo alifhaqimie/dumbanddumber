@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #abd1b5;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.LoginController">
+    <children>
+        <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="191.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <ImageView fitHeight="318.0" fitWidth="310.0" layoutX="1.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="98.0" AnchorPane.topAnchor="42.0">
+                    <image>
+                        <Image url="@../Assets/d80c9bc2cb0116854839390457a41106.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="289.0" layoutY="65.0" prefHeight="271.0" prefWidth="320.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="289.0" AnchorPane.rightAnchor="91.0" AnchorPane.topAnchor="65.0">
+            <effect>
+                <DropShadow />
+            </effect>
+            <children>
+                <TextField fx:id="LoginUsername" layoutX="38.0" layoutY="46.0" prefHeight="25.0" prefWidth="243.0" promptText="username" style="-fx-background-radius: 25PX;" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="39.0">
+                    <font>
+                        <Font name="System Italic" size="12.0" />
+                    </font>
+                </TextField>
+                <Button fx:id="LoginButton" layoutX="55.0" layoutY="165.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="223.0" style="-fx-background-color: #abd1b5;" text="Sign in" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="42.0" />
+                <PasswordField fx:id="LoginPassword" layoutX="37.0" layoutY="84.0" prefHeight="25.0" prefWidth="243.0" promptText="password" style="-fx-background-radius: 25PX;" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="40.0" />
+            <HBox alignment="BOTTOM_CENTER" layoutX="19.0" layoutY="190.0" prefHeight="71.0" prefWidth="205.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="17.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Need an account ?" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin></Text>
+                  <Button fx:id="registerbutton" mnemonicParsing="false" style="-fx-background-radius: 25PX;" text="Sign up">
+                     <HBox.margin>
+                        <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                     </padding>
+                  </Button>
+               </children>
+            </HBox>
+            <RadioButton fx:id="signinradio1" layoutX="64.0" layoutY="127.0" mnemonicParsing="false" selected="true" text="Doctor">
+               <toggleGroup>
+                  <ToggleGroup fx:id="signinradio" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="signinradio2" layoutX="137.0" layoutY="127.0" mnemonicParsing="false" text="Chef" toggleGroup="$signinradio" />
+            <RadioButton fx:id="signinradio3" layoutX="196.0" layoutY="127.0" mnemonicParsing="false" text="Salesman" toggleGroup="$signinradio" />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
