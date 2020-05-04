@@ -9,5 +9,11 @@ public class Const {
     public static final String Users_PASSWORD="password";
     public static final String Users_TYPE="type";
 
+    public static final String Patients_Table="patientstable";
+    //Column names
+    public static final String Patients_FULLNAME="fullname";
+    public static final String Patients_ETAT="Etatpatient";
+    public static final String Patients_MENU="Menu";
+    public static final String Patients_Regime="Regime";
 
 }
