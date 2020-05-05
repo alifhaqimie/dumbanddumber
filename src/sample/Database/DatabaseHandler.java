@@ -8,13 +8,16 @@ import java.sql.*;
 import static sample.Model.Patient.*;
 
 public class DatabaseHandler extends Configs {
-    Connection dbConnection;
-    public Connection getDbConnection() throws ClassNotFoundException, SQLException {
-        String connectionString = "jdbc:mysql://"+dbHost + ":"
-                +dbPort + "/"
-                +dbName;
+    static Connection dbConnection;
+
+
+
+    public static Connection getDbConnection() throws ClassNotFoundException, SQLException {
+        String connectionString = "jdbc:mysql://"+"localhost" + ":"
+                +"3306" + "/"
+                +"active";
         Class.forName("com.mysql.jdbc.Driver");
-        dbConnection = DriverManager.getConnection(connectionString,dbUser,dbPass);
+        dbConnection = DriverManager.getConnection(connectionString,"root","1337");
 
         return dbConnection;
     }
