@@ -119,7 +119,7 @@ public class LoginController {
                 });
 
     }
-    //medfield not working yet
+    //take to medfield (the page is designed but incomplete)
     private void showMedField(){
         registerbutton.getScene().getWindow().hide();
         FXMLLoader loader = new FXMLLoader();
@@ -136,6 +136,7 @@ public class LoginController {
 
 
     }
+    // will take us to cheffield
     private void showChefField(){
         registerbutton.getScene().getWindow().hide();
         FXMLLoader loader = new FXMLLoader();
@@ -152,6 +153,7 @@ public class LoginController {
 
 
     }
+    //salesfield page
     private void showSalesField(){
         registerbutton.getScene().getWindow().hide();
         FXMLLoader loader = new FXMLLoader();

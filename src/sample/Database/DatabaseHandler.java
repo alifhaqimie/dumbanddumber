@@ -1,8 +1,11 @@
 package sample.Database;
 
+import sample.Model.Patient;
 import sample.Model.User;
 
 import java.sql.*;
+
+import static sample.Model.Patient.*;
 
 public class DatabaseHandler extends Configs {
     Connection dbConnection;
@@ -15,6 +18,7 @@ public class DatabaseHandler extends Configs {
 
         return dbConnection;
     }
+    //signup
     public void signUpUser(User user){
         String insert = "INSERT INTO "  + Const.Users_Table + "("+Const.Users_FIRSTNAME+","+Const.Users_LASTNAME+","+Const.Users_USERNAME+","+Const.Users_PASSWORD+","+Const.Users_TYPE+")" +"Values(?,?,?,?,?)" ;
         try{
@@ -58,5 +62,25 @@ public class DatabaseHandler extends Configs {
         return resultSet;
 
     }
+    //add a patient
+    public void addPatient(Patient patient){
+        String insertion = "INSERT INTO "  + Const.Patients_Table + "("+Const.Patients_FULLNAME+","+Const.Patients_ETAT+","+Const.Patients_MENU+","
+                +Const.Patients_Regime +")" +"Values(?,?,?,?)" ;
+        try{
+            PreparedStatement preparedStatement = getDbConnection().prepareStatement(insertion);
+            preparedStatement.setString( 1,patient.getFullname());
+            preparedStatement.setString( 2,patient.getEtatpatient());
+            preparedStatement.setString( 3,patient.getMenu());
+            preparedStatement.setString( 4,patient.getRegime());
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+
+
+    }
+
 
 }

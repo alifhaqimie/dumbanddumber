@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -9,24 +10,30 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.MedFieldController">
    <children>
-      <TableView layoutY="83.0" prefHeight="316.0" prefWidth="700.0">
+      <TableView prefHeight="316.0" prefWidth="700.0">
          <columns>
             <TableColumn fx:id="PatientName" prefWidth="175.0" style="-fx-background-color: #abd1b5;" text="Patient Name" />
             <TableColumn fx:id="PatientStatus" prefWidth="182.0" style="-fx-background-color: #abd1b5;" text="Patient Status" />
             <TableColumn fx:id="Patientmenu" prefWidth="182.0" style="-fx-background-color: #abd1b5;" text="Menu" />
             <TableColumn fx:id="PatientDiet" prefWidth="163.0" style="-fx-background-color: #abd1b5;" text="Diet" />
          </columns>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </TableView>
-      <Button fx:id="AddPatient" layoutX="129.0" layoutY="47.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #abd1b5; -fx-background-radius: 25PX;" text="add patient" textFill="WHITE">
+      <Button fx:id="medAddPatient" layoutX="581.0" layoutY="322.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #abd1b5; -fx-background-radius: 25PX;" text="add patient" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <Button fx:id="DeletePatient" layoutX="491.0" layoutY="47.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #abd1b5; -fx-background-radius: 25PX;" text="Delete patient" textFill="WHITE">
+      <Button fx:id="medDeletePatient" layoutX="581.0" layoutY="357.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #abd1b5; -fx-background-radius: 25PX;" text="Delete patient" textFill="WHITE">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <TextField layoutX="276.0" layoutY="35.0" prefHeight="25.0" prefWidth="176.0" promptText="Search patient " />
+      <TextField fx:id="medPatientName" layoutX="14.0" layoutY="359.0" prefHeight="25.0" prefWidth="122.0" promptText="patient name" />
+      <TextField fx:id="medPatientState" layoutX="152.0" layoutY="359.0" prefHeight="25.0" prefWidth="122.0" promptText="state" />
+      <TextField fx:id="medPatientMenu" layoutX="289.0" layoutY="359.0" prefHeight="25.0" prefWidth="122.0" promptText="Menu" />
+      <TextField fx:id="medPatientRegime" layoutX="424.0" layoutY="359.0" prefHeight="25.0" prefWidth="122.0" promptText="Regime" />
    </children>
 </AnchorPane>
