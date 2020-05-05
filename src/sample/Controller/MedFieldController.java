@@ -67,8 +67,24 @@ public class MedFieldController  {
                 databaseHandler = new DatabaseHandler();
                 medAddPatient.setOnAction(event ->{
                         addPatient();
+                        showPatients();
+
                         
                 });
+                
+
+
+        }
+        private void addPatient(){
+                String patientName = medPatientName.getText().trim();
+                String patientState = medPatientState.getText().trim();
+                String patientMenu = medPatientMenu.getText().trim();
+                String patientRegime = medPatientRegime.getText().trim();
+
+                Patient patient = new Patient(patientName,patientState,patientMenu,patientRegime);
+                databaseHandler.addPatient(patient);
+        }
+        private void showPatients(){
                 Connection con = null;
                 try {
                         con = DatabaseHandler.getDbConnection();
@@ -103,20 +119,13 @@ public class MedFieldController  {
 
                 patientsTable.setItems(oblist);
 
-        }
-        private void addPatient(){
-                String patientName = medPatientName.getText().trim();
-                String patientState = medPatientState.getText().trim();
-                String patientMenu = medPatientMenu.getText().trim();
-                String patientRegime = medPatientRegime.getText().trim();
 
-                Patient patient = new Patient(patientName,patientState,patientMenu,patientRegime);
-                databaseHandler.addPatient(patient);
         }
         ObservableList<Table> oblist = FXCollections.observableArrayList();
 
 
-       
+
+
 
 
 
