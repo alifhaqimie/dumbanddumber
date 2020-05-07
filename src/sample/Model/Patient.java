@@ -1,50 +1,72 @@
 package sample.Model;
 
-public class Patient {
-    private String fullname;
-    private String Etatpatient;
-    private String Menu;
-    private String Regime;
+public class Patient
+{
+	private String	fullname;
+	private String	Etatpatient;
+	private String	Menu;
+	private String	Regime;
+	private int			doctorId;
 
-    public Patient() {
-    }
+	public Patient()
+	{
+	}
 
-    public Patient(String fullname, String etatpatient, String menu, String regime) {
-        this.fullname = fullname;
-        this.Etatpatient=etatpatient;
-        this.Menu=menu;
-        this.Regime=regime;
-    }
+	public Patient(String fullname, String etatpatient, String menu, String regime)
+	{
+		this.fullname = fullname;
+		this.Etatpatient = etatpatient;
+		this.Menu = menu;
+		this.Regime = regime;
+	}
 
-    public String getFullname() {
-        return fullname;
-    }
+	public int getDoctorId()
+	{
+		return doctorId;
+	}
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
+	public void setDoctorId(int doctorId)
+	{
+		this.doctorId = doctorId;
+	}
 
-    public String getEtatpatient() {
-        return Etatpatient;
-    }
+	public String getFullname()
+	{
+		return fullname;
+	}
 
-    public void setEtatpatient(String etatpatient) {
-        Etatpatient = etatpatient;
-    }
+	public void setFullname(String fullname)
+	{
+		this.fullname = fullname;
+	}
 
-    public String getMenu() {
-        return Menu;
-    }
+	public String getEtatpatient()
+	{
+		return Etatpatient;
+	}
 
-    public void setMenu(String menu) {
-        Menu = menu;
-    }
+	public void setEtatpatient(String etatpatient)
+	{
+		Etatpatient = etatpatient;
+	}
 
-    public String getRegime() {
-        return Regime;
-    }
+	public String getMenu()
+	{
+		return Menu;
+	}
 
-    public void setRegime(String regime) {
-        Regime = regime;
-    }
+	public void setMenu(String menu)
+	{
+		Menu = menu;
+	}
+
+	public String getRegime()
+	{
+		return Regime;
+	}
+
+	public void setRegime(String regime)
+	{
+		Regime = regime;
+	}
 }

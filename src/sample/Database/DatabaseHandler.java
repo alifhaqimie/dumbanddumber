@@ -1,89 +1,149 @@
 package sample.Database;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import sample.Model.Patient;
 import sample.Model.User;
 
-import java.sql.*;
+public class DatabaseHandler extends Configs
+{
+	static Connection dbConnection;
 
-import static sample.Model.Patient.*;
+	public static Connection getDbConnection() throws ClassNotFoundException, SQLException
+	{
+		String connectionString = "jdbc:mysql://" + "localhost" + ":" + "3306" + "/" + "active";
+		Class.forName("com.mysql.jdbc.Driver");
+		dbConnection = DriverManager.getConnection(connectionString, "root", "12345");
 
-public class DatabaseHandler extends Configs {
-    static Connection dbConnection;
+		return dbConnection;
+	}
 
+	//signup
+	public void signUpUser(User user)
+	{
+		String insert = "INSERT INTO " +
+			Const.Users_Table + "(" + Const.Users_FIRSTNAME + "," + Const.Users_LASTNAME + "," +
+			Const.Users_USERNAME + "," + Const.Users_PASSWORD + "," + Const.Users_TYPE + ")" +
+			"Values(?,?,?,?,?)";
+		try
+		{
+			PreparedStatement preparedStatement = getDbConnection().prepareStatement(insert);
+			preparedStatement.setString(1, user.getFirstname());
+			preparedStatement.setString(2, user.getLastname());
+			preparedStatement.setString(3, user.getUsername());
+			preparedStatement.setString(4, user.getPassword());
+			preparedStatement.setString(5, user.getType());
 
+			preparedStatement.executeUpdate();
 
-    public static Connection getDbConnection() throws ClassNotFoundException, SQLException {
-        String connectionString = "jdbc:mysql://"+"localhost" + ":"
-                +"3306" + "/"
-                +"active";
-        Class.forName("com.mysql.jdbc.Driver");
-        dbConnection = DriverManager.getConnection(connectionString,"root","1337");
+		}
+		catch (SQLException | ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
 
-        return dbConnection;
-    }
-    //signup
-    public void signUpUser(User user){
-        String insert = "INSERT INTO "  + Const.Users_Table + "("+Const.Users_FIRSTNAME+","+Const.Users_LASTNAME+","+Const.Users_USERNAME+","+Const.Users_PASSWORD+","+Const.Users_TYPE+")" +"Values(?,?,?,?,?)" ;
-        try{
-            PreparedStatement preparedStatement = getDbConnection().prepareStatement(insert);
-            preparedStatement.setString( 1,user.getFirstname());
-            preparedStatement.setString( 2,user.getLastname());
-            preparedStatement.setString( 3,user.getUsername());
-            preparedStatement.setString( 4,user.getPassword());
-            preparedStatement.setString( 5,user.getType());
+	}
 
-            preparedStatement.executeUpdate();
+	public ResultSet getUser(User user)
+	{
+		ResultSet resultSet = null;
 
-        } catch (SQLException | ClassNotFoundException e){
-            e.printStackTrace();
-        }
+		if (!user.getUsername().equals("") || !user.getPassword().equals(""))
+		{
+			String query = "SELECT * FROM " +
+				Const.Users_Table + " " + "WHERE" + " " + Const.Users_USERNAME + "=?" + " " + "AND" + " " +
+				Const.Users_PASSWORD + "=?" + " " + "AND" + " " + Const.Users_TYPE + "=?";
+			try
+			{
+				PreparedStatement preparedStatement = getDbConnection().prepareStatement(query);
+				preparedStatement.setString(1, user.getUsername());
+				preparedStatement.setString(2, user.getPassword());
+				preparedStatement.setString(3, user.getType());
 
-    }
-    public ResultSet getUser(User user){
-        ResultSet resultSet = null;
+				resultSet = preparedStatement.executeQuery();
 
-        if(!user.getUsername().equals("")||!user.getPassword().equals("")){
-            String query = "SELECT * FROM " + Const.Users_Table + " " + "WHERE" +" " +  Const.Users_USERNAME + "=?" + " "
-                    + "AND" +" " + Const.Users_PASSWORD + "=?" + " " + "AND" + " " +Const.Users_TYPE + "=?";
-            try{
-                PreparedStatement preparedStatement = getDbConnection().prepareStatement(query);
-                preparedStatement.setString(1,user.getUsername());
-                preparedStatement.setString(2,user.getPassword());
-                preparedStatement.setString(3,user.getType());
+			}
+			catch (SQLException | ClassNotFoundException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			System.out.println("please enter your information");
 
-                resultSet = preparedStatement.executeQuery();
+		}
 
-            } catch (SQLException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }else{
-            System.out.println("please enter your information");
+		return resultSet;
 
-        }
+	}
 
+	public int getUserId(User user)
+	{
+		ResultSet resultSet = null;
+		int i = 0;
+		if (!user.getUsername().equals("") && !user.getPassword().equals(""))
+		{
+			String query = "SELECT userId FROM " +
+				Const.Users_Table + " " + "WHERE" + " " + Const.Users_USERNAME + "=?" + " " + "AND" + " " +
+				Const.Users_PASSWORD + "=?" + " " + "AND" + " " + Const.Users_TYPE + "=?";
+			try
+			{
+				PreparedStatement preparedStatement = getDbConnection().prepareStatement(query);
+				preparedStatement.setString(1, user.getUsername());
+				preparedStatement.setString(2, user.getPassword());
+				preparedStatement.setString(3, user.getType());
 
-        return resultSet;
+				resultSet = preparedStatement.executeQuery();
+				if (resultSet.next())
+				{
+					i = resultSet.getInt("userId");
+					resultSet.next();
+				}
 
-    }
-    //add a patient
-    public void addPatient(Patient patient){
-        String insertion = "INSERT INTO "  + Const.Patients_Table + "("+Const.Patients_FULLNAME+","+Const.Patients_ETAT+","+Const.Patients_MENU+","
-                +Const.Patients_Regime +")" +"Values(?,?,?,?)" ;
-        try{
-            PreparedStatement preparedStatement = getDbConnection().prepareStatement(insertion);
-            preparedStatement.setString( 1,patient.getFullname());
-            preparedStatement.setString( 2,patient.getEtatpatient());
-            preparedStatement.setString( 3,patient.getMenu());
-            preparedStatement.setString( 4,patient.getRegime());
+			}
+			catch (SQLException | ClassNotFoundException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			System.out.println("please enter your information");
 
-            preparedStatement.executeUpdate();
+		}
+		return i;
 
-        } catch (SQLException | ClassNotFoundException e){
-            e.printStackTrace();
-        }
+	}
 
+	//add a patient
+	public void addPatient(Patient patient)
+	{
+		String insertion = "INSERT INTO " +
+			Const.Patients_Table + "(" + Const.Patients_FULLNAME + "," + Const.Patients_ETAT + "," +
+			Const.Patients_MENU + "," + Const.Patients_Regime + "," + Const.Patients_DoctorId + ")" +
+			"Values(?,?,?,?,?)";
+		try
+		{
+			PreparedStatement preparedStatement = getDbConnection().prepareStatement(insertion);
+			preparedStatement.setString(1, patient.getFullname());
+			preparedStatement.setString(2, patient.getEtatpatient());
+			preparedStatement.setString(3, patient.getMenu());
+			preparedStatement.setString(4, patient.getRegime());
+			preparedStatement.setInt(5, patient.getDoctorId());
 
-    }
+			preparedStatement.executeUpdate();
 
+		}
+		catch (SQLException | ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+
+	}
 
 }
