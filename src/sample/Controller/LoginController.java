@@ -117,7 +117,6 @@ public class LoginController {
 
 
                 });
-
     }
     //take to medfield (the page is designed but incomplete)
     private void showMedField(){

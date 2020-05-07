@@ -68,34 +68,31 @@ public class MedFieldController  {
                 medAddPatient.setOnAction(event ->{
                         addPatient();
                         showPatients();
-
                         
                 });
-                
-
 
         }
-        private void addPatient(){
+        private void addPatient() {
                 String patientName = medPatientName.getText().trim();
                 String patientState = medPatientState.getText().trim();
                 String patientMenu = medPatientMenu.getText().trim();
                 String patientRegime = medPatientRegime.getText().trim();
 
-                Patient patient = new Patient(patientName,patientState,patientMenu,patientRegime);
+                Patient patient = new Patient(patientName, patientState, patientMenu, patientRegime);
                 databaseHandler.addPatient(patient);
         }
         private void showPatients(){
                 Connection con = null;
                 try {
                         con = DatabaseHandler.getDbConnection();
-                } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
-                } catch (SQLException e) {
+                } catch (ClassNotFoundException | SQLException e) {
                         e.printStackTrace();
                 }
                 ResultSet rs = null;
-                try {
-                        rs = con.createStatement().executeQuery("SELECT * FROM patientstable");
+                try{
+                        String qq="SELECT * FROM patientstable ";
+                        System.out.println(qq);
+                        rs = con.createStatement().executeQuery(qq);
                 } catch (SQLException e) {
                         e.printStackTrace();
                 }
@@ -119,10 +116,8 @@ public class MedFieldController  {
 
                 patientsTable.setItems(oblist);
 
-
         }
         ObservableList<Table> oblist = FXCollections.observableArrayList();
-
 
 
 

@@ -1,6 +1,10 @@
 package sample.Database;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.cell.PropertyValueFactory;
 import sample.Model.Patient;
+import sample.Model.Table;
 import sample.Model.User;
 
 import java.sql.*;
@@ -68,7 +72,7 @@ public class DatabaseHandler extends Configs {
     //add a patient
     public void addPatient(Patient patient){
         String insertion = "INSERT INTO "  + Const.Patients_Table + "("+Const.Patients_FULLNAME+","+Const.Patients_ETAT+","+Const.Patients_MENU+","
-                +Const.Patients_Regime +")" +"Values(?,?,?,?)" ;
+                +Const.Patients_Regime +")" +"Values(?,?,?,?)";
         try{
             PreparedStatement preparedStatement = getDbConnection().prepareStatement(insertion);
             preparedStatement.setString( 1,patient.getFullname());
@@ -84,6 +88,5 @@ public class DatabaseHandler extends Configs {
 
 
     }
+    }
 
-
-}

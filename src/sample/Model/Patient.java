@@ -6,10 +6,13 @@ public class Patient {
     private String Menu;
     private String Regime;
 
+
+
+
     public Patient() {
     }
 
-    public Patient(String fullname, String etatpatient, String menu, String regime) {
+    public Patient(String fullname, String etatpatient, String menu, String regime ) {
         this.fullname = fullname;
         this.Etatpatient=etatpatient;
         this.Menu=menu;
