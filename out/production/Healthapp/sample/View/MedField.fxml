@@ -10,12 +10,13 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.MedFieldController">
    <children>
-      <TableView fx:id="patientsTable" layoutX="-7.0" prefHeight="316.0" prefWidth="708.0">
+      <TableView fx:id="patientsTable" layoutX="-7.0" onMouseClicked="#getSelected" onMouseEntered="#getSelected" prefHeight="316.0" prefWidth="708.0">
          <columns>
+            <TableColumn fx:id="PatientID" prefWidth="77.0" style="-fx-background-color: #abd1b5;" text="Patient ID" />
             <TableColumn fx:id="PatientName" prefWidth="175.0" style="-fx-background-color: #abd1b5;" text="Patient Name" />
-            <TableColumn fx:id="PatientStatus" prefWidth="175.0" style="-fx-background-color: #abd1b5;" text="Patient Status" />
-            <TableColumn fx:id="Patientmenu" prefWidth="175.0" style="-fx-background-color: #abd1b5;" text="Menu" />
-            <TableColumn fx:id="PatientDiet" prefWidth="182.0" style="-fx-background-color: #abd1b5;" text="Diet" />
+            <TableColumn fx:id="PatientStatus" prefWidth="150.0" style="-fx-background-color: #abd1b5;" text="Patient Status" />
+            <TableColumn fx:id="Patientmenu" prefWidth="150.0" style="-fx-background-color: #abd1b5;" text="Menu" />
+            <TableColumn fx:id="PatientDiet" prefWidth="155.0" style="-fx-background-color: #abd1b5;" text="Diet" />
          </columns>
          <opaqueInsets>
             <Insets />

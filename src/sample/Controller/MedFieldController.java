@@ -2,6 +2,7 @@ package sample.Controller;
 
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -9,28 +10,27 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import sample.Database.DatabaseHandler;
 import sample.Model.Patient;
 import sample.Model.Table;
-import sample.Model.User;
 
-
+import javax.swing.*;
 
 public class MedFieldController
 {
 	@FXML
-	private ResourceBundle							resources;
+	private ResourceBundle	resources;
 
 	@FXML
-	private URL													location;
+	private URL	location;
 
 	@FXML
-	private TableView<Table>						patientsTable;
+	private TableView<Table> patientsTable;
+	@FXML
+	private TableColumn<Table, Integer> PatientID;
+
 
 	@FXML
 	private TableColumn<Table, String>	PatientName;
@@ -45,38 +45,78 @@ public class MedFieldController
 	private TableColumn<Table, String>	PatientDiet;
 
 	@FXML
-	private Button											medAddPatient;
+	private Button	medAddPatient;
 
 	@FXML
-	private Button											medDeletePatient;
+	private Button	medDeletePatient;
 
 	@FXML
-	private Button											medModify;
+	private Button medModify;
 
 	@FXML
-	private TextField										medPatientName;
+	private TextField medPatientName;
 
 	@FXML
-	private TextField										medPatientState;
+	private TextField medPatientState;
 
 	@FXML
-	private TextField										medPatientMenu;
+	private TextField medPatientMenu;
 
 	@FXML
-	private TextField										medPatientRegime;
+	private TextField medPatientRegime;
+	ObservableList<Table> oblist;
+	Connection conu = null;
+	int index = -1;
 
-	private DatabaseHandler							databaseHandler;
+
+	private DatabaseHandler	databaseHandler;
 
 	@FXML
 	void initialize()
 	{
+		UpdateTable();
+		patientsTable.setEditable(true);
+
+		//This will allow the table to select multiple rows at once
+
+		patientsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		databaseHandler = new DatabaseHandler();
 		medAddPatient.setOnAction(event -> {
 			addPatient();
-			showPatients();
 
 		});
+		medModify.setOnAction(event -> {
+			Edit();
+		});
+		medDeletePatient.setOnAction(event -> {
+			try {
+				Delete();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		});
 
+	}
+
+	public void Edit(){
+		try{
+			String tmp;
+			conu=DatabaseHandler.getDbConnection();
+			String Value0 =PatientID.getText();
+			String Value1 = medPatientName.getText();
+			String Value2 = medPatientState.getText();
+			String Value3 = medPatientMenu.getText();
+			String Value4 = medPatientRegime.getText();
+			String sql ="UPDATE patientstable SET fullname = '"+Value1+"',Etatpatient = '"+Value2+"',Menu = '"+Value3+"',Regime = '"+Value4+"' WHERE idpatientstable = '"+Value0+"' " ;
+			PreparedStatement psst = conu.prepareStatement(sql);
+			System.out.println(sql);
+			psst.execute();
+			UpdateTable();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void addPatient()
@@ -91,9 +131,10 @@ public class MedFieldController
 		patient.setDoctorId(LoginController.userConnectedId);
 
 		databaseHandler.addPatient(patient);
+		UpdateTable();
 	}
 
-	private void showPatients()
+	private ObservableList<Table> showPatients()
 	{
 		Connection con = null;
 		try
@@ -109,9 +150,16 @@ public class MedFieldController
 			e.printStackTrace();
 		}
 		ResultSet rs = null;
+		ObservableList<Table> oblist = FXCollections.observableArrayList();
 		try
 		{
-			rs = con.createStatement().executeQuery("SELECT * FROM patientstable JOIN userstable ON patientstable.userId=userstable.userId");
+			PreparedStatement prp =con.prepareStatement("SELECT * FROM patientstable INNER JOIN userstable ON patientstable.userId=userstable.userId WHERE userstable.userid=?");
+			prp.setInt(1,LoginController.userConnectedId);
+			rs = prp.executeQuery();
+
+
+
+			//rs = con.createStatement().executeQuery("SELECT * FROM patientstable INNER JOIN userstable ON patientstable.userId=userstable.userId WHERE userstable.username=?");
 		}
 		catch (SQLException e)
 		{
@@ -131,13 +179,14 @@ public class MedFieldController
 			try
 			{
 				oblist
-					.add(new Table(rs.getString("fullname"), rs.getString("Etatpatient"), rs.getString("Menu"), rs.getString("Regime")));
+					.add(new Table(rs.getInt("idpatientstable"),rs.getString("fullname"), rs.getString("Etatpatient"), rs.getString("Menu"), rs.getString("Regime")));
 			}
 			catch (SQLException e)
 			{
 				e.printStackTrace();
 			}
 		}
+		PatientID.setCellValueFactory(new PropertyValueFactory<>("idpatientstable"));
 		PatientName.setCellValueFactory(new PropertyValueFactory<>("fullname"));
 		PatientStatus.setCellValueFactory(new PropertyValueFactory<>("Etatpatient"));
 		Patientmenu.setCellValueFactory(new PropertyValueFactory<>("Menu"));
@@ -145,8 +194,44 @@ public class MedFieldController
 
 		patientsTable.setItems(oblist);
 
+		return oblist;
 	}
 
-	ObservableList<Table> oblist = FXCollections.observableArrayList();
+	@FXML
+	public void getSelected(javafx.scene.input.MouseEvent event) {
+		index=patientsTable.getSelectionModel().getSelectedIndex();
+		if(index<=-1){
+			return;
+		}
+		PatientID.setText(String.valueOf(PatientID.getCellData(index)).toString());
+		medPatientName.setText(PatientName.getCellData(index).toString());
+		medPatientState.setText(PatientStatus.getCellData(index).toString());
+		medPatientMenu.setText(Patientmenu.getCellData(index).toString());
+		medPatientRegime.setText(PatientDiet.getCellData(index).toString());
+	}
+	@FXML
+	public void Delete() throws SQLException, ClassNotFoundException {
+		conu = DatabaseHandler.getDbConnection();
+		String sql = "delete from patientstable where idpatientstable = ?";
+		try {
+			PreparedStatement pst = conu.prepareStatement(sql);
+			pst.setString(1,PatientID.getText());
+			pst.execute();
+			JOptionPane.showMessageDialog(null, "Delete");
+			UpdateTable();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
 
+	}
+	public void UpdateTable(){
+		PatientID.setCellValueFactory(new PropertyValueFactory<Table,Integer>("idpatientstable"));
+		PatientName.setCellValueFactory(new PropertyValueFactory<Table,String>("fullname"));
+		PatientStatus.setCellValueFactory(new PropertyValueFactory<Table,String>("Etatpatient"));
+		Patientmenu.setCellValueFactory(new PropertyValueFactory<Table,String>("Menu"));
+		PatientDiet.setCellValueFactory(new PropertyValueFactory<Table,String>("Regime"));
+
+		oblist = showPatients();
+		patientsTable.setItems(oblist);
+	}
 }

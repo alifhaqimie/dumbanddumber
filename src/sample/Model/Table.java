@@ -2,12 +2,22 @@ package sample.Model;
 
 public class Table {
     String fullname,Etatpatient,Menu,Regime;
+    int idpatientstable;
 
-    public Table(String fullname, String etatpatient, String menu, String regime) {
+    public int getIdpatientstable() {
+        return idpatientstable;
+    }
+
+    public void setIdpatientstable(int idpatientstable) {
+        this.idpatientstable = idpatientstable;
+    }
+
+    public Table(int idpatientstable, String fullname, String etatpatient, String menu, String regime) {
+        this.idpatientstable=idpatientstable;
         this.fullname = fullname;
-        Etatpatient = etatpatient;
-        Menu = menu;
-        Regime = regime;
+        this.Etatpatient = etatpatient;
+        this.Menu = menu;
+       this.Regime = regime;
     }
 
     public String getFullname() {

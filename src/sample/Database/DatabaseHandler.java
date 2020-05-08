@@ -88,6 +88,7 @@ public class DatabaseHandler extends Configs
 		return resultSet;
 
 	}
+	
 
 	public int getUserId(User user)
 	{
