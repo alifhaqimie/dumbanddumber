@@ -18,4 +18,12 @@ public class Const
 	public static final String	Patients_Regime="Regime";
 	public static final String	Patients_usersId="userId";
 
+
+	public static final String Order_Table="ordertable";
+	//column names
+	public static final String Order_id="idordertable";
+	public static final String Order_date="cDate";
+	public static final String Order_commande="Commande";
+	public static final String Order_quantity="Quantity";
+
 }

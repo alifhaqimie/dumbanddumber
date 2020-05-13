@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import sample.Model.Chef;
 import sample.Model.Patient;
 import sample.Model.Table;
 import sample.Model.User;
@@ -153,5 +154,24 @@ public class DatabaseHandler extends Configs
 		}
 
 	}
+	public void addOrder(Chef chef){
+		String insertion = "INSERT INTO " +
+				Const.Order_Table + "(" + Const.Order_id + "," + Const.Order_date + "," +
+				Const.Order_commande + "," + Const.Order_quantity + ")" +
+				"Values(?,?,?,?)";
+		try{
+			PreparedStatement preparedStatement = getDbConnection().prepareStatement(insertion);
+			preparedStatement.setString(1,chef.getNumero());
+			preparedStatement.setString( 2,chef.getDate() );
+			preparedStatement.setString( 3,chef.getOrdre());
+			preparedStatement.setString( 4,chef.getQuantity());
+
+			preparedStatement.executeUpdate();
+
+		} catch (SQLException | ClassNotFoundException e){
+			e.printStackTrace();
+		}
+	}
+
 
 }

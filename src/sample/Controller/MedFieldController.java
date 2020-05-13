@@ -15,7 +15,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import sample.Database.DatabaseHandler;
 import sample.Model.Patient;
 import sample.Model.Table;
-
 import javax.swing.*;
 
 public class MedFieldController
@@ -64,6 +63,69 @@ public class MedFieldController
 
 	@FXML
 	private TextField medPatientRegime;
+	@FXML
+	private MenuButton menubar;
+	@FXML
+	private RadioMenuItem tst1;
+
+	@FXML
+	private ToggleGroup k;
+
+	@FXML
+	private RadioMenuItem tst2;
+
+	@FXML
+	private RadioMenuItem tst3;
+
+	@FXML
+	private RadioMenuItem tst4;
+
+	@FXML
+	private RadioMenuItem tst5;
+	@FXML
+	private MenuButton menubar1;
+
+	@FXML
+	private RadioMenuItem r1;
+
+	@FXML
+	private ToggleGroup k1;
+
+	@FXML
+	private RadioMenuItem r2;
+
+	@FXML
+	private RadioMenuItem r3;
+
+	@FXML
+	private RadioMenuItem r4;
+
+	@FXML
+	private RadioMenuItem r5;
+
+	@FXML
+	private MenuButton menubar2;
+
+	@FXML
+	private RadioMenuItem s1;
+
+	@FXML
+	private ToggleGroup k2;
+
+	@FXML
+	private RadioMenuItem s2;
+
+	@FXML
+	private RadioMenuItem s3;
+
+	@FXML
+	private RadioMenuItem s4;
+
+	@FXML
+	private RadioMenuItem s5;
+
+
+
 	ObservableList<Table> oblist;
 	Connection conu = null;
 	int index = -1;
@@ -122,9 +184,46 @@ public class MedFieldController
 	private void addPatient()
 	{
 		String patientName = medPatientName.getText().trim();
-		String patientState = medPatientState.getText().trim();
-		String patientMenu = medPatientMenu.getText().trim();
-		String patientRegime = medPatientRegime.getText().trim();
+		String patientState= " ";
+		if(s1.isSelected()){
+			patientState="Soins intensifs";
+		}else if(tst2.isSelected()){
+			patientState="Hospitalisation court séjour";
+		}else if(tst3.isSelected()){
+			patientState="Hospitalisation long séjour";
+		}else if(tst4.isSelected()){
+			patientState="Hospitalisation du jour";
+		}else{
+			patientState = medPatientState.getText().trim();
+		}
+		//String patientState = medPatientState.getText().trim();
+		//String patientMenu = medPatientMenu.getText().trim();
+		//String patientRegime = medPatientRegime.getText().trim();
+		String patientRegime= " ";
+		if(r1.isSelected()){
+			patientRegime="Sans sel";
+		}else if(r2.isSelected()){
+			patientRegime="Avec sel";
+		}else if(r3.isSelected()){
+			patientRegime="Sans sucre";
+		}else if(r4.isSelected()){
+			patientRegime="Avec sucre";
+		}else{
+			patientRegime = medPatientRegime.getText().trim();
+		}
+
+		String patientMenu = " ";
+		if(tst1.isSelected()){
+			patientMenu="Végétarien";
+		}else if(tst2.isSelected()){
+			patientMenu="Bœuf";
+		}else if(tst3.isSelected()){
+			patientMenu="Agneau";
+		}else if(tst4.isSelected()){
+			patientMenu="Poulet";
+		}else{
+			patientMenu = medPatientMenu.getText().trim();
+		}
 
 		Patient patient = new Patient(patientName, patientState, patientMenu, patientRegime);
 
