@@ -1,12 +1,23 @@
 package sample.Model;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class Patient
 {
 	private String	fullname;
 	private String	Etatpatient;
 	private String	Menu;
-	private String	Regime;
-	private int			doctorId;
+	private String Regime;
+	private int	doctorId;
+	private int Patientid;
+	public int getPatientid() {
+		return Patientid;
+	}
+
+	public void setPatientid(int patientid) {
+		Patientid = patientid;
+	}
+
 
 	public Patient()
 	{
@@ -37,7 +48,7 @@ public class Patient
 
 	public void setFullname(String fullname)
 	{
-		this.fullname = fullname;
+		this.fullname =fullname;
 	}
 
 	public String getEtatpatient()

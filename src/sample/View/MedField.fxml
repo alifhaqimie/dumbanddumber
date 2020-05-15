@@ -2,20 +2,24 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.MedFieldController">
    <children>
-      <TableView fx:id="patientsTable" layoutX="-7.0" prefHeight="316.0" prefWidth="708.0">
+      <TableView fx:id="patientsTable" layoutX="-7.0" onMouseClicked="#getSelected" onMouseEntered="#getSelected" prefHeight="316.0" prefWidth="708.0">
          <columns>
+            <TableColumn fx:id="PatientID" prefWidth="77.0" style="-fx-background-color: #abd1b5;" text="Patient ID" />
             <TableColumn fx:id="PatientName" prefWidth="175.0" style="-fx-background-color: #abd1b5;" text="Patient Name" />
-            <TableColumn fx:id="PatientStatus" prefWidth="175.0" style="-fx-background-color: #abd1b5;" text="Patient Status" />
-            <TableColumn fx:id="Patientmenu" prefWidth="175.0" style="-fx-background-color: #abd1b5;" text="Menu" />
-            <TableColumn fx:id="PatientDiet" prefWidth="182.0" style="-fx-background-color: #abd1b5;" text="Diet" />
+            <TableColumn fx:id="PatientStatus" prefWidth="150.0" style="-fx-background-color: #abd1b5;" text="Patient Status" />
+            <TableColumn fx:id="Patientmenu" prefWidth="150.0" style="-fx-background-color: #abd1b5;" text="Menu" />
+            <TableColumn fx:id="PatientDiet" prefWidth="155.0" style="-fx-background-color: #abd1b5;" text="Diet" />
          </columns>
          <opaqueInsets>
             <Insets />
@@ -28,9 +32,48 @@
       </Button>
       <Button fx:id="medDeletePatient" layoutX="190.0" layoutY="359.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" style="-fx-background-color: #abd1b5; -fx-background-radius: 25PX;" text="Delete patient" textFill="WHITE" />
       <TextField fx:id="medPatientName" layoutX="7.0" layoutY="324.0" prefHeight="25.0" prefWidth="159.0" promptText="patient name" />
-      <TextField fx:id="medPatientState" layoutX="180.0" layoutY="324.0" prefHeight="25.0" prefWidth="159.0" promptText="state" />
-      <TextField fx:id="medPatientMenu" layoutX="358.0" layoutY="324.0" prefHeight="25.0" prefWidth="159.0" promptText="Menu" />
-      <TextField fx:id="medPatientRegime" layoutX="528.0" layoutY="324.0" prefHeight="25.0" prefWidth="159.0" promptText="Regime" />
+      <TextField fx:id="medPatientState" layoutX="266.0" layoutY="324.0" prefHeight="25.0" prefWidth="73.0" promptText="State" />
+      <TextField fx:id="medPatientMenu" layoutX="444.0" layoutY="324.0" prefHeight="25.0" prefWidth="73.0" promptText="Menu" />
+      <TextField fx:id="medPatientRegime" layoutX="624.0" layoutY="324.0" prefHeight="25.0" prefWidth="73.0" promptText="Regime" />
       <Button fx:id="medModify" layoutX="420.0" layoutY="359.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" style="-fx-background-color: #abd1b5; -fx-background-radius: 25PX;" text="Modify" textFill="WHITE" />
+      <MenuButton fx:id="menubar" layoutX="364.0" layoutY="324.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Menu">
+        <items>
+            <RadioMenuItem fx:id="tst1" mnemonicParsing="false" text="Végétarien">
+               <toggleGroup>
+                  <ToggleGroup fx:id="k" />
+               </toggleGroup>
+            </RadioMenuItem>
+            <RadioMenuItem fx:id="tst2" mnemonicParsing="false" text="Bœuf" toggleGroup="$k" />
+            <RadioMenuItem fx:id="tst3" mnemonicParsing="false" text="Agneau" toggleGroup="$k" />
+            <RadioMenuItem fx:id="tst4" mnemonicParsing="false" text="Poulet" toggleGroup="$k" />
+            <RadioMenuItem fx:id="tst5" mnemonicParsing="false" text="Autres " toggleGroup="$k" />
+        </items>
+      </MenuButton>
+      <MenuButton fx:id="menubar1" layoutX="538.0" layoutY="324.0" mnemonicParsing="false" text="Regime">
+         <items>
+            <RadioMenuItem fx:id="r1" mnemonicParsing="false" text="Sans sel">
+               <toggleGroup>
+                  <ToggleGroup fx:id="k1" />
+               </toggleGroup>
+            </RadioMenuItem>
+            <RadioMenuItem fx:id="r2" mnemonicParsing="false" text="Avec sel" toggleGroup="$k1" />
+            <RadioMenuItem fx:id="r3" mnemonicParsing="false" text="Sans sucre" toggleGroup="$k1" />
+            <RadioMenuItem fx:id="r4" mnemonicParsing="false" text="Avec sucre" toggleGroup="$k1" />
+            <RadioMenuItem fx:id="r5" mnemonicParsing="false" text="Autres " toggleGroup="$k1" />
+         </items>
+      </MenuButton>
+      <MenuButton fx:id="menubar2" layoutX="184.0" layoutY="324.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="State">
+         <items>
+            <RadioMenuItem fx:id="s1" mnemonicParsing="false" text="Soins intensifs">
+               <toggleGroup>
+                  <ToggleGroup fx:id="k2" />
+               </toggleGroup>
+            </RadioMenuItem>
+            <RadioMenuItem fx:id="s2" mnemonicParsing="false" text="Hospitalisation court séjour" toggleGroup="$k2" />
+            <RadioMenuItem fx:id="s3" mnemonicParsing="false" text="Hospitalisation long séjour" toggleGroup="$k2" />
+            <RadioMenuItem fx:id="s4" mnemonicParsing="false" text="Hospitalisation du jour" toggleGroup="$k2" />
+            <RadioMenuItem fx:id="s5" mnemonicParsing="false" text="Autres " toggleGroup="$k2" />
+         </items>
+      </MenuButton>
    </children>
 </AnchorPane>

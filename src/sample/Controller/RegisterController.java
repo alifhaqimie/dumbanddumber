@@ -1,11 +1,16 @@
 package sample.Controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import sample.Database.DatabaseHandler;
 import sample.Model.User;
 import javafx.scene.control.RadioButton;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -43,9 +48,7 @@ public class RegisterController {
     void initialize() {
         signupbutton.setOnAction(event -> {
             createUser();
-
-        });
-
+            });
     }
     private void createUser(){
         DatabaseHandler databaseHandler = new DatabaseHandler();
@@ -67,5 +70,7 @@ public class RegisterController {
 
         databaseHandler.signUpUser(user);
 
+
     }
+
 }

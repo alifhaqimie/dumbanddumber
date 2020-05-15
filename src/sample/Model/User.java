@@ -2,7 +2,7 @@ package sample.Model;
 
 public class User
 {
-	private int			userId;
+	private int	userId;
 	private String	firstname;
 	private String	lastname;
 	private String	username;

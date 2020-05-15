@@ -1,13 +1,21 @@
 package sample.Database;
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.cell.PropertyValueFactory;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import sample.Model.Chef;
 import sample.Model.Patient;
+import sample.Model.Table;
 import sample.Model.User;
+
+import java.sql.*;
+
+import static sample.Model.Patient.*;
 
 public class DatabaseHandler extends Configs
 {
@@ -17,7 +25,7 @@ public class DatabaseHandler extends Configs
 	{
 		String connectionString = "jdbc:mysql://" + "localhost" + ":" + "3306" + "/" + "active";
 		Class.forName("com.mysql.jdbc.Driver");
-		dbConnection = DriverManager.getConnection(connectionString, "root", "12345");
+		dbConnection = DriverManager.getConnection(connectionString, "root", "1337");
 
 		return dbConnection;
 	}
@@ -81,6 +89,7 @@ public class DatabaseHandler extends Configs
 		return resultSet;
 
 	}
+	
 
 	public int getUserId(User user)
 	{
@@ -125,7 +134,7 @@ public class DatabaseHandler extends Configs
 	{
 		String insertion = "INSERT INTO " +
 			Const.Patients_Table + "(" + Const.Patients_FULLNAME + "," + Const.Patients_ETAT + "," +
-			Const.Patients_MENU + "," + Const.Patients_Regime + "," + Const.Patients_DoctorId + ")" +
+			Const.Patients_MENU + "," + Const.Patients_Regime + "," + Const.Patients_usersId+ ")" +
 			"Values(?,?,?,?,?)";
 		try
 		{
@@ -145,5 +154,24 @@ public class DatabaseHandler extends Configs
 		}
 
 	}
+	public void addOrder(Chef chef){
+		String insertion = "INSERT INTO " +
+				Const.Order_Table + "(" + Const.Order_id + "," + Const.Order_date + "," +
+				Const.Order_commande + "," + Const.Order_quantity + ")" +
+				"Values(?,?,?,?)";
+		try{
+			PreparedStatement preparedStatement = getDbConnection().prepareStatement(insertion);
+			preparedStatement.setString(1,chef.getNumero());
+			preparedStatement.setString( 2,chef.getDate() );
+			preparedStatement.setString( 3,chef.getOrdre());
+			preparedStatement.setString( 4,chef.getQuantity());
+
+			preparedStatement.executeUpdate();
+
+		} catch (SQLException | ClassNotFoundException e){
+			e.printStackTrace();
+		}
+	}
+
 
 }

@@ -50,7 +50,7 @@ public class LoginController
 
 	private DatabaseHandler	databaseHandler;
 
-	public static int				userConnectedId;
+	public static int userConnectedId;
 
 	@FXML
 	void initialize()
