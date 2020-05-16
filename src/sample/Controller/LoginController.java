@@ -22,35 +22,35 @@ import sample.Model.User;
 public class LoginController
 {
 	@FXML
-	private ResourceBundle	resources;
+	private ResourceBundle					resources;
 
 	@FXML
-	private URL							location;
+	private URL											location;
 
 	@FXML
-	private TextField				LoginUsername;
+	private TextField								LoginUsername;
 
 	@FXML
-	private Button					LoginButton;
+	private Button									LoginButton;
 
 	@FXML
-	private RadioButton			signinradio1;
+	private RadioButton							signinradio1;
 
 	@FXML
-	private RadioButton			signinradio2;
+	private RadioButton							signinradio2;
 
 	@FXML
-	private PasswordField		LoginPassword;
+	private PasswordField						LoginPassword;
 
 	@FXML
-	private Button					registerbutton;
+	private Button									registerbutton;
 
 	@FXML
-	private RadioButton			signinradio3;
+	private RadioButton							signinradio3;
 
-	private DatabaseHandler	databaseHandler;
+	private static DatabaseHandler	databaseHandler;
 
-	public static int				userConnectedId;
+	public static int								userConnectedId;
 
 	@FXML
 	void initialize()
@@ -95,7 +95,20 @@ public class LoginController
 				}
 				if (counter == 1)
 				{
-					afterLogin(user, type);
+					userConnectedId = databaseHandler.getUserId(user);
+
+					if (type == "doctor")
+					{
+						showMedField();
+					}
+					else if (type == "Chef")
+					{
+						showChefField();
+					}
+					else if (type == "Salesman")
+					{
+						showSalesField();
+					}
 
 				}
 				else
@@ -135,22 +148,10 @@ public class LoginController
 
 	}
 
-	public void afterLogin(User user, String type)
+	public static void setUserConnectedId(User user)
 	{
-		userConnectedId = databaseHandler.getUserId(user);
-
-		if (type == "doctor")
-		{
-			showMedField();
-		}
-		else if (type == "Chef")
-		{
-			showChefField();
-		}
-		else if (type == "Salesman")
-		{
-			showSalesField();
-		}
+		LoginController.userConnectedId = databaseHandler.getUserId(user);
+		;
 	}
 
 	//take to medfield (the page is designed but incomplete)

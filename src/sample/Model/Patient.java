@@ -10,7 +10,7 @@ public class Patient
 	private String Regime;
 	private int	doctorId;
 	private int Patientid;
-	public int getPatientid() {
+	public  int getPatientid() {
 		return Patientid;
 	}
 

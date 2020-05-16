@@ -44,6 +44,9 @@ public class MedFieldController
 	private TableColumn<Table, String>	PatientDiet;
 
 	@FXML
+	private Button logout;
+
+	@FXML
 	private Button	medAddPatient;
 
 	@FXML

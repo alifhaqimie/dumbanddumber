@@ -101,8 +101,90 @@ public class RegisterController
 		{
 			User user = new User(name, lastname, username, password, type);
 			databaseHandler.signUpUser(user);
+			LoginController.setUserConnectedId(user);
+			afterSignup(type);
 
 		}
+
+	}
+
+	public void afterSignup(String type)
+	{
+
+		if (type == "doctor")
+		{
+			showMedField();
+		}
+		else if (type == "Chef")
+		{
+			showChefField();
+		}
+		else if (type == "Salesman")
+		{
+			showSalesField();
+		}
+	}
+
+	//take to medfield (the page is designed but incomplete)
+	private void showMedField()
+	{
+		signupbutton.getScene().getWindow().hide();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/sample/view/MedField.fxml"));
+		try
+		{
+			loader.load();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		Parent root = loader.getRoot();
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.show();
+
+	}
+
+	// will take us to cheffield
+	private void showChefField()
+	{
+		signupbutton.getScene().getWindow().hide();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/sample/view/ChefField.fxml"));
+		try
+		{
+			loader.load();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		Parent root = loader.getRoot();
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.show();
+
+	}
+
+	//salesfield page
+	private void showSalesField()
+	{
+		signupbutton.getScene().getWindow().hide();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/sample/view/SalesField.fxml"));
+		try
+		{
+			loader.load();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		Parent root = loader.getRoot();
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.show();
 
 	}
 
