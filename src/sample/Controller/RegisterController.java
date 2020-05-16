@@ -1,14 +1,19 @@
 package sample.Controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import sample.Animation.Shaker;
 import sample.Database.DatabaseHandler;
 import sample.Model.User;
@@ -96,8 +101,90 @@ public class RegisterController
 		{
 			User user = new User(name, lastname, username, password, type);
 			databaseHandler.signUpUser(user);
+			LoginController.setUserConnectedId(user);
+			afterSignup(type);
 
 		}
+
+	}
+
+	public void afterSignup(String type)
+	{
+
+		if (type == "doctor")
+		{
+			showMedField();
+		}
+		else if (type == "Chef")
+		{
+			showChefField();
+		}
+		else if (type == "Salesman")
+		{
+			showSalesField();
+		}
+	}
+
+	//take to medfield (the page is designed but incomplete)
+	private void showMedField()
+	{
+		signupbutton.getScene().getWindow().hide();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/sample/view/MedField.fxml"));
+		try
+		{
+			loader.load();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		Parent root = loader.getRoot();
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+
+	}
+
+	// will take us to cheffield
+	private void showChefField()
+	{
+		signupbutton.getScene().getWindow().hide();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/sample/view/ChefField.fxml"));
+		try
+		{
+			loader.load();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		Parent root = loader.getRoot();
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
+
+	}
+
+	//salesfield page
+	private void showSalesField()
+	{
+		signupbutton.getScene().getWindow().hide();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/sample/view/SalesField.fxml"));
+		try
+		{
+			loader.load();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		Parent root = loader.getRoot();
+		Stage stage = new Stage();
+		stage.setScene(new Scene(root));
+		stage.showAndWait();
 
 	}
 
