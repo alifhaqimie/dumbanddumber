@@ -1,76 +1,104 @@
 package sample.Controller;
 
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
-import sample.Database.DatabaseHandler;
-import sample.Model.User;
-import javafx.scene.control.RadioButton;
-
-import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class RegisterController {
-    @FXML
-    private ResourceBundle resources;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import sample.Animation.Shaker;
+import sample.Database.DatabaseHandler;
+import sample.Model.User;
 
-    @FXML
-    private URL location;
+public class RegisterController
+{
+	@FXML
+	private ResourceBundle	resources;
 
-    @FXML
-    private TextField registerfirstname;
+	@FXML
+	private URL							location;
 
-    @FXML
-    private TextField registerusername;
+	@FXML
+	private TextField				registerfirstname;
 
-    @FXML
-    private PasswordField registerpassword;
+	@FXML
+	private TextField				registerusername;
 
-    @FXML
-    private Button signupbutton;
+	@FXML
+	private PasswordField		registerpassword;
 
-    @FXML
-    private RadioButton registerradio1;
+	@FXML
+	private Button					signupbutton;
 
-    @FXML
-    private RadioButton registerradio2;
+	@FXML
+	private RadioButton			registerradio1;
 
-    @FXML
-    private RadioButton registerradio3;
+	@FXML
+	private RadioButton			registerradio2;
 
-    @FXML
-    private TextField registerlastname;
-    @FXML
-    void initialize() {
-        signupbutton.setOnAction(event -> {
-            createUser();
-            });
-    }
-    private void createUser(){
-        DatabaseHandler databaseHandler = new DatabaseHandler();
-        String name = registerfirstname.getText();
-        String lastname = registerlastname.getText();
-        String username = registerusername.getText();
-        String password = registerpassword.getText();
-        String type = " ";
-        if(registerradio1.isSelected()){
-            type="doctor";
-        }else if(registerradio2.isSelected()){
-            type="Chef";
-        }else if(registerradio3.isSelected()){
-            type="Salesman";
-        }else {
+	@FXML
+	private RadioButton			registerradio3;
 
-        }
-        User user = new User(name,lastname,username,password,type);
+	@FXML
+	private TextField				registerlastname;
 
-        databaseHandler.signUpUser(user);
+	LoginController					loginController;
 
+	@FXML
+	void initialize()
+	{
+		signupbutton.setOnAction(event -> { createUser(); });
 
-    }
+	}
+
+	private void createUser()
+	{
+		DatabaseHandler databaseHandler = new DatabaseHandler();
+		String name = registerfirstname.getText();
+		String lastname = registerlastname.getText();
+		String username = registerusername.getText();
+		String password = registerpassword.getText();
+		String type = " ";
+		Boolean exists = false;
+		if (registerradio1.isSelected())
+		{
+			type = "doctor";
+		}
+		else if (registerradio2.isSelected())
+		{
+			type = "Chef";
+		}
+		else if (registerradio3.isSelected())
+		{
+			type = "Salesman";
+		}
+		else
+		{
+
+		}
+
+		List<String> listUsernames = databaseHandler.getListUsernames();
+		for (String user : listUsernames)
+		{
+			if (user.equalsIgnoreCase(username))
+			{
+				exists = true;
+				Shaker userNameShaker = new Shaker(registerusername);
+				userNameShaker.shake();
+				registerusername.setText(" ");
+				break;
+			}
+		}
+		if (!exists)
+		{
+			User user = new User(name, lastname, username, password, type);
+			databaseHandler.signUpUser(user);
+
+		}
+
+	}
 
 }

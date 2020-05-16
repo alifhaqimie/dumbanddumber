@@ -50,7 +50,7 @@ public class LoginController
 
 	private DatabaseHandler	databaseHandler;
 
-	public static int userConnectedId;
+	public static int				userConnectedId;
 
 	@FXML
 	void initialize()
@@ -95,20 +95,7 @@ public class LoginController
 				}
 				if (counter == 1)
 				{
-					userConnectedId = databaseHandler.getUserId(user);
-
-					if (type == "doctor")
-					{
-						showMedField();
-					}
-					else if (type == "Chef")
-					{
-						showChefField();
-					}
-					else if (type == "Salesman")
-					{
-						showSalesField();
-					}
+					afterLogin(user, type);
 
 				}
 				else
@@ -146,6 +133,24 @@ public class LoginController
 
 		});
 
+	}
+
+	public void afterLogin(User user, String type)
+	{
+		userConnectedId = databaseHandler.getUserId(user);
+
+		if (type == "doctor")
+		{
+			showMedField();
+		}
+		else if (type == "Chef")
+		{
+			showChefField();
+		}
+		else if (type == "Salesman")
+		{
+			showSalesField();
+		}
 	}
 
 	//take to medfield (the page is designed but incomplete)
