@@ -20,7 +20,7 @@ public class DatabaseHandler extends Configs
 	{
 		String connectionString = "jdbc:mysql://" + "localhost" + ":" + "3306" + "/" + "active";
 		Class.forName("com.mysql.jdbc.Driver");
-		dbConnection = DriverManager.getConnection(connectionString, "root", "1337");
+		dbConnection = DriverManager.getConnection(connectionString, "root", "12345");
 
 		return dbConnection;
 	}

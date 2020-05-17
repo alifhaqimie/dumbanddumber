@@ -150,8 +150,16 @@ public class LoginController
 
 	public static void setUserConnectedId(User user)
 	{
-		LoginController.userConnectedId = databaseHandler.getUserId(user);
-		;
+		System.out.println("heheeeee");
+
+		if (user == null)
+		{
+			System.out.println("hehe");
+			userConnectedId = 0;
+		}
+		else
+			userConnectedId = databaseHandler.getUserId(user);
+
 	}
 
 	//take to medfield (the page is designed but incomplete)
