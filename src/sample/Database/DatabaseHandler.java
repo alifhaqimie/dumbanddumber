@@ -1,16 +1,13 @@
 package sample.Database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import sample.Model.Chef;
-import sample.Model.Patient;
-import sample.Model.User;
+import javafx.scene.control.TextField;
+import sample.Model.*;
 
 public class DatabaseHandler extends Configs
 {
@@ -20,7 +17,7 @@ public class DatabaseHandler extends Configs
 	{
 		String connectionString = "jdbc:mysql://" + "localhost" + ":" + "3306" + "/" + "active";
 		Class.forName("com.mysql.jdbc.Driver");
-		dbConnection = DriverManager.getConnection(connectionString, "root", "12345");
+		dbConnection = DriverManager.getConnection(connectionString, "root", "1337");
 
 		return dbConnection;
 	}
@@ -48,6 +45,31 @@ public class DatabaseHandler extends Configs
 		{
 			e.printStackTrace();
 		}
+
+	}
+	public void makeorder(OrderTable order){
+		String pattern = "yyyy-MM-dd";
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+		String insert = "INSERT INTO " +
+				Const.Order_Table + "(" + Const.Order_date + "," + Const.Order_rdate + "," +
+				Const.Order_commande + "," + Const.Order_quantity +  ")" +
+				"Values(?,?,?,?)";
+		try
+		{
+			PreparedStatement preparedStatement = getDbConnection().prepareStatement(insert);
+			preparedStatement.setDate(1, java.sql.Date.valueOf(order.getCdate()));
+			preparedStatement.setDate(2, java.sql.Date.valueOf(order.getRdate()));
+			preparedStatement.setString(3,order.getCommande() );
+			preparedStatement.setString(4,order.getQuantity() );
+
+			preparedStatement.executeUpdate();
+
+		}
+		catch (SQLException | ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+
 
 	}
 
@@ -152,18 +174,68 @@ public class DatabaseHandler extends Configs
 	public void addPatient(Patient patient)
 	{
 		String insertion = "INSERT INTO " +
-			Const.Patients_Table + "(" + Const.Patients_FULLNAME + "," + Const.Patients_ETAT + "," +
-			Const.Patients_MENU + "," + Const.Patients_Regime + "," + Const.Patients_usersId + ")" +
-			"Values(?,?,?,?,?)";
+				Const.Patients_Table + "(" + Const.Patients_FULLNAME + "," + Const.Patients_ETAT + "," +
+				Const.Patients_BREAKFAST + "," +Const.Patients_LUNCH + "," + Const.Patients_DINNER + "," +Const.Patients_Regime + "," + Const.Patients_usersId+ ")" +
+				"Values(?,?,?,?,?,?,?)";
 		try
 		{
 			PreparedStatement preparedStatement = getDbConnection().prepareStatement(insertion);
 			preparedStatement.setString(1, patient.getFullname());
 			preparedStatement.setString(2, patient.getEtatpatient());
-			preparedStatement.setString(3, patient.getMenu());
-			preparedStatement.setString(4, patient.getRegime());
-			preparedStatement.setInt(5, patient.getDoctorId());
+			preparedStatement.setString(3, patient.getBreakfast());
+			preparedStatement.setString(4, patient.getLunch());
+			preparedStatement.setString(5, patient.getDinner());
+			preparedStatement.setString(6, patient.getRegime());
+			preparedStatement.setInt(7, patient.getDoctorId());
 
+			preparedStatement.executeUpdate();
+
+		}
+		catch (SQLException | ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+
+	}
+
+	//add an element
+	public void addElement(Storage storage)
+	{
+		String insertion = "INSERT INTO " +
+				Const.Storage_Table + "(" + Const.Element_id + "," + Const.Storage_element+ "," +
+				Const.Storage_zone + "," + Const.Storage_type +  ")" +
+				"Values(?,?,?,?)";
+		try
+		{
+			PreparedStatement preparedStatement = getDbConnection().prepareStatement(insertion);
+			preparedStatement.setString(1, String.valueOf(storage.getIdelement()));
+			preparedStatement.setString(2, storage.getElement());
+			preparedStatement.setString(3, storage.getStoragezone());
+			preparedStatement.setString(4, storage.getStoragetype());
+
+
+			preparedStatement.executeUpdate();
+
+		}
+		catch (SQLException | ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+
+	}
+	public void getQuantity(Quantity quantity){
+
+		String insert = "INSERT INTO " +
+				Const.Quantity_Table + "(" + Const.Quantity_Element+ "," + Const.Quantity_initial + "," + Const.Quantity_consumed + "," + Const.Quantity_ordered + ","+ Const.Quantity_present+ ")" +
+				"Values(?,?,?,?,?)";
+		try
+		{
+			PreparedStatement preparedStatement = getDbConnection().prepareStatement(insert);
+			preparedStatement.setString(1, quantity.getElement());
+			preparedStatement.setInt(2, quantity.getInitial());
+			preparedStatement.setInt(3, quantity.getConsumed());
+			preparedStatement.setInt(4, quantity.getOrdered());
+			preparedStatement.setInt(5, quantity.getPresent());
 			preparedStatement.executeUpdate();
 
 		}
@@ -194,6 +266,40 @@ public class DatabaseHandler extends Configs
 		{
 			e.printStackTrace();
 		}
+	}
+	public void getPlat(Menu plat){
+		String insert = "INSERT INTO " +
+				Const.Menu_Table+ "("+ Const.Menu_plat+ ","  + Const.Menu_gras1+ "," + Const.Menu_gras2 + "," +
+				Const.Menu_fruit1 + "," + Const.Menu_fruit2 + "," + Const.Menu_fruit3+ "," + Const.Menu_legume1+ ","+ Const.Menu_legume2+ "," +
+				Const.Menu_legume3 + "," + Const.Menu_cereal + "," + Const.Menu_cereal1+ "," + Const.Menu_boisson+ ","+ Const.Menu_vvpolav + "," +Const.Menu_name+")" +
+				"Values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		try
+		{
+			PreparedStatement preparedStatement = getDbConnection().prepareStatement(insert);
+			preparedStatement.setString(1, plat.getPlat());
+			preparedStatement.setString(2, plat.getGras());
+			preparedStatement.setString(3, plat.getGras1());
+			preparedStatement.setString(4, plat.getFruit1());
+			preparedStatement.setString(5, plat.getFruit2());
+			preparedStatement.setString(6, plat.getFruit3());
+			preparedStatement.setString(7, plat.getLeg1());
+			preparedStatement.setString(8, plat.getLeg2());
+			preparedStatement.setString(9, plat.getLeg3());
+			preparedStatement.setString(10, plat.getCereal1());
+			preparedStatement.setString(11, plat.getCereal2());
+			preparedStatement.setString(12, plat.getBoi());
+			preparedStatement.setString(13, plat.getVvpolav());
+			preparedStatement.setString(14, plat.getName());
+
+			preparedStatement.executeUpdate();
+
+		}
+		catch (SQLException | ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+
+
 	}
 
 }

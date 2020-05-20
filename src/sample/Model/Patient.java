@@ -6,7 +6,7 @@ public class Patient
 {
 	private String	fullname;
 	private String	Etatpatient;
-	private String	Menu;
+	private String	breakfast,lunch,dinner;
 	private String Regime;
 	private int	doctorId;
 	private int Patientid;
@@ -23,12 +23,37 @@ public class Patient
 	{
 	}
 
-	public Patient(String fullname, String etatpatient, String menu, String regime)
-	{
+	public String getBreakfast() {
+		return breakfast;
+	}
+
+	public void setBreakfast(String breakfast) {
+		this.breakfast = breakfast;
+	}
+
+	public String getLunch() {
+		return lunch;
+	}
+
+	public void setLunch(String lunch) {
+		this.lunch = lunch;
+	}
+
+	public String getDinner() {
+		return dinner;
+	}
+
+	public void setDinner(String dinner) {
+		this.dinner = dinner;
+	}
+
+	public Patient(String fullname, String etatpatient, String breakfast, String lunch, String dinner, String regime) {
 		this.fullname = fullname;
-		this.Etatpatient = etatpatient;
-		this.Menu = menu;
-		this.Regime = regime;
+		Etatpatient = etatpatient;
+		this.breakfast = breakfast;
+		this.lunch = lunch;
+		this.dinner = dinner;
+		Regime = regime;
 	}
 
 	public int getDoctorId()
@@ -60,17 +85,6 @@ public class Patient
 	{
 		Etatpatient = etatpatient;
 	}
-
-	public String getMenu()
-	{
-		return Menu;
-	}
-
-	public void setMenu(String menu)
-	{
-		Menu = menu;
-	}
-
 	public String getRegime()
 	{
 		return Regime;

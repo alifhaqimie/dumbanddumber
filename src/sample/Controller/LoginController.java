@@ -188,7 +188,7 @@ public class LoginController
 	{
 		registerbutton.getScene().getWindow().hide();
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/sample/view/ChefField.fxml"));
+		loader.setLocation(getClass().getResource("/sample/view/ChefField2.fxml"));
 		try
 		{
 			loader.load();

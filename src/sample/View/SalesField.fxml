@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.SalesFieldController">
-   <children>
-      <TextField layoutX="197.0" layoutY="146.0" text="SALES FIELD(design later)" />
-   </children>
-</AnchorPane>
+<TabPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.SalesFieldController">
+   <tabs>
+      <Tab closable="false" text="Orders">
+         <content>
+            <AnchorPane prefHeight="400.0" prefWidth="700.0">
+               <children>
+                  <TableView fx:id="orderstable" prefHeight="401.0" prefWidth="700.0">
+                    <columns>
+                      <TableColumn fx:id="orderID" prefWidth="175.0" style="-fx-background-color: #abd1b5;" text="OrderID" />
+                      <TableColumn fx:id="orderDate" prefWidth="175.0" style="-fx-background-color: #abd1b5;" text="Date" />
+                        <TableColumn fx:id="orderCommande" prefWidth="175.0" style="-fx-background-color: #abd1b5;" text="Commande" />
+                        <TableColumn fx:id="orderQuantity" prefWidth="175.0" style="-fx-background-color: #abd1b5;" text="Quantity" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+   </tabs>
+</TabPane>

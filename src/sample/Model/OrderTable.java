@@ -1,47 +1,63 @@
 package sample.Model;
 
+import java.time.LocalDate;
+
 public class OrderTable {
-    String commande,datecommande,quantity;
-    String NCommande;
+    int idordertable;
+    String Commande,Quantity;
+    LocalDate cdate;
+    LocalDate rdate;
 
-    public OrderTable(String NCommande, String datecommande, String commande, String quantity) {
-
-        this.NCommande = NCommande;
-        this.datecommande = datecommande;
-        this.commande = commande;
-        this.quantity = quantity;
+    public OrderTable(LocalDate chefOrderDa, LocalDate receptionDa, String commande, String quantity) {
     }
 
-    public String getNCommande() {
-        return NCommande;
+    public OrderTable(int idordertable, LocalDate  cdate, LocalDate  rdate, String commande, String quantity) {
+        this.idordertable = idordertable;
+        this.cdate = cdate;
+        this.rdate = rdate;
+        Commande = commande;
+        Quantity = quantity;
+
     }
 
-    public void setNCommande(String NCommande) {
-        this.NCommande = NCommande;
+    public int getIdordertable() {
+        return idordertable;
     }
 
-    public String getDatecommande() {
-        return datecommande;
-    }
-
-    public void setDatecommande(String datecommande) {
-        this.datecommande = datecommande;
+    public void setIdordertable(int idordertable) {
+        this.idordertable = idordertable;
     }
 
     public String getCommande() {
-        return commande;
+        return Commande;
     }
 
     public void setCommande(String commande) {
-        this.commande = commande;
+        Commande = commande;
     }
 
     public String getQuantity() {
-        return quantity;
+        return Quantity;
     }
 
     public void setQuantity(String quantity) {
-        this.quantity = quantity;
+        Quantity = quantity;
+    }
+
+    public LocalDate getCdate() {
+        return cdate;
+    }
+
+    public void setCdate(LocalDate cdate) {
+        this.cdate = cdate;
+    }
+
+    public LocalDate getRdate() {
+        return rdate;
+    }
+
+    public void setRdate(LocalDate rdate) {
+        this.rdate = rdate;
     }
 }
 

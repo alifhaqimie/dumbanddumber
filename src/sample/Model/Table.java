@@ -1,7 +1,7 @@
 package sample.Model;
 
 public class Table {
-    String fullname,Etatpatient,Menu,Regime;
+    String fullname,Etatpatient,breakfast,lunch,dinner,Regime;
     int idpatientstable;
 
     public int getIdpatientstable() {
@@ -12,12 +12,38 @@ public class Table {
         this.idpatientstable = idpatientstable;
     }
 
-    public Table(int idpatientstable, String fullname, String etatpatient, String menu, String regime) {
-        this.idpatientstable=idpatientstable;
+    public String getBreakfast() {
+        return breakfast;
+    }
+
+    public void setBreakfast(String breakfast) {
+        this.breakfast = breakfast;
+    }
+
+    public String getLunch() {
+        return lunch;
+    }
+
+    public void setLunch(String lunch) {
+        this.lunch = lunch;
+    }
+
+    public String getDinner() {
+        return dinner;
+    }
+
+    public void setDinner(String dinner) {
+        this.dinner = dinner;
+    }
+
+    public Table(int idpatientstable, String fullname, String etatpatient, String breakfast, String lunch, String dinner, String regime) {
         this.fullname = fullname;
-        this.Etatpatient = etatpatient;
-        this.Menu = menu;
-       this.Regime = regime;
+        Etatpatient = etatpatient;
+        this.breakfast = breakfast;
+        this.lunch = lunch;
+        this.dinner = dinner;
+        Regime = regime;
+        this.idpatientstable = idpatientstable;
     }
 
     public String getFullname() {
@@ -34,14 +60,6 @@ public class Table {
 
     public void setEtatpatient(String etatpatient) {
         Etatpatient = etatpatient;
-    }
-
-    public String getMenu() {
-        return Menu;
-    }
-
-    public void setMenu(String menu) {
-        Menu = menu;
     }
 
     public String getRegime() {

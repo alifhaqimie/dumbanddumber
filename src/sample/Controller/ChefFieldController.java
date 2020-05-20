@@ -3,10 +3,8 @@ package sample.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -57,6 +55,9 @@ public class ChefFieldController {
 
     @FXML
     private TableColumn<OrderTable, String> Order;
+    @FXML
+    private RadioMenuItem ChefFraise;
+
 
     @FXML
     private TableColumn<OrderTable, String> QuantiteOrder;
@@ -81,7 +82,10 @@ public class ChefFieldController {
         String Numero = NOrder.getText().trim();
 
         String  date = DateOrder.getText().trim();
-        String Ordre= Order.getText().trim();
+        String Ordre=" ";
+        if(ChefFraise.isSelected()){
+            Ordre="Fraise";
+        }
         String Quantity = QuantiteOrder.getText().trim();
 
 
@@ -111,12 +115,12 @@ public class ChefFieldController {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-            try{
-                tab.add(new OrderTable(rs.getString("idordertable"),rs.getString("cDate")
-                        ,rs.getString("Commande"),rs.getString("Quantity")));
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+            //try{
+              //  tab.add(new OrderTable(rs.getInt("idordertable"),rs.getString("cDate")
+                //        ,rs.getString("Commande"),rs.getString("Quantity")));
+            //} catch (SQLException throwables) {
+              //  throwables.printStackTrace();
+            //}
             NOrder.setCellValueFactory(new PropertyValueFactory<>("idordertable"));
             DateOrder.setCellValueFactory(new PropertyValueFactory<>("cDate"));
             Order.setCellValueFactory(new PropertyValueFactory<>("Commande"));
@@ -148,11 +152,11 @@ public class ChefFieldController {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-            try{
-                tableau.add(new MenuTable(rs.getInt("idpatientstable"),rs.getString("Menu")));
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+            //try{
+              //  tableau.add(new MenuTable(rs.getInt("idpatientstable"),rs.getString("")));
+            //} catch (SQLException throwables) {
+               // throwables.printStackTrace();
+            //}
 
 
         }

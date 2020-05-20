@@ -2,79 +2,119 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.MedFieldController">
-   <children>
-      <TableView fx:id="patientsTable" layoutX="-7.0" onMouseClicked="#getSelected" onMouseEntered="#getSelected" prefHeight="316.0" prefWidth="708.0">
-         <columns>
-            <TableColumn fx:id="PatientID" prefWidth="77.0" style="-fx-background-color: #abd1b5;" text="Patient ID" />
-            <TableColumn fx:id="PatientName" prefWidth="175.0" style="-fx-background-color: #abd1b5;" text="Patient Name" />
-            <TableColumn fx:id="PatientStatus" prefWidth="150.0" style="-fx-background-color: #abd1b5;" text="Patient Status" />
-            <TableColumn fx:id="Patientmenu" prefWidth="150.0" style="-fx-background-color: #abd1b5;" text="Menu" />
-            <TableColumn fx:id="PatientDiet" prefWidth="155.0" style="-fx-background-color: #abd1b5;" text="Diet" />
-         </columns>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </TableView>
-      <Button fx:id="medAddPatient" layoutX="299.0" layoutY="357.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="112.0" style="-fx-background-color: #abd1b5; -fx-background-radius: 25PX;" text="add patient" textFill="WHITE">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Button>
-      <Button fx:id="medDeletePatient" layoutX="190.0" layoutY="359.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" style="-fx-background-color: #abd1b5; -fx-background-radius: 25PX;" text="Delete patient" textFill="WHITE" />
-      <TextField fx:id="medPatientName" layoutX="7.0" layoutY="324.0" prefHeight="25.0" prefWidth="159.0" promptText="patient name" />
-      <TextField fx:id="medPatientState" layoutX="266.0" layoutY="324.0" prefHeight="25.0" prefWidth="73.0" promptText="State" />
-      <TextField fx:id="medPatientMenu" layoutX="444.0" layoutY="324.0" prefHeight="25.0" prefWidth="73.0" promptText="Menu" />
-      <TextField fx:id="medPatientRegime" layoutX="624.0" layoutY="324.0" prefHeight="25.0" prefWidth="73.0" promptText="Regime" />
-      <Button fx:id="medModify" layoutX="420.0" layoutY="359.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" style="-fx-background-color: #abd1b5; -fx-background-radius: 25PX;" text="Modify" textFill="WHITE" />
-      <MenuButton fx:id="menubar" layoutX="364.0" layoutY="324.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="Menu">
-        <items>
-            <RadioMenuItem fx:id="tst1" mnemonicParsing="false" text="Végétarien">
-               <toggleGroup>
-                  <ToggleGroup fx:id="k" />
-               </toggleGroup>
-            </RadioMenuItem>
-            <RadioMenuItem fx:id="tst2" mnemonicParsing="false" text="Bœuf" toggleGroup="$k" />
-            <RadioMenuItem fx:id="tst3" mnemonicParsing="false" text="Agneau" toggleGroup="$k" />
-            <RadioMenuItem fx:id="tst4" mnemonicParsing="false" text="Poulet" toggleGroup="$k" />
-            <RadioMenuItem fx:id="tst5" mnemonicParsing="false" text="Autres " toggleGroup="$k" />
-        </items>
-      </MenuButton>
-      <MenuButton fx:id="menubar1" layoutX="538.0" layoutY="324.0" mnemonicParsing="false" text="Regime">
-         <items>
-            <RadioMenuItem fx:id="r1" mnemonicParsing="false" text="Sans sel">
-               <toggleGroup>
-                  <ToggleGroup fx:id="k1" />
-               </toggleGroup>
-            </RadioMenuItem>
-            <RadioMenuItem fx:id="r2" mnemonicParsing="false" text="Avec sel" toggleGroup="$k1" />
-            <RadioMenuItem fx:id="r3" mnemonicParsing="false" text="Sans sucre" toggleGroup="$k1" />
-            <RadioMenuItem fx:id="r4" mnemonicParsing="false" text="Avec sucre" toggleGroup="$k1" />
-            <RadioMenuItem fx:id="r5" mnemonicParsing="false" text="Autres " toggleGroup="$k1" />
-         </items>
-      </MenuButton>
-      <MenuButton fx:id="menubar2" layoutX="184.0" layoutY="324.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="73.0" text="State">
-         <items>
-            <RadioMenuItem fx:id="s1" mnemonicParsing="false" text="Soins intensifs">
-               <toggleGroup>
-                  <ToggleGroup fx:id="k2" />
-               </toggleGroup>
-            </RadioMenuItem>
-            <RadioMenuItem fx:id="s2" mnemonicParsing="false" text="Hospitalisation court séjour" toggleGroup="$k2" />
-            <RadioMenuItem fx:id="s3" mnemonicParsing="false" text="Hospitalisation long séjour" toggleGroup="$k2" />
-            <RadioMenuItem fx:id="s4" mnemonicParsing="false" text="Hospitalisation du jour" toggleGroup="$k2" />
-            <RadioMenuItem fx:id="s5" mnemonicParsing="false" text="Autres " toggleGroup="$k2" />
-         </items>
-      </MenuButton>
-      <Button fx:id="logout" layoutX="61.0" layoutY="359.0" mnemonicParsing="false" text="Logout" />
-   </children>
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.MedFieldController">
+    <children>
+        <TabPane prefHeight="500.0" prefWidth="800.0">
+            <tabs>
+                <Tab closable="false" text="Patients">
+                    <content>
+                        <AnchorPane prefHeight="400.0" prefWidth="700.0">
+                            <children>
+                                <TableView fx:id="patientsTable" layoutX="-7.0" onMouseClicked="#getSelected" onMouseEntered="#getSelected" prefHeight="378.0" prefWidth="809.0">
+                                    <columns>
+                                        <TableColumn fx:id="PatientID" minWidth="15.0" prefWidth="100.0" style="-fx-background-color: #abd1b5;" text="Patient ID" />
+                                        <TableColumn fx:id="PatientName" prefWidth="125.0" style="-fx-background-color: #abd1b5;" text="Patient Name" />
+                                        <TableColumn fx:id="PatientStatus" prefWidth="100.0" style="-fx-background-color: #abd1b5;" text="Patient Status" />
+                                        <TableColumn fx:id="PatientDiet" prefWidth="120.0" style="-fx-background-color: #abd1b5;" text="Diet" />
+                              <TableColumn fx:id="PatientBreakfast" prefWidth="120.0" style="-fx-background-color: #abd1b5;" text="breakfast" />
+                              <TableColumn fx:id="PatientLunch" prefWidth="120.0" style="-fx-background-color: #abd1b5;" text="lunch" />
+                              <TableColumn fx:id="PatientDinner" prefWidth="120.0" style="-fx-background-color: #abd1b5;" text="dinner" />
+                                    </columns>
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets>
+                                </TableView>
+                                <Button fx:id="medAddPatient" layoutX="364.0" layoutY="426.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="112.0" style="-fx-background-color: #abd1b5; -fx-background-radius: 25PX;" text="add patient" textFill="WHITE">
+                                    <font>
+                                        <Font size="13.0" />
+                                    </font>
+                                </Button>
+                                <Button fx:id="medDeletePatient" layoutX="217.0" layoutY="428.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" style="-fx-background-color: #abd1b5; -fx-background-radius: 25PX;" text="Delete patient" textFill="WHITE" />
+                                <TextField fx:id="medPatientName" layoutX="82.0" layoutY="391.0" prefHeight="25.0" prefWidth="121.0" promptText="patient name" />
+                                <Button fx:id="medModify" layoutX="513.0" layoutY="428.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" style="-fx-background-color: #abd1b5; -fx-background-radius: 25PX;" text="Modify" textFill="WHITE" />
+                                <TextField fx:id="selectedPatientId" disable="true" layoutX="14.0" layoutY="390.0" prefHeight="26.0" prefWidth="46.0" promptText="ID" />
+                        <ComboBox fx:id="StatusBox" layoutX="214.0" layoutY="390.0" prefHeight="26.0" prefWidth="103.0" promptText="State" />
+                        <ComboBox fx:id="BreakfastBox" layoutX="331.0" layoutY="390.0" prefHeight="26.0" prefWidth="101.0" promptText="Breakfast" />
+                        <ComboBox fx:id="LunchBox" layoutX="461.0" layoutY="390.0" prefHeight="26.0" prefWidth="86.0" promptText="Lunch" />
+                        <ComboBox fx:id="DinnerBox" layoutX="575.0" layoutY="390.0" prefHeight="26.0" prefWidth="107.0" promptText="Dinner" />
+                        <ComboBox fx:id="DietBox" layoutX="692.0" layoutY="390.0" prefHeight="26.0" prefWidth="86.0" promptText="Diet" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab closable="false" text="Profile">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TextField fx:id="medFName" layoutX="256.0" layoutY="45.0" />
+                                <TextField fx:id="medLName" layoutX="256.0" layoutY="84.0" />
+                                <TextField fx:id="medUsername" disable="true" layoutX="256.0" layoutY="128.0" />
+                                <Text layoutX="96.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First name" wrappingWidth="93.13671875" />
+                                <Text layoutX="96.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last name" wrappingWidth="93.13671875" />
+                                <Text layoutX="96.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="93.13671875" />
+                                <Text layoutX="96.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="93.13671875" />
+                                <Button fx:id="medSaveB" layoutX="242.0" layoutY="309.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="259.0" style="-fx-background-color: #abd1b5;" text="Save" />
+                                <PasswordField fx:id="medPw" layoutX="256.0" layoutY="213.0" />
+                                <TextField fx:id="medUsername1" layoutX="256.0" layoutY="163.0" promptText="new username" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab closable="false" text="Menu">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <ComboBox fx:id="gras1" layoutX="99.0" layoutY="79.0" prefWidth="150.0" promptText="Matiere grasse" />
+                                <ComboBox fx:id="frui1" layoutX="99.0" layoutY="121.0" prefWidth="150.0" promptText="Fruit" />
+                                <ComboBox fx:id="cereal2" layoutX="304.0" layoutY="219.0" prefWidth="150.0" promptText="produits cerealiser" />
+                                <ComboBox fx:id="boi" layoutX="515.0" layoutY="79.0" prefWidth="150.0" promptText="Boissons" />
+                                <ComboBox fx:id="fruit2" layoutX="303.0" layoutY="121.0" prefWidth="150.0" promptText="Fruit" />
+                                <ComboBox fx:id="leg1" layoutX="99.0" layoutY="171.0" prefWidth="150.0" promptText="Legumes" />
+                                <ComboBox fx:id="leg2" layoutX="303.0" layoutY="171.0" prefWidth="150.0" promptText="Legumes" />
+                                <ComboBox fx:id="vvpolav" layoutX="515.0" layoutY="219.0" prefWidth="150.0" promptText="vvpolav" />
+                                <ComboBox fx:id="leg3" layoutX="515.0" layoutY="171.0" prefWidth="150.0" promptText="Legumes" />
+                                <RadioButton fx:id="BreakfastCheckBox" layoutX="239.0" layoutY="30.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="85.0" text="Breakfast">
+                                    <toggleGroup>
+                                        <ToggleGroup fx:id="lolo" />
+                                    </toggleGroup>
+                                    <font>
+                                        <Font size="13.0" />
+                                    </font>
+                                </RadioButton>
+                                <RadioButton fx:id="LunchCheckBox" layoutX="350.0" layoutY="30.0" mnemonicParsing="false" text="Lunch" toggleGroup="$lolo">
+                                    <font>
+                                        <Font size="13.0" />
+                                    </font>
+                                </RadioButton>
+                                <RadioButton fx:id="DinnerCheckBox" layoutX="457.0" layoutY="30.0" mnemonicParsing="false" text="Dinner" toggleGroup="$lolo">
+                                    <font>
+                                        <Font size="13.0" />
+                                    </font>
+                                </RadioButton>
+                                <TextField fx:id="name" alignment="CENTER" layoutX="281.0" layoutY="315.0" prefHeight="25.0" prefWidth="205.0" promptText="Name it" />
+                                <Button fx:id="addmealbutton" layoutX="279.0" layoutY="359.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="209.0" style="-fx-background-radius: 24PX;" text="Add meal" />
+                        <ComboBox fx:id="gras2" layoutX="303.0" layoutY="79.0" prefWidth="150.0" promptText="Matiere grasse" />
+                        <ComboBox fx:id="fruit3" layoutX="515.0" layoutY="121.0" prefWidth="150.0" promptText="fruit" />
+                        <ComboBox fx:id="cereal1" layoutX="99.0" layoutY="219.0" prefWidth="150.0" promptText="produits cerealiser" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+        <Button fx:id="logout" layoutX="716.0" layoutY="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Log out" />
+    </children>
 </AnchorPane>
