@@ -1,13 +1,20 @@
 package sample.Database;
 
-import java.sql.*;
-import java.time.format.DateTimeFormatter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import javafx.scene.control.TextField;
-import sample.Model.*;
+import sample.Model.Chef;
+import sample.Model.Menu;
+import sample.Model.OrderTable;
+import sample.Model.Patient;
+import sample.Model.Quantity;
+import sample.Model.Storage;
+import sample.Model.User;
 
 public class DatabaseHandler extends Configs
 {
@@ -17,7 +24,7 @@ public class DatabaseHandler extends Configs
 	{
 		String connectionString = "jdbc:mysql://" + "localhost" + ":" + "3306" + "/" + "active";
 		Class.forName("com.mysql.jdbc.Driver");
-		dbConnection = DriverManager.getConnection(connectionString, "root", "1337");
+		dbConnection = DriverManager.getConnection(connectionString, "root", "12345");
 
 		return dbConnection;
 	}
@@ -47,20 +54,21 @@ public class DatabaseHandler extends Configs
 		}
 
 	}
-	public void makeorder(OrderTable order){
-		String pattern = "yyyy-MM-dd";
-		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+
+	public void makeorder(OrderTable order)
+	{
+		//	String pattern = "yyyy-MM-dd";
+		//	DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
 		String insert = "INSERT INTO " +
-				Const.Order_Table + "(" + Const.Order_date + "," + Const.Order_rdate + "," +
-				Const.Order_commande + "," + Const.Order_quantity +  ")" +
-				"Values(?,?,?,?)";
+			Const.Order_Table + "(" + Const.Order_date + "," + Const.Order_rdate + "," +
+			Const.Order_commande + "," + Const.Order_quantity + ")" + "Values(?,?,?,?)";
 		try
 		{
 			PreparedStatement preparedStatement = getDbConnection().prepareStatement(insert);
 			preparedStatement.setDate(1, java.sql.Date.valueOf(order.getCdate()));
 			preparedStatement.setDate(2, java.sql.Date.valueOf(order.getRdate()));
-			preparedStatement.setString(3,order.getCommande() );
-			preparedStatement.setString(4,order.getQuantity() );
+			preparedStatement.setString(3, order.getCommande());
+			preparedStatement.setString(4, order.getQuantity());
 
 			preparedStatement.executeUpdate();
 
@@ -69,7 +77,6 @@ public class DatabaseHandler extends Configs
 		{
 			e.printStackTrace();
 		}
-
 
 	}
 
@@ -174,9 +181,9 @@ public class DatabaseHandler extends Configs
 	public void addPatient(Patient patient)
 	{
 		String insertion = "INSERT INTO " +
-				Const.Patients_Table + "(" + Const.Patients_FULLNAME + "," + Const.Patients_ETAT + "," +
-				Const.Patients_BREAKFAST + "," +Const.Patients_LUNCH + "," + Const.Patients_DINNER + "," +Const.Patients_Regime + "," + Const.Patients_usersId+ ")" +
-				"Values(?,?,?,?,?,?,?)";
+			Const.Patients_Table + "(" + Const.Patients_FULLNAME + "," + Const.Patients_ETAT + "," +
+			Const.Patients_BREAKFAST + "," + Const.Patients_LUNCH + "," + Const.Patients_DINNER + "," +
+			Const.Patients_Regime + "," + Const.Patients_usersId + ")" + "Values(?,?,?,?,?,?,?)";
 		try
 		{
 			PreparedStatement preparedStatement = getDbConnection().prepareStatement(insertion);
@@ -202,9 +209,8 @@ public class DatabaseHandler extends Configs
 	public void addElement(Storage storage)
 	{
 		String insertion = "INSERT INTO " +
-				Const.Storage_Table + "(" + Const.Element_id + "," + Const.Storage_element+ "," +
-				Const.Storage_zone + "," + Const.Storage_type +  ")" +
-				"Values(?,?,?,?)";
+			Const.Storage_Table + "(" + Const.Element_id + "," + Const.Storage_element + "," +
+			Const.Storage_zone + "," + Const.Storage_type + ")" + "Values(?,?,?,?)";
 		try
 		{
 			PreparedStatement preparedStatement = getDbConnection().prepareStatement(insertion);
@@ -212,7 +218,6 @@ public class DatabaseHandler extends Configs
 			preparedStatement.setString(2, storage.getElement());
 			preparedStatement.setString(3, storage.getStoragezone());
 			preparedStatement.setString(4, storage.getStoragetype());
-
 
 			preparedStatement.executeUpdate();
 
@@ -223,11 +228,14 @@ public class DatabaseHandler extends Configs
 		}
 
 	}
-	public void getQuantity(Quantity quantity){
+
+	public void getQuantity(Quantity quantity)
+	{
 
 		String insert = "INSERT INTO " +
-				Const.Quantity_Table + "(" + Const.Quantity_Element+ "," + Const.Quantity_initial + "," + Const.Quantity_consumed + "," + Const.Quantity_ordered + ","+ Const.Quantity_present+ ")" +
-				"Values(?,?,?,?,?)";
+			Const.Quantity_Table + "(" + Const.Quantity_Element + "," + Const.Quantity_initial + "," +
+			Const.Quantity_consumed + "," + Const.Quantity_ordered + "," + Const.Quantity_present + ")" +
+			"Values(?,?,?,?,?)";
 		try
 		{
 			PreparedStatement preparedStatement = getDbConnection().prepareStatement(insert);
@@ -267,12 +275,15 @@ public class DatabaseHandler extends Configs
 			e.printStackTrace();
 		}
 	}
-	public void getPlat(Menu plat){
+
+	public void getPlat(Menu plat)
+	{
 		String insert = "INSERT INTO " +
-				Const.Menu_Table+ "("+ Const.Menu_plat+ ","  + Const.Menu_gras1+ "," + Const.Menu_gras2 + "," +
-				Const.Menu_fruit1 + "," + Const.Menu_fruit2 + "," + Const.Menu_fruit3+ "," + Const.Menu_legume1+ ","+ Const.Menu_legume2+ "," +
-				Const.Menu_legume3 + "," + Const.Menu_cereal + "," + Const.Menu_cereal1+ "," + Const.Menu_boisson+ ","+ Const.Menu_vvpolav + "," +Const.Menu_name+")" +
-				"Values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			Const.Menu_Table + "(" + Const.Menu_plat + "," + Const.Menu_gras1 + "," + Const.Menu_gras2 +
+			"," + Const.Menu_fruit1 + "," + Const.Menu_fruit2 + "," + Const.Menu_fruit3 + "," +
+			Const.Menu_legume1 + "," + Const.Menu_legume2 + "," + Const.Menu_legume3 + "," +
+			Const.Menu_cereal + "," + Const.Menu_cereal1 + "," + Const.Menu_boisson + "," +
+			Const.Menu_vvpolav + "," + Const.Menu_name + ")" + "Values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try
 		{
 			PreparedStatement preparedStatement = getDbConnection().prepareStatement(insert);
@@ -298,7 +309,6 @@ public class DatabaseHandler extends Configs
 		{
 			e.printStackTrace();
 		}
-
 
 	}
 
