@@ -81,6 +81,8 @@ public class ChefFieldController2
 
 	@FXML
 	private Button													ChefClear;
+	@FXML
+	private TextField ChefOrdern;
 
 	@FXML
 	private TableColumn<?, ?>								StrorageIDElement;
@@ -128,8 +130,8 @@ public class ChefFieldController2
 	void initialize()
 	{
 		UpdateTable();
-		ChefSubmit.setOnAction(event -> { addOrder(); });
-
+		ChefSubmit.setOnAction(event -> { addOrder();
+            reseet();});
 	}
 
 	private ObservableList<MenuTable> showMenu()
@@ -199,6 +201,7 @@ public class ChefFieldController2
 	public void addOrder()
 	{
 		DatabaseHandler databaseHandler = new DatabaseHandler();
+		String ChefOrdernumber = ChefOrdern.getText();
 		LocalDate ChefOrderDa = ChefOrderDate.getValue();
 		LocalDate ReceptionDa = ChefReceptionDate.getValue();
 		String Commande = " ";
@@ -207,7 +210,12 @@ public class ChefFieldController2
 			Commande = "Fraise";
 		}
 		String Quantity = ChefQuantity.getText();
-		OrderTable order = new OrderTable(ChefOrderDa, ReceptionDa, Commande, Quantity);
+		OrderTable order = new OrderTable(ChefOrdernumber,ChefOrderDa, ReceptionDa, Commande, Quantity);
 		databaseHandler.makeorder(order);
 	}
+	public void reseet(){
+        ChefOrderDate.getEditor().clear();
+        ChefReceptionDate.getEditor().clear();
+        ChefQuantity.clear();
+    }
 }

@@ -6,21 +6,49 @@ public class Patient
 {
 	private String	fullname;
 	private String	Etatpatient;
-	private String	breakfast,lunch,dinner;
 	private String Regime;
+	private String	breakfast,lunch,dinner;
 	private int	doctorId;
 	private int Patientid;
 	public  int getPatientid() {
 		return Patientid;
 	}
 
-	public void setPatientid(int patientid) {
-		Patientid = patientid;
+	public Patient() {
+	}
+
+	public Patient(String fullname, String etatpatient, String regime, String breakfast, String lunch, String dinner) {
+		this.fullname = fullname;
+		Etatpatient = etatpatient;
+		Regime = regime;
+		this.breakfast = breakfast;
+		this.lunch = lunch;
+		this.dinner = dinner;
 	}
 
 
-	public Patient()
-	{
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+
+	public String getEtatpatient() {
+		return Etatpatient;
+	}
+
+	public void setEtatpatient(String etatpatient) {
+		Etatpatient = etatpatient;
+	}
+
+	public String getRegime() {
+		return Regime;
+	}
+
+	public void setRegime(String regime) {
+		Regime = regime;
 	}
 
 	public String getBreakfast() {
@@ -47,51 +75,15 @@ public class Patient
 		this.dinner = dinner;
 	}
 
-	public Patient(String fullname, String etatpatient, String breakfast, String lunch, String dinner, String regime) {
-		this.fullname = fullname;
-		Etatpatient = etatpatient;
-		this.breakfast = breakfast;
-		this.lunch = lunch;
-		this.dinner = dinner;
-		Regime = regime;
-	}
-
-	public int getDoctorId()
-	{
+	public int getDoctorId() {
 		return doctorId;
 	}
 
-	public void setDoctorId(int doctorId)
-	{
+	public void setDoctorId(int doctorId) {
 		this.doctorId = doctorId;
 	}
 
-	public String getFullname()
-	{
-		return fullname;
-	}
-
-	public void setFullname(String fullname)
-	{
-		this.fullname =fullname;
-	}
-
-	public String getEtatpatient()
-	{
-		return Etatpatient;
-	}
-
-	public void setEtatpatient(String etatpatient)
-	{
-		Etatpatient = etatpatient;
-	}
-	public String getRegime()
-	{
-		return Regime;
-	}
-
-	public void setRegime(String regime)
-	{
-		Regime = regime;
+	public void setPatientid(int patientid) {
+		Patientid = patientid;
 	}
 }

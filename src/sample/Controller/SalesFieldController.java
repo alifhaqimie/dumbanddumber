@@ -1,10 +1,8 @@
 package sample.Controller;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -15,8 +13,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import sample.Database.DatabaseHandler;
+import sample.Model.MenuTable;
 import sample.Model.OrderTable;
 import sample.Model.Table;
+
+import static sample.Database.DatabaseHandler.getDbConnection;
 
 public class SalesFieldController {
 
@@ -29,10 +30,10 @@ public class SalesFieldController {
     private TableView<OrderTable> orderstable;
 
     @FXML
-    private TableColumn<OrderTable, Integer> orderID;
+    private TableColumn<OrderTable, String> orderID;
 
     @FXML
-    private TableColumn<OrderTable, String> orderDate;
+    private TableColumn<OrderTable, Date> orderDate;
 
     @FXML
     private TableColumn<OrderTable, String> orderCommande;
@@ -50,31 +51,27 @@ public class SalesFieldController {
         UpdateTable();
     }
 
-    private ObservableList<OrderTable> showorders()
+    private ObservableList<OrderTable> showit()
     {
+        Connection con = null;
         try
         {
-            conu = DatabaseHandler.getDbConnection();
+            con = getDbConnection();
         }
         catch (ClassNotFoundException | SQLException e)
         {
             e.printStackTrace();
         }
         ResultSet rs = null;
-        ObservableList<OrderTable> oblista = FXCollections.observableArrayList();
         try
         {
-            PreparedStatement prp = conu
-                    .prepareStatement(
-                            "SELECT * FROM ordertable"
-                    );
-            rs = prp.executeQuery();
-
-            //rs = con.createStatement().executeQuery("SELECT * FROM patientstable INNER JOIN userstable ON patientstable.userId=userstable.userId WHERE userstable.username=?");
+            rs = con
+                    .createStatement()
+                    .executeQuery("SELECT Cdate,orderNumber,Commande,Quantity FROM ordertable");
         }
-        catch (SQLException e)
+        catch (SQLException throwables)
         {
-            e.printStackTrace();
+            throwables.printStackTrace();
         }
         while (true)
         {
@@ -83,39 +80,38 @@ public class SalesFieldController {
                 if (!rs.next())
                     break;
             }
-            catch (SQLException e)
+            catch (SQLException throwables)
             {
-                e.printStackTrace();
+                throwables.printStackTrace();
             }
             try
             {
-                //oblista
-                       // .add(new OrderTable(rs.getInt("idordertable"), rs.getString("Cdate"), rs.getString("Commande"), rs.getString("Quantity")));
-            } catch (Exception e) {
-                e.printStackTrace();
+                oblista
+                        .add(new OrderTable(rs.getString("orderNumber"),rs.getDate("Cdate"),rs.getString("Commande"),rs.getString("Quantity")));
             }
-            //catch (SQLException e)
-            //{
-                //e.printStackTrace();
-            //}
+            catch (SQLException throwables)
+            {
+                throwables.printStackTrace();
+            }
+
         }
-        orderID.setCellValueFactory(new PropertyValueFactory<>("idordertable"));
+        orderID.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));
         orderDate.setCellValueFactory(new PropertyValueFactory<>("Cdate"));
         orderCommande.setCellValueFactory(new PropertyValueFactory<>("Commande"));
         orderQuantity.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
 
         orderstable.setItems(oblista);
-
         return oblista;
     }
+
     public void UpdateTable()
     {
-        orderID.setCellValueFactory(new PropertyValueFactory<OrderTable, Integer>("idordertable"));
-        orderDate.setCellValueFactory(new PropertyValueFactory<OrderTable, String>("Cdate"));
+        orderID.setCellValueFactory(new PropertyValueFactory<OrderTable, String>("orderNumber"));
+        orderDate.setCellValueFactory(new PropertyValueFactory<OrderTable,Date>("Cdate"));
         orderCommande.setCellValueFactory(new PropertyValueFactory<OrderTable, String>("Commande"));
         orderQuantity.setCellValueFactory(new PropertyValueFactory<OrderTable, String>("Quantity"));
 
-        oblista = showorders();
+        oblista = showit();
         orderstable.setItems(oblista);
     }
 

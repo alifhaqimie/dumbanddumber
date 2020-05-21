@@ -37,6 +37,7 @@ public class Const
 	public static final String Order_rdate="Rdate";
 	public static final String Order_commande="Commande";
 	public static final String Order_quantity="Quantity";
+	public static final String Order_number="orderNumber";
 
 	public static final String Storage_Table="storagetable";
 	//Column names

@@ -233,8 +233,9 @@ public class MedFieldController
 		});
 		addmealbutton.setOnAction(event->{
 			AddPlat();
-			resetValues();
 			//seethis();
+			testing();
+			resetValues();
 			showw();
 		});
 
@@ -570,6 +571,7 @@ public class MedFieldController
 					e.printStackTrace();
 				}
 				try {
+					//LunchBox.getItems().clear();
 					LunchBox.getItems().addAll(res.getString("name"));
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -606,9 +608,95 @@ public class MedFieldController
 		}
 	}
 	public void seethis(){
-		BreakfastBox.getItems().clear();
 		LunchBox.getItems().clear();
+		BreakfastBox.getItems().clear();
 		DinnerBox.getItems().clear();
+	}
+	public void testing() {
+		try {
+			conu = DatabaseHandler.getDbConnection();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		ResultSet rs = null;
+
+		PreparedStatement prp = null;
+		try {
+			prp = conu.prepareStatement("SELECT name from menutable WHERE menutable.plat='breakfast'");
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+
+		try {
+			rs = prp.executeQuery();
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+		while (true) {
+			try {
+				if (!rs.next())
+					break;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				BreakfastBox.getItems().clear();} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			try {
+				conu = DatabaseHandler.getDbConnection();
+			} catch (ClassNotFoundException | SQLException e) {
+				e.printStackTrace();
+			}
+			ResultSet res = null;
+
+			PreparedStatement prep = null;
+			try {
+				prep = conu.prepareStatement("SELECT name from menutable WHERE menutable.plat='lunch'");
+			} catch (SQLException throwables) {
+				throwables.printStackTrace();
+			}
+
+			try {
+				res = prep.executeQuery();
+			} catch (SQLException throwables) {
+				throwables.printStackTrace();
+			}
+			while (true) {
+				try {
+					if (!res.next())
+						break;
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				LunchBox.getItems().clear();
+			}
+			ResultSet resu = null;
+
+			PreparedStatement prepr = null;
+			try {
+				prepr = conu.prepareStatement("SELECT name from menutable WHERE menutable.plat='dinner'");
+			} catch (SQLException throwables) {
+				throwables.printStackTrace();
+			}
+
+			try {
+				resu = prepr.executeQuery();
+			} catch (SQLException throwables) {
+				throwables.printStackTrace();
+			}
+			while (true) {
+				try {
+					if (!resu.next())
+						break;
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				DinnerBox.getItems().clear();
+			}
+
+		}
 	}
 
 

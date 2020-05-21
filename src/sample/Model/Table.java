@@ -1,15 +1,44 @@
 package sample.Model;
 
 public class Table {
-    String fullname,Etatpatient,breakfast,lunch,dinner,Regime;
     int idpatientstable;
+    String fullname,Etatpatient,Regime,breakfast,lunch,dinner;
 
-    public int getIdpatientstable() {
-        return idpatientstable;
+    public Table() {
     }
 
-    public void setIdpatientstable(int idpatientstable) {
+    public Table(int idpatientstable, String fullname, String etatpatient, String regime, String breakfast, String lunch, String dinner) {
         this.idpatientstable = idpatientstable;
+        this.fullname = fullname;
+        Etatpatient = etatpatient;
+        Regime = regime;
+        this.breakfast = breakfast;
+        this.lunch = lunch;
+        this.dinner = dinner;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getEtatpatient() {
+        return Etatpatient;
+    }
+
+    public void setEtatpatient(String etatpatient) {
+        Etatpatient = etatpatient;
+    }
+
+    public String getRegime() {
+        return Regime;
+    }
+
+    public void setRegime(String regime) {
+        Regime = regime;
     }
 
     public String getBreakfast() {
@@ -36,38 +65,14 @@ public class Table {
         this.dinner = dinner;
     }
 
-    public Table(int idpatientstable, String fullname, String etatpatient, String breakfast, String lunch, String dinner, String regime) {
-        this.fullname = fullname;
-        Etatpatient = etatpatient;
-        this.breakfast = breakfast;
-        this.lunch = lunch;
-        this.dinner = dinner;
-        Regime = regime;
+    public int getIdpatientstable() {
+        return idpatientstable;
+    }
+
+    public void setIdpatientstable(int idpatientstable) {
         this.idpatientstable = idpatientstable;
     }
 
-    public String getFullname() {
-        return fullname;
-    }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
-
-    public String getEtatpatient() {
-        return Etatpatient;
-    }
-
-    public void setEtatpatient(String etatpatient) {
-        Etatpatient = etatpatient;
-    }
-
-    public String getRegime() {
-        return Regime;
-    }
-
-    public void setRegime(String regime) {
-        Regime = regime;
-    }
 
 }

@@ -11,46 +11,64 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.MedFieldController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.MedFieldController">
     <children>
-        <TabPane prefHeight="500.0" prefWidth="800.0">
+        <TabPane prefHeight="600.0" prefWidth="1000.0">
             <tabs>
                 <Tab closable="false" text="Patients">
                     <content>
-                        <AnchorPane prefHeight="400.0" prefWidth="700.0">
+                        <AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #FFFFFF;">
                             <children>
-                                <TableView fx:id="patientsTable" layoutX="-7.0" onMouseClicked="#getSelected" onMouseEntered="#getSelected" prefHeight="378.0" prefWidth="809.0">
+                                <TableView fx:id="patientsTable" layoutX="18.0" layoutY="63.0" onMouseClicked="#getSelected" onMouseEntered="#getSelected" prefHeight="365.0" prefWidth="958.0">
                                     <columns>
-                                        <TableColumn fx:id="PatientID" minWidth="15.0" prefWidth="100.0" style="-fx-background-color: #abd1b5;" text="Patient ID" />
-                                        <TableColumn fx:id="PatientName" prefWidth="125.0" style="-fx-background-color: #abd1b5;" text="Patient Name" />
-                                        <TableColumn fx:id="PatientStatus" prefWidth="100.0" style="-fx-background-color: #abd1b5;" text="Patient Status" />
-                                        <TableColumn fx:id="PatientDiet" prefWidth="120.0" style="-fx-background-color: #abd1b5;" text="Diet" />
-                              <TableColumn fx:id="PatientBreakfast" prefWidth="120.0" style="-fx-background-color: #abd1b5;" text="breakfast" />
-                              <TableColumn fx:id="PatientLunch" prefWidth="120.0" style="-fx-background-color: #abd1b5;" text="lunch" />
-                              <TableColumn fx:id="PatientDinner" prefWidth="120.0" style="-fx-background-color: #abd1b5;" text="dinner" />
+                                        <TableColumn fx:id="PatientID" editable="false" minWidth="15.0" prefWidth="100.0" style="-fx-background-color: #abd1b5;" text="Patient ID" />
+                                        <TableColumn fx:id="PatientName" editable="false" prefWidth="125.0" style="-fx-background-color: #abd1b5;" text="Patient Name" />
+                                        <TableColumn fx:id="PatientStatus" editable="false" prefWidth="100.0" style="-fx-background-color: #abd1b5;" text="Patient Status" />
+                                        <TableColumn fx:id="PatientDiet" editable="false" prefWidth="120.0" style="-fx-background-color: #abd1b5;" text="Diet" />
+                              <TableColumn fx:id="PatientBreakfast" editable="false" prefWidth="120.0" style="-fx-background-color: #abd1b5;" text="breakfast" />
+                              <TableColumn fx:id="PatientLunch" editable="false" prefWidth="120.0" style="-fx-background-color: #abd1b5;" text="lunch" />
+                              <TableColumn fx:id="PatientDinner" editable="false" prefWidth="76.0" style="-fx-background-color: #abd1b5;" text="dinner" />
+                              <TableColumn editable="false" prefWidth="63.0" style="-fx-background-color: #abd1b5;" text="Menu" />
+                              <TableColumn editable="false" prefWidth="134.0" style="-fx-background-color: #abd1b5;" text="Date" />
                                     </columns>
                                     <opaqueInsets>
                                         <Insets />
                                     </opaqueInsets>
                                 </TableView>
-                                <Button fx:id="medAddPatient" layoutX="364.0" layoutY="426.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="112.0" style="-fx-background-color: #abd1b5; -fx-background-radius: 25PX;" text="add patient" textFill="WHITE">
+                                <Button fx:id="medAddPatient" layoutX="440.0" layoutY="499.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="139.0" style="-fx-background-color: #abd1b5; -fx-background-radius: 25PX;" text="add patient" textFill="WHITE">
                                     <font>
                                         <Font size="13.0" />
                                     </font>
                                 </Button>
-                                <Button fx:id="medDeletePatient" layoutX="217.0" layoutY="428.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" style="-fx-background-color: #abd1b5; -fx-background-radius: 25PX;" text="Delete patient" textFill="WHITE" />
-                                <TextField fx:id="medPatientName" layoutX="82.0" layoutY="391.0" prefHeight="25.0" prefWidth="121.0" promptText="patient name" />
-                                <Button fx:id="medModify" layoutX="513.0" layoutY="428.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="97.0" style="-fx-background-color: #abd1b5; -fx-background-radius: 25PX;" text="Modify" textFill="WHITE" />
-                                <TextField fx:id="selectedPatientId" disable="true" layoutX="14.0" layoutY="390.0" prefHeight="26.0" prefWidth="46.0" promptText="ID" />
-                        <ComboBox fx:id="StatusBox" layoutX="214.0" layoutY="390.0" prefHeight="26.0" prefWidth="103.0" promptText="State" />
-                        <ComboBox fx:id="BreakfastBox" layoutX="331.0" layoutY="390.0" prefHeight="26.0" prefWidth="101.0" promptText="Breakfast" />
-                        <ComboBox fx:id="LunchBox" layoutX="461.0" layoutY="390.0" prefHeight="26.0" prefWidth="86.0" promptText="Lunch" />
-                        <ComboBox fx:id="DinnerBox" layoutX="575.0" layoutY="390.0" prefHeight="26.0" prefWidth="107.0" promptText="Dinner" />
-                        <ComboBox fx:id="DietBox" layoutX="692.0" layoutY="390.0" prefHeight="26.0" prefWidth="86.0" promptText="Diet" />
+                                <Button fx:id="medDeletePatient" layoutX="264.0" layoutY="522.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="124.0" style="-fx-background-color: #abd1b5; -fx-background-radius: 25PX;" text="Delete patient" textFill="WHITE" />
+                                <TextField fx:id="medPatientName" layoutX="97.0" layoutY="443.0" prefHeight="25.0" prefWidth="121.0" promptText="patient name" />
+                                <Button fx:id="medModify" layoutX="622.0" layoutY="521.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: #abd1b5; -fx-background-radius: 25PX;" text="Modify" textFill="WHITE" />
+                                <TextField fx:id="selectedPatientId" disable="true" layoutX="40.0" layoutY="443.0" prefHeight="26.0" prefWidth="46.0" promptText="ID" />
+                        <ComboBox fx:id="StatusBox" layoutX="238.0" layoutY="442.0" prefHeight="26.0" prefWidth="123.0" promptText="State" />
+                        <ComboBox fx:id="BreakfastBox" layoutX="496.0" layoutY="441.0" prefHeight="26.0" prefWidth="124.0" promptText="Breakfast" />
+                        <ComboBox fx:id="LunchBox" layoutX="636.0" layoutY="441.0" prefHeight="26.0" prefWidth="130.0" promptText="Lunch" />
+                        <ComboBox fx:id="DinnerBox" layoutX="782.0" layoutY="442.0" prefHeight="26.0" prefWidth="163.0" promptText="Dinner" />
+                        <ComboBox fx:id="DietBox" layoutX="370.0" layoutY="441.0" prefHeight="26.0" prefWidth="111.0" promptText="Diet" />
+                        <ImageView fitHeight="33.0" fitWidth="107.0" layoutX="460.0" layoutY="531.0">
+                           <image>
+                              <Image url="@../Assets/logo%20small.png" />
+                           </image>
+                        </ImageView>
+                        <Text fontSmoothingType="LCD" layoutX="418.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patients field" wrappingWidth="247.13671875">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                           <effect>
+                              <Reflection />
+                           </effect>
+                        </Text>
                             </children>
                         </AnchorPane>
                     </content>
@@ -115,6 +133,6 @@
                 </Tab>
             </tabs>
         </TabPane>
-        <Button fx:id="logout" layoutX="716.0" layoutY="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Log out" />
+        <Button fx:id="logout" layoutX="912.0" layoutY="-3.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Log out" />
     </children>
 </AnchorPane>

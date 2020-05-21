@@ -24,7 +24,7 @@ public class DatabaseHandler extends Configs
 	{
 		String connectionString = "jdbc:mysql://" + "localhost" + ":" + "3306" + "/" + "active";
 		Class.forName("com.mysql.jdbc.Driver");
-		dbConnection = DriverManager.getConnection(connectionString, "root", "12345");
+		dbConnection = DriverManager.getConnection(connectionString, "root", "1337");
 
 		return dbConnection;
 	}
@@ -61,7 +61,7 @@ public class DatabaseHandler extends Configs
 		//	DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
 		String insert = "INSERT INTO " +
 			Const.Order_Table + "(" + Const.Order_date + "," + Const.Order_rdate + "," +
-			Const.Order_commande + "," + Const.Order_quantity + ")" + "Values(?,?,?,?)";
+			Const.Order_commande + "," + Const.Order_quantity + ","+ Const.Order_number + ")" + "Values(?,?,?,?,?)";
 		try
 		{
 			PreparedStatement preparedStatement = getDbConnection().prepareStatement(insert);
@@ -69,6 +69,7 @@ public class DatabaseHandler extends Configs
 			preparedStatement.setDate(2, java.sql.Date.valueOf(order.getRdate()));
 			preparedStatement.setString(3, order.getCommande());
 			preparedStatement.setString(4, order.getQuantity());
+			preparedStatement.setString(5, order.getOrderNumber());
 
 			preparedStatement.executeUpdate();
 
@@ -181,18 +182,17 @@ public class DatabaseHandler extends Configs
 	public void addPatient(Patient patient)
 	{
 		String insertion = "INSERT INTO " +
-			Const.Patients_Table + "(" + Const.Patients_FULLNAME + "," + Const.Patients_ETAT + "," +
-			Const.Patients_BREAKFAST + "," + Const.Patients_LUNCH + "," + Const.Patients_DINNER + "," +
-			Const.Patients_Regime + "," + Const.Patients_usersId + ")" + "Values(?,?,?,?,?,?,?)";
+			Const.Patients_Table + "(" + Const.Patients_FULLNAME + "," + Const.Patients_ETAT + "," + Const.Patients_Regime+ ","+
+			Const.Patients_BREAKFAST + "," + Const.Patients_LUNCH + "," + Const.Patients_DINNER + "," + Const.Patients_usersId + ")" + "Values(?,?,?,?,?,?,?)";
 		try
 		{
 			PreparedStatement preparedStatement = getDbConnection().prepareStatement(insertion);
 			preparedStatement.setString(1, patient.getFullname());
 			preparedStatement.setString(2, patient.getEtatpatient());
-			preparedStatement.setString(3, patient.getBreakfast());
-			preparedStatement.setString(4, patient.getLunch());
-			preparedStatement.setString(5, patient.getDinner());
-			preparedStatement.setString(6, patient.getRegime());
+			preparedStatement.setString(3, patient.getRegime());
+			preparedStatement.setString(4, patient.getBreakfast());
+			preparedStatement.setString(5, patient.getLunch());
+			preparedStatement.setString(6, patient.getDinner());
 			preparedStatement.setInt(7, patient.getDoctorId());
 
 			preparedStatement.executeUpdate();

@@ -1,20 +1,37 @@
 package sample.Model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class OrderTable
 {
 	int				idordertable;
-	String		Commande, Quantity;
-	LocalDate	cdate;
+	String		orderNumber,Commande, Quantity;
+	LocalDate cdate;
 	LocalDate	rdate;
 
-	public OrderTable(LocalDate chefOrderDa, LocalDate receptionDa, String commande, String quantity)
+	public OrderTable(){
+
+	}
+
+	public OrderTable(String chefOrdernumber, LocalDate chefOrderDa, LocalDate receptionDa, String commande, String quantity)
 	{
+		this.orderNumber=chefOrdernumber;
 		this.cdate = chefOrderDa;
 		this.rdate = receptionDa;
 		Commande = commande;
 		Quantity = quantity;
+	}
+
+	public OrderTable(String orderNumber, Date cdate, String commande, String quantity) {
+	}
+
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 
 	public OrderTable(
@@ -31,6 +48,9 @@ public class OrderTable
 		Commande = commande;
 		Quantity = quantity;
 
+	}
+
+	public OrderTable(Date idordertable, Date cdate, String commande, String quantity) {
 	}
 
 	public int getIdordertable()
