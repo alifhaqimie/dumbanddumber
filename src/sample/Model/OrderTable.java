@@ -6,31 +6,53 @@ import java.time.LocalDate;
 public class OrderTable
 {
 	int				idordertable;
-	String		orderNumber,Commande, Quantity;
-	LocalDate cdate;
+	String		orderNumber, Commande, Quantity;
+	LocalDate	cdate;
 	LocalDate	rdate;
 
-	public OrderTable(){
+	public OrderTable()
+	{
 
 	}
 
-	public OrderTable(String chefOrdernumber, LocalDate chefOrderDa, LocalDate receptionDa, String commande, String quantity)
+	public OrderTable(
+		String chefOrdernumber,
+		LocalDate chefOrderDa,
+		LocalDate receptionDa,
+		String commande,
+		String quantity
+	)
 	{
-		this.orderNumber=chefOrdernumber;
+		this.orderNumber = chefOrdernumber;
 		this.cdate = chefOrderDa;
 		this.rdate = receptionDa;
 		Commande = commande;
 		Quantity = quantity;
 	}
 
-	public OrderTable(String orderNumber, Date cdate, String commande, String quantity) {
+	public OrderTable(
+		int idOrder,
+		String orderNumber,
+		LocalDate cdate,
+		String commande,
+		String quantity
+	)
+	{
+		this.idordertable = idOrder;
+		this.orderNumber = orderNumber;
+		this.cdate = cdate;
+		Commande = commande;
+		Quantity = quantity;
+
 	}
 
-	public String getOrderNumber() {
+	public String getOrderNumber()
+	{
 		return orderNumber;
 	}
 
-	public void setOrderNumber(String orderNumber) {
+	public void setOrderNumber(String orderNumber)
+	{
 		this.orderNumber = orderNumber;
 	}
 
@@ -50,7 +72,8 @@ public class OrderTable
 
 	}
 
-	public OrderTable(Date idordertable, Date cdate, String commande, String quantity) {
+	public OrderTable(Date idordertable, Date cdate, String commande, String quantity)
+	{
 	}
 
 	public int getIdordertable()

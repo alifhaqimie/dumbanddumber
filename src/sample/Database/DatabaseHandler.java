@@ -24,7 +24,7 @@ public class DatabaseHandler extends Configs
 	{
 		String connectionString = "jdbc:mysql://" + "localhost" + ":" + "3306" + "/" + "active";
 		Class.forName("com.mysql.jdbc.Driver");
-		dbConnection = DriverManager.getConnection(connectionString, "root", "1337");
+		dbConnection = DriverManager.getConnection(connectionString, "root", "12345");
 
 		return dbConnection;
 	}
@@ -61,7 +61,8 @@ public class DatabaseHandler extends Configs
 		//	DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
 		String insert = "INSERT INTO " +
 			Const.Order_Table + "(" + Const.Order_date + "," + Const.Order_rdate + "," +
-			Const.Order_commande + "," + Const.Order_quantity + ","+ Const.Order_number + ")" + "Values(?,?,?,?,?)";
+			Const.Order_commande + "," + Const.Order_quantity + "," + Const.Order_number + ")" +
+			"Values(?,?,?,?,?)";
 		try
 		{
 			PreparedStatement preparedStatement = getDbConnection().prepareStatement(insert);
@@ -182,8 +183,9 @@ public class DatabaseHandler extends Configs
 	public void addPatient(Patient patient)
 	{
 		String insertion = "INSERT INTO " +
-			Const.Patients_Table + "(" + Const.Patients_FULLNAME + "," + Const.Patients_ETAT + "," + Const.Patients_Regime+ ","+
-			Const.Patients_BREAKFAST + "," + Const.Patients_LUNCH + "," + Const.Patients_DINNER + "," + Const.Patients_usersId + ")" + "Values(?,?,?,?,?,?,?)";
+			Const.Patients_Table + "(" + Const.Patients_FULLNAME + "," + Const.Patients_ETAT + "," +
+			Const.Patients_Regime + "," + Const.Patients_BREAKFAST + "," + Const.Patients_LUNCH + "," +
+			Const.Patients_DINNER + "," + Const.Patients_usersId + ")" + "Values(?,?,?,?,?,?,?)";
 		try
 		{
 			PreparedStatement preparedStatement = getDbConnection().prepareStatement(insertion);
@@ -309,6 +311,82 @@ public class DatabaseHandler extends Configs
 		{
 			e.printStackTrace();
 		}
+
+	}
+
+	public List<String> getBreakfastNames()
+	{
+		ResultSet resultSet = null;
+		List<String> list = new ArrayList();
+		String query = "SELECT name  FROM menutable Where plat = 'breakfast';";
+
+		PreparedStatement preparedStatement;
+		try
+		{
+			preparedStatement = getDbConnection().prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next())
+			{
+				list.add(resultSet.getString("name"));
+
+			}
+		}
+		catch (ClassNotFoundException | SQLException e)
+		{
+		}
+
+		return list;
+
+	}
+
+	public List<String> getLunchNames()
+	{
+		ResultSet resultSet = null;
+		List<String> list = new ArrayList();
+		String query = "SELECT name  FROM menutable Where plat = 'lunch';";
+
+		PreparedStatement preparedStatement;
+		try
+		{
+			preparedStatement = getDbConnection().prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next())
+			{
+				list.add(resultSet.getString("name"));
+			}
+		}
+		catch (ClassNotFoundException | SQLException e)
+		{
+		}
+
+		return list;
+
+	}
+
+	public List<String> getDinnerNames()
+	{
+		ResultSet resultSet = null;
+		List<String> list = new ArrayList();
+		String query = "SELECT name  FROM menutable Where plat = 'dinner';";
+
+		PreparedStatement preparedStatement;
+		try
+		{
+			preparedStatement = getDbConnection().prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next())
+			{
+				list.add(resultSet.getString("name"));
+			}
+		}
+		catch (ClassNotFoundException | SQLException e)
+		{
+		}
+
+		return list;
 
 	}
 
