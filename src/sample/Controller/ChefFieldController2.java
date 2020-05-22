@@ -201,7 +201,6 @@ public class ChefFieldController2
 	public void addOrder()
 	{
 		DatabaseHandler databaseHandler = new DatabaseHandler();
-		String ChefOrdernumber = ChefOrdern.getText();
 		LocalDate ChefOrderDa = ChefOrderDate.getValue();
 		LocalDate ReceptionDa = ChefReceptionDate.getValue();
 		String Commande = " ";
@@ -210,7 +209,7 @@ public class ChefFieldController2
 			Commande = "Fraise";
 		}
 		String Quantity = ChefQuantity.getText();
-		OrderTable order = new OrderTable(ChefOrdernumber,ChefOrderDa, ReceptionDa, Commande, Quantity);
+		OrderTable order = new OrderTable(ChefOrderDa, ReceptionDa, Commande, Quantity);
 		databaseHandler.makeorder(order);
 	}
 	public void reseet(){

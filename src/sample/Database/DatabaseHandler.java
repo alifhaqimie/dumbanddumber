@@ -61,7 +61,7 @@ public class DatabaseHandler extends Configs
 		//	DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
 		String insert = "INSERT INTO " +
 			Const.Order_Table + "(" + Const.Order_date + "," + Const.Order_rdate + "," +
-			Const.Order_commande + "," + Const.Order_quantity + ","+ Const.Order_number + ")" + "Values(?,?,?,?,?)";
+			Const.Order_commande + "," + Const.Order_quantity +  ")" + "Values(?,?,?,?)";
 		try
 		{
 			PreparedStatement preparedStatement = getDbConnection().prepareStatement(insert);
@@ -69,7 +69,6 @@ public class DatabaseHandler extends Configs
 			preparedStatement.setDate(2, java.sql.Date.valueOf(order.getRdate()));
 			preparedStatement.setString(3, order.getCommande());
 			preparedStatement.setString(4, order.getQuantity());
-			preparedStatement.setString(5, order.getOrderNumber());
 
 			preparedStatement.executeUpdate();
 
