@@ -1,22 +1,5 @@
 package sample.Controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
-import sample.Animation.Shaker;
-import sample.Database.DatabaseHandler;
-import sample.Model.Menu;
-import sample.Model.Patient;
-import sample.Model.Table;
-import sample.Model.breakfast;
-
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -25,158 +8,183 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import sample.Animation.Shaker;
+import sample.Database.DatabaseHandler;
+import sample.Model.Menu;
+import sample.Model.Patient;
+import sample.Model.Table;
 
 public class MedFieldController
 {
 	@FXML
-	private ResourceBundle resources;
+	private ResourceBundle							resources;
 
 	@FXML
-	private URL location;
+	private URL													location;
 
 	@FXML
-	private TableView<Table> patientsTable;
+	private TableView<Table>						patientsTable;
 
 	@FXML
-	private TableColumn<Table, Integer> PatientID;
+	private TableColumn<Table, Integer>	PatientID;
 
 	@FXML
-	private TableColumn<Table, String> PatientName;
+	private TableColumn<Table, String>	PatientName;
 
 	@FXML
-	private TableColumn<Table, String> PatientStatus;
+	private TableColumn<Table, String>	PatientStatus;
 
 	@FXML
-	private TableColumn<Table, String> PatientBreakfast;
+	private TableColumn<Table, String>	PatientBreakfast;
 
 	@FXML
-	private TableColumn<Table, String> PatientLunch;
+	private TableColumn<Table, String>	PatientLunch;
 
 	@FXML
-	private TableColumn<Table, String> PatientDinner;
+	private TableColumn<Table, String>	PatientDinner;
 
 	@FXML
-	private TableColumn<Table, String> PatientDiet;
+	private TableColumn<Table, String>	PatientDiet;
 
 	@FXML
-	private Button medAddPatient;
+	private Button											medAddPatient;
 
 	@FXML
-	private Button medDeletePatient;
+	private Button											medDeletePatient;
 
 	@FXML
-	private TextField medPatientName;
+	private TextField										medPatientName;
 
 	@FXML
-	private Button medModify;
+	private Button											medModify;
 
 	@FXML
-	private TextField selectedPatientId;
+	private TextField										selectedPatientId;
 
 	@FXML
-	private ComboBox<String> StatusBox;
+	private ComboBox<String>						StatusBox;
 
 	@FXML
-	private ComboBox<String> BreakfastBox;
+	private ComboBox<String>						BreakfastBox;
 
 	@FXML
-	private ComboBox<String> LunchBox;
+	private ComboBox<String>						LunchBox;
 
 	@FXML
-	private ComboBox<String> DinnerBox;
+	private ComboBox<String>						DinnerBox;
 
 	@FXML
-	private ComboBox<String> DietBox;
+	private ComboBox<String>						DietBox;
 
 	@FXML
-	private TextField medFName;
+	private TextField										medFName;
 
 	@FXML
-	private TextField medLName;
+	private TextField										medLName;
 
 	@FXML
-	private TextField medUsername;
+	private TextField										medUsername;
 
 	@FXML
-	private Button medSaveB;
+	private Button											medSaveB;
 
 	@FXML
-	private PasswordField medPw;
+	private PasswordField								medPw;
 
 	@FXML
-	private TextField medUsername1;
+	private TextField										medUsername1;
 
 	@FXML
-	private ComboBox<String> gras1;
+	private ComboBox<String>						gras1;
 
 	@FXML
-	private ComboBox<String> frui1;
+	private ComboBox<String>						frui1;
 
 	@FXML
-	private ComboBox<String> cereal2;
+	private ComboBox<String>						cereal2;
 
 	@FXML
-	private ComboBox<String> boi;
+	private ComboBox<String>						boi;
 
 	@FXML
-	private ComboBox<String> fruit2;
+	private ComboBox<String>						fruit2;
 
 	@FXML
-	private ComboBox<String> leg1;
+	private ComboBox<String>						leg1;
 
 	@FXML
-	private ComboBox<String> leg2;
+	private ComboBox<String>						leg2;
 
 	@FXML
-	private ComboBox<String> vvpolav;
+	private ComboBox<String>						vvpolav;
 
 	@FXML
-	private ComboBox<String> leg3;
+	private ComboBox<String>						leg3;
 
 	@FXML
-	private RadioButton BreakfastCheckBox;
+	private RadioButton									BreakfastCheckBox;
 
 	@FXML
-	private ToggleGroup lolo;
+	private ToggleGroup									lolo;
 
 	@FXML
-	private RadioButton LunchCheckBox;
+	private RadioButton									LunchCheckBox;
 
 	@FXML
-	private RadioButton DinnerCheckBox;
+	private RadioButton									DinnerCheckBox;
 
 	@FXML
-	private TextField name;
+	private TextField										name;
 
 	@FXML
-	private Button addmealbutton;
+	private Button											addmealbutton;
 
 	@FXML
-	private ComboBox<String> gras2;
+	private ComboBox<String>						gras2;
 
 	@FXML
-	private ComboBox<String> fruit3;
+	private ComboBox<String>						fruit3;
 
 	@FXML
-	private ComboBox<String> cereal1;
+	private ComboBox<String>						cereal1;
 
 	@FXML
-	private Button logout;
-	ObservableList<Table>oblist;
-	private DatabaseHandler	databaseHandler;
-	Connection	conu	= null;
-	int	index	= -1;
-	final ObservableList bf =FXCollections.observableArrayList();
+	private Button											logout;
+	ObservableList<Table>								oblist;
+	private DatabaseHandler							databaseHandler;
+	Connection													conu	= null;
+	int																	index	= -1;
+	final ObservableList bf		= FXCollections.observableArrayList();
 	//final ObservableList lc =FXCollections.observableArrayList();
 	//final ObservableList di =FXCollections.observableArrayList();
-
 
 	@FXML
 	void initialize()
 	{
+		databaseHandler = new DatabaseHandler();
 		fill();
 		Connection con = null;
+		seethis();
 		showw();
 		UpdateTable();
 		showInfo();
@@ -227,13 +235,13 @@ public class MedFieldController
 			stage.show();
 
 		});
-		medSaveB.setOnAction(event ->{
+		medSaveB.setOnAction(event -> {
 			SaveP();
 
 		});
-		addmealbutton.setOnAction(event->{
+		addmealbutton.setOnAction(event -> {
 			AddPlat();
-			//seethis();
+			seethis();
 			testing();
 			resetValues();
 			showw();
@@ -241,34 +249,67 @@ public class MedFieldController
 
 	}
 
-	private void AddPlat() {
+	private void AddPlat()
+	{
 		DatabaseHandler databaseHandler = new DatabaseHandler();
-		String menus="";
-		if(BreakfastCheckBox.isSelected()){
-			menus="breakfast";
-		}else if(LunchCheckBox.isSelected()){
-			menus="lunch";
-		}else if(DinnerCheckBox.isSelected()){
-			menus="dinner";
+		String menus = "";
+		if (BreakfastCheckBox.isSelected())
+		{
+			menus = "breakfast";
+		}
+		else if (LunchCheckBox.isSelected())
+		{
+			menus = "lunch";
+		}
+		else if (DinnerCheckBox.isSelected())
+		{
+			menus = "dinner";
 		}
 
-		String gass= gras1.getValue().toString();
-		String gass1=gras2.getValue().toString();
-		String bois=boi.getValue().toString();
-		String fruit=frui1.getValue().toString();
-		String fruits2=fruit2.getValue().toString();
-		String fruits3=fruit3.getValue().toString();
-		String legg=leg1.getValue().toString();
-		String legg1=leg2.getValue().toString();
-		String legg2=leg3.getValue().toString();
-		String cer=cereal1.getValue().toString();
-		String cer1=cereal2.getValue().toString();
-		String vv=vvpolav.getValue().toString();
+		String gass = gras1.getValue().toString();
+		String gass1 = gras2.getValue().toString();
+		String bois = boi.getValue().toString();
+		String fruit = frui1.getValue().toString();
+		String fruits2 = fruit2.getValue().toString();
+		String fruits3 = fruit3.getValue().toString();
+		String legg = leg1.getValue().toString();
+		String legg1 = leg2.getValue().toString();
+		String legg2 = leg3.getValue().toString();
+		String cer = cereal1.getValue().toString();
+		String cer1 = cereal2.getValue().toString();
+		String vv = vvpolav.getValue().toString();
 		String name1 = name.getText();
 
-		Menu plat = new Menu(menus,gass,gass1,fruit,fruits2,fruits3,legg,legg1,legg2,cer,cer1,bois,vv,name1);
+		Menu plat = new Menu(
+			menus,
+			gass,
+			gass1,
+			fruit,
+			fruits2,
+			fruits3,
+			legg,
+			legg1,
+			legg2,
+			cer,
+			cer1,
+			bois,
+			vv,
+			name1
+		);
 
-		databaseHandler.getPlat(plat);
+		if (
+			(menus.equalsIgnoreCase("breakfast") &&
+				this.databaseHandler.getBreakfastNames().contains(name1)) ||
+				menus.equalsIgnoreCase("lunch") && this.databaseHandler.getLunchNames().contains(name1) || menus.equalsIgnoreCase("dinner") && this.databaseHandler.getDinnerNames().contains(name1)
+		)
+
+		{
+			System.out.println("Add shaker");
+
+		}
+		else
+			databaseHandler.getPlat(plat);
+
 	}
 
 	public void Edit()
@@ -280,18 +321,17 @@ public class MedFieldController
 			String Value0 = selectedPatientId.getText();
 			String Value1 = medPatientName.getText();
 			//String Value2 = medPatientState.getText();
-			String Value2=StatusBox.getValue().toString();
+			String Value2 = StatusBox.getValue().toString();
 
-
-			String Value3=BreakfastBox.getValue().toString();
-			String Value4=LunchBox.getValue().toString();
-			String Value5=DinnerBox.getValue().toString();
-			String Value6=DietBox.getValue().toString();
-
+			String Value3 = BreakfastBox.getValue().toString();
+			String Value4 = LunchBox.getValue().toString();
+			String Value5 = DinnerBox.getValue().toString();
+			String Value6 = DietBox.getValue().toString();
 
 			String sql = "UPDATE patientstable SET fullname = '" +
-					Value1 + "',Etatpatient = '" + Value2 + "',breakfast = '" + Value3 +"',lunch = '" + Value4 +"',dinner = '" + Value5 + "',Regime = '" + Value6 +
-					"' WHERE idpatientstable = '" + Value0 + "' ";
+				Value1 + "',Etatpatient = '" + Value2 + "',breakfast = '" + Value3 + "',lunch = '" +
+				Value4 + "',dinner = '" + Value5 + "',Regime = '" + Value6 + "' WHERE idpatientstable = '" +
+				Value0 + "' ";
 			PreparedStatement psst = conu.prepareStatement(sql);
 			System.out.println(sql);
 			psst.execute();
@@ -302,15 +342,18 @@ public class MedFieldController
 			e.printStackTrace();
 		}
 	}
-	public void SaveP(){
-		try{
+
+	public void SaveP()
+	{
+		try
+		{
 			String tmp;
-			conu=DatabaseHandler.getDbConnection();
+			conu = DatabaseHandler.getDbConnection();
 			String v1 = medFName.getText();
 			String v2 = medLName.getText();
 			String v3 = medUsername1.getText();
 			String v4 = medPw.getText();
-			boolean exists=false;
+			boolean exists = false;
 			List<String> listUsernames = databaseHandler.getListUsernames();
 			for (String user : listUsernames)
 			{
@@ -322,17 +365,22 @@ public class MedFieldController
 					break;
 				}
 			}
-			if (!exists) {
+			if (!exists)
+			{
 				String sql = "UPDATE userstableau SET firstname = '" +
-						v1 + "',lastname = '" + v2 + "',username = '" + v3 + "',password = '" + v4 +
-						"' WHERE userid = ?";
+					v1 + "',lastname = '" + v2 + "',username = '" + v3 + "',password = '" + v4 +
+					"' WHERE userid = ?";
 				PreparedStatement psst = conu.prepareStatement(sql);
 				psst.setInt(1, LoginController.userConnectedId);
 				psst.execute();
 			}
-		} catch (SQLException e) {
+		}
+		catch (SQLException e)
+		{
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
+		}
+		catch (ClassNotFoundException e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -340,13 +388,20 @@ public class MedFieldController
 	private void addPatient()
 	{
 		String patientName = medPatientName.getText().trim();
-		String patientState =StatusBox.getValue().toString();
-		String patientRegime =DietBox.getValue().toString();
+		String patientState = StatusBox.getValue().toString();
+		String patientRegime = DietBox.getValue().toString();
 		String patientBreakfast = BreakfastBox.getValue().toString();
 		String patientLunch = LunchBox.getValue().toString();
-		String patientDinner  = DinnerBox.getValue().toString();
+		String patientDinner = DinnerBox.getValue().toString();
 
-		Patient patient = new Patient(patientName,patientState,patientRegime,patientBreakfast,patientLunch,patientDinner);
+		Patient patient = new Patient(
+			patientName,
+			patientState,
+			patientRegime,
+			patientBreakfast,
+			patientLunch,
+			patientDinner
+		);
 
 		patient.setDoctorId(LoginController.userConnectedId);
 
@@ -369,7 +424,10 @@ public class MedFieldController
 		ObservableList<Table> oblist = FXCollections.observableArrayList();
 		try
 		{
-			PreparedStatement prp = con.prepareStatement("SELECT * FROM patientstable INNER JOIN userstable ON patientstable.userid=userstable.userid WHERE userstable.userid=?");
+			PreparedStatement prp = con
+				.prepareStatement(
+					"SELECT * FROM patientstable INNER JOIN userstable ON patientstable.userid=userstable.userid WHERE userstable.userid=?"
+				);
 			prp.setInt(1, LoginController.userConnectedId);
 			rs = prp.executeQuery();
 
@@ -392,7 +450,8 @@ public class MedFieldController
 			}
 			try
 			{
-				oblist.add(new Table(rs.getInt("idpatientstable"),rs.getString("fullname"),rs.getString("Etatpatient"),rs.getString("Regime"),rs.getString("breakfast"),rs.getString("lunch"),rs.getString("dinner")));
+				oblist
+					.add(new Table(rs.getInt("idpatientstable"), rs.getString("fullname"), rs.getString("Etatpatient"), rs.getString("Regime"), rs.getString("breakfast"), rs.getString("lunch"), rs.getString("dinner")));
 			}
 			catch (SQLException e)
 			{
@@ -411,34 +470,50 @@ public class MedFieldController
 
 		return oblist;
 	}
-	private void showInfo() {
+
+	private void showInfo()
+	{
 		Connection cn = null;
-		try {
+		try
+		{
 			cn = DatabaseHandler.getDbConnection();
-		} catch (ClassNotFoundException | SQLException e) {
+		}
+		catch (ClassNotFoundException | SQLException e)
+		{
 			e.printStackTrace();
 		}
 		ResultSet res = null;
-		try {
-			PreparedStatement prp = cn.prepareStatement("SELECT * FROM  userstable  WHERE userstable.userid=?");
+		try
+		{
+			PreparedStatement prp = cn
+				.prepareStatement("SELECT * FROM  userstable  WHERE userstable.userid=?");
 			prp.setInt(1, LoginController.userConnectedId);
 			res = prp.executeQuery();
 
-		} catch (SQLException e) {
+		}
+		catch (SQLException e)
+		{
 			e.printStackTrace();
 		}
-		try {
-			if(res.next()) {
-				try {
+		try
+		{
+			if (res.next())
+			{
+				try
+				{
 					medFName.setText(res.getString("firstname"));
 					medLName.setText(res.getString("lastname"));
 					medUsername.setText(res.getString("username"));
 					medPw.setText(res.getString("password"));
-				} catch (SQLException e) {
+				}
+				catch (SQLException e)
+				{
 					e.printStackTrace();
 				}
 			}
-		} catch (SQLException e) {
+		}
+		catch (SQLException e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -476,21 +551,56 @@ public class MedFieldController
 		UpdateTable();
 
 	}
-	public void fill(){
-		gras1.getItems().addAll("oil","egg","butter","aucun");
-		gras2.getItems().addAll("oil","egg","butter","aucun");
-		boi.getItems().addAll("Tea","juice","cofe","aucun");
-		frui1.getItems().addAll("apple","avocado","banana","Apricots","Date Fruit","aucun");
-		fruit2.getItems().addAll("apple","avocado","banana","Apricots","Date Fruit","aucun");
-		fruit3.getItems().addAll("apple","avocado","banana","Apricots","Date Fruit","aucun");
-		leg1.getItems().addAll("tomato","potato","eggplant","green pepper","carrot","garlic","broccoli","aucun");
-		leg2.getItems().addAll("tomato","potato","eggplant","green pepper","carrot","garlic","broccoli","aucun");
-		leg3.getItems().addAll("tomato","potato","eggplant","green pepper","carrot","garlic","broccoli","aucun");
-		cereal2.getItems().addAll("bread","cereal","pasta","oats","corn","aucun");
-		cereal1.getItems().addAll("bread","cereal","pasta","oats","corn","aucun");
-		vvpolav.getItems().addAll("meat","fish","chicken","aucun");
-		StatusBox.getItems().addAll("intesif care","normal");
-		DietBox.getItems().addAll("sugar free","full");
+
+	public void fill()
+	{
+		gras1.getItems().addAll("oil", "egg", "butter", "aucun");
+		gras2.getItems().addAll("oil", "egg", "butter", "aucun");
+		boi.getItems().addAll("Tea", "juice", "cofe", "aucun");
+		frui1.getItems().addAll("apple", "avocado", "banana", "Apricots", "Date Fruit", "aucun");
+		fruit2.getItems().addAll("apple", "avocado", "banana", "Apricots", "Date Fruit", "aucun");
+		fruit3.getItems().addAll("apple", "avocado", "banana", "Apricots", "Date Fruit", "aucun");
+		leg1
+			.getItems()
+			.addAll(
+				"tomato",
+				"potato",
+				"eggplant",
+				"green pepper",
+				"carrot",
+				"garlic",
+				"broccoli",
+				"aucun"
+			);
+		leg2
+			.getItems()
+			.addAll(
+				"tomato",
+				"potato",
+				"eggplant",
+				"green pepper",
+				"carrot",
+				"garlic",
+				"broccoli",
+				"aucun"
+			);
+		leg3
+			.getItems()
+			.addAll(
+				"tomato",
+				"potato",
+				"eggplant",
+				"green pepper",
+				"carrot",
+				"garlic",
+				"broccoli",
+				"aucun"
+			);
+		cereal2.getItems().addAll("bread", "cereal", "pasta", "oats", "corn", "aucun");
+		cereal1.getItems().addAll("bread", "cereal", "pasta", "oats", "corn", "aucun");
+		vvpolav.getItems().addAll("meat", "fish", "chicken", "aucun");
+		StatusBox.getItems().addAll("intesif care", "normal");
+		DietBox.getItems().addAll("sugar free", "full");
 	}
 
 	public void UpdateTable()
@@ -506,168 +616,251 @@ public class MedFieldController
 		oblist = showPatients();
 		patientsTable.setItems(oblist);
 	}
-	public void resetValues() {
+
+	public void resetValues()
+	{
 		name.clear();
 	}
 
-	public void showw() {
-		try {
+	public void showw()
+	{
+		try
+		{
 			conu = DatabaseHandler.getDbConnection();
-		} catch (ClassNotFoundException | SQLException e) {
+		}
+		catch (ClassNotFoundException | SQLException e)
+		{
 			e.printStackTrace();
 		}
 		ResultSet rs = null;
 
 		PreparedStatement prp = null;
-		try {
+		try
+		{
 			prp = conu.prepareStatement("SELECT name from menutable WHERE menutable.plat='breakfast'");
-		} catch (SQLException throwables) {
+		}
+		catch (SQLException throwables)
+		{
 			throwables.printStackTrace();
 		}
 
-		try {
+		try
+		{
 			rs = prp.executeQuery();
-		} catch (SQLException throwables) {
+		}
+		catch (SQLException throwables)
+		{
 			throwables.printStackTrace();
 		}
-		while (true) {
-			try {
+		while (true)
+		{
+			try
+			{
 				if (!rs.next())
 					break;
-			} catch (SQLException e) {
+			}
+			catch (SQLException e)
+			{
 				e.printStackTrace();
 			}
-			try {
+			try
+			{
 				//BreakfastBox.getItems().clear();
-				BreakfastBox.getItems().addAll(rs.getString("name"));
-			} catch (SQLException e) {
+					BreakfastBox.getItems().addAll(rs.getString("name"));
+
+			}
+			catch (SQLException e)
+			{
 				e.printStackTrace();
 			}
 
-			try {
+			try
+			{
 				conu = DatabaseHandler.getDbConnection();
-			} catch (ClassNotFoundException | SQLException e) {
+			}
+			catch (ClassNotFoundException | SQLException e)
+			{
 				e.printStackTrace();
 			}
 			ResultSet res = null;
 
 			PreparedStatement prep = null;
-			try {
+			try
+			{
 				prep = conu.prepareStatement("SELECT name from menutable WHERE menutable.plat='lunch'");
-			} catch (SQLException throwables) {
+			}
+			catch (SQLException throwables)
+			{
 				throwables.printStackTrace();
 			}
 
-			try {
+			try
+			{
 				res = prep.executeQuery();
-			} catch (SQLException throwables) {
+			}
+			catch (SQLException throwables)
+			{
 				throwables.printStackTrace();
 			}
-			while (true) {
-				try {
+			while (true)
+			{
+				try
+				{
 					if (!res.next())
 						break;
-				} catch (SQLException e) {
+				}
+				catch (SQLException e)
+				{
 					e.printStackTrace();
 				}
-				try {
-					//LunchBox.getItems().clear();
-					LunchBox.getItems().addAll(res.getString("name"));
-				} catch (SQLException e) {
+				try
+				{
+						LunchBox.getItems().addAll(res.getString("name"));
+
+				}
+				catch (SQLException e)
+				{
 					e.printStackTrace();
 				}
 			}
 			ResultSet resu = null;
 
 			PreparedStatement prepr = null;
-			try {
+			try
+			{
 				prepr = conu.prepareStatement("SELECT name from menutable WHERE menutable.plat='dinner'");
-			} catch (SQLException throwables) {
+			}
+			catch (SQLException throwables)
+			{
 				throwables.printStackTrace();
 			}
 
-			try {
+			try
+			{
 				resu = prepr.executeQuery();
-			} catch (SQLException throwables) {
+			}
+			catch (SQLException throwables)
+			{
 				throwables.printStackTrace();
 			}
-			while (true) {
-				try {
+			while (true)
+			{
+				try
+				{
 					if (!resu.next())
 						break;
-				} catch (SQLException e) {
+				}
+				catch (SQLException e)
+				{
 					e.printStackTrace();
 				}
-				try {
+				try
+				{
 					DinnerBox.getItems().addAll(resu.getString("name"));
-				} catch (SQLException e) {
+				}
+				catch (SQLException e)
+				{
 					e.printStackTrace();
 				}
 			}
 
 		}
 	}
-	public void seethis(){
+
+	public void seethis()
+	{
 		LunchBox.getItems().clear();
 		BreakfastBox.getItems().clear();
 		DinnerBox.getItems().clear();
 	}
-	public void testing() {
-		try {
+
+	public void testing()
+	{
+		try
+		{
 			conu = DatabaseHandler.getDbConnection();
-		} catch (ClassNotFoundException | SQLException e) {
+		}
+		catch (ClassNotFoundException | SQLException e)
+		{
 			e.printStackTrace();
 		}
 		ResultSet rs = null;
 
 		PreparedStatement prp = null;
-		try {
+		try
+		{
 			prp = conu.prepareStatement("SELECT name from menutable WHERE menutable.plat='breakfast'");
-		} catch (SQLException throwables) {
+		}
+		catch (SQLException throwables)
+		{
 			throwables.printStackTrace();
 		}
 
-		try {
+		try
+		{
 			rs = prp.executeQuery();
-		} catch (SQLException throwables) {
+		}
+		catch (SQLException throwables)
+		{
 			throwables.printStackTrace();
 		}
-		while (true) {
-			try {
+		while (true)
+		{
+			try
+			{
 				if (!rs.next())
 					break;
-			} catch (SQLException e) {
+			}
+			catch (SQLException e)
+			{
 				e.printStackTrace();
 			}
-			try {
-				BreakfastBox.getItems().clear();} catch (Exception e) {
+			try
+			{
+				BreakfastBox.getItems().clear();
+			}
+			catch (Exception e)
+			{
 				e.printStackTrace();
 			}
 
-			try {
+			try
+			{
 				conu = DatabaseHandler.getDbConnection();
-			} catch (ClassNotFoundException | SQLException e) {
+			}
+			catch (ClassNotFoundException | SQLException e)
+			{
 				e.printStackTrace();
 			}
 			ResultSet res = null;
 
 			PreparedStatement prep = null;
-			try {
+			try
+			{
 				prep = conu.prepareStatement("SELECT name from menutable WHERE menutable.plat='lunch'");
-			} catch (SQLException throwables) {
+			}
+			catch (SQLException throwables)
+			{
 				throwables.printStackTrace();
 			}
 
-			try {
+			try
+			{
 				res = prep.executeQuery();
-			} catch (SQLException throwables) {
+			}
+			catch (SQLException throwables)
+			{
 				throwables.printStackTrace();
 			}
-			while (true) {
-				try {
+			while (true)
+			{
+				try
+				{
 					if (!res.next())
 						break;
-				} catch (SQLException e) {
+				}
+				catch (SQLException e)
+				{
 					e.printStackTrace();
 				}
 				LunchBox.getItems().clear();
@@ -675,22 +868,32 @@ public class MedFieldController
 			ResultSet resu = null;
 
 			PreparedStatement prepr = null;
-			try {
+			try
+			{
 				prepr = conu.prepareStatement("SELECT name from menutable WHERE menutable.plat='dinner'");
-			} catch (SQLException throwables) {
+			}
+			catch (SQLException throwables)
+			{
 				throwables.printStackTrace();
 			}
 
-			try {
+			try
+			{
 				resu = prepr.executeQuery();
-			} catch (SQLException throwables) {
+			}
+			catch (SQLException throwables)
+			{
 				throwables.printStackTrace();
 			}
-			while (true) {
-				try {
+			while (true)
+			{
+				try
+				{
 					if (!resu.next())
 						break;
-				} catch (SQLException e) {
+				}
+				catch (SQLException e)
+				{
 					e.printStackTrace();
 				}
 				DinnerBox.getItems().clear();
@@ -698,9 +901,5 @@ public class MedFieldController
 
 		}
 	}
-
-
-
-
 
 }
