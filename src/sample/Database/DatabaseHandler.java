@@ -24,7 +24,7 @@ public class DatabaseHandler extends Configs
 	{
 		String connectionString = "jdbc:mysql://" + "localhost" + ":" + "3306" + "/" + "active";
 		Class.forName("com.mysql.jdbc.Driver");
-		dbConnection = DriverManager.getConnection(connectionString, "root", "12345");
+		dbConnection = DriverManager.getConnection(connectionString, "root", "1337");
 
 		return dbConnection;
 	}
@@ -210,30 +210,6 @@ public class DatabaseHandler extends Configs
 
 	}
 
-	//add an element
-	public void addElement(Storage storage)
-	{
-		String insertion = "INSERT INTO " +
-			Const.Storage_Table + "(" + Const.Element_id + "," + Const.Storage_element + "," +
-			Const.Storage_zone + "," + Const.Storage_type + ")" + "Values(?,?,?,?)";
-		try
-		{
-			PreparedStatement preparedStatement = getDbConnection().prepareStatement(insertion);
-			preparedStatement.setString(1, String.valueOf(storage.getIdelement()));
-			preparedStatement.setString(2, storage.getElement());
-			preparedStatement.setString(3, storage.getStoragezone());
-			preparedStatement.setString(4, storage.getStoragetype());
-
-			preparedStatement.executeUpdate();
-
-		}
-		catch (SQLException | ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-
-	}
-
 	public void getQuantity(Quantity quantity)
 	{
 
@@ -390,6 +366,27 @@ public class DatabaseHandler extends Configs
 		}
 
 		return list;
+
+	}
+	public void addelement(Storage storage)
+	{
+		String insertion = "INSERT INTO " +
+				Const.Storage_Table + "(" + Const.Storage_element + "," + Const.Storage_zone + "," +
+				Const.Storage_type + ")" + "Values(?,?,?)";
+		try
+		{
+			PreparedStatement preparedStatement = getDbConnection().prepareStatement(insertion);
+			preparedStatement.setString(1, storage.getElement());
+			preparedStatement.setString(2, storage.getStoragezone());
+			preparedStatement.setString(3, storage.getStoragetype());
+
+			preparedStatement.executeUpdate();
+
+		}
+		catch (SQLException | ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
 
 	}
 

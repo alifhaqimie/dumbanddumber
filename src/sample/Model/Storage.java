@@ -1,7 +1,7 @@
 package sample.Model;
 
 public class Storage {
-    private String idelement;
+    private Integer idelement;
     private String element;
     private String storagezone;
     private String storagetype;
@@ -9,18 +9,25 @@ public class Storage {
     public Storage() {
     }
 
-    public Storage(String idelement, String element, String storagezone, String storagetype) {
-        this.idelement = idelement;
+    public Storage( String element, String storagezone, String storagetype) {
+        //this.idelement = idelement;
         this.element = element;
         this.storagezone = storagezone;
         this.storagetype = storagetype;
     }
 
-    public String getIdelement() {
+    public Storage(Integer idelement, String element, String storagezone, String storagetype) {
+        this.idelement = idelement;
+        this.element = element;
+        this.storagezone = storagezone;
+        this.storagetype = storagetype;}
+
+
+    public Integer getIdelement() {
         return idelement;
     }
 
-    public void setIdelement(String idelement) {
+    public void setIdelement(Integer idelement) {
         this.idelement = idelement;
     }
 

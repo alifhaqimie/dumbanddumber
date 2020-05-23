@@ -4,6 +4,7 @@ import static sample.Database.DatabaseHandler.getDbConnection;
 
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -13,17 +14,15 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.RadioMenuItem;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import sample.Database.DatabaseHandler;
 import sample.Model.MenuTable;
 import sample.Model.OrderTable;
+import sample.Model.Patient;
+import sample.Model.Storage;
+
+import javax.swing.*;
 
 public class ChefFieldController2
 {
@@ -85,16 +84,16 @@ public class ChefFieldController2
 	private TextField ChefOrdern;
 
 	@FXML
-	private TableColumn<?, ?>								StrorageIDElement;
+	private TableColumn<Storage,Integer>								StrorageIDElement;
 
 	@FXML
-	private TableColumn<?, ?>								StrorageElement;
+	private TableColumn<Storage, String>								StrorageElement;
 
 	@FXML
-	private TableColumn<?, ?>								StorageZone;
+	private TableColumn<Storage, String>								StorageZone;
 
 	@FXML
-	private TableColumn<?, ?>								StorageType;
+	private TableColumn<Storage,String>								StorageType;
 
 	@FXML
 	private TextField												TextidElement;
@@ -119,19 +118,45 @@ public class ChefFieldController2
 
 	@FXML
 	private Button													StorageModifyButton;
+	@FXML
+	private TableView<Storage> storage;
+	private DatabaseHandler							databaseHandler;
+	@FXML
+	private RadioMenuItem z1;
+	@FXML
+	private RadioMenuItem z2;
 
 	@FXML
 	private Button													StorageDeleteButton;
+	Connection													conu	= null;
 	ObservableList<MenuTable>								tableau				= FXCollections.observableArrayList();
 	String																	pattern				= "yyyy-MM-dd";
 	DateTimeFormatter												dateFormatter	= DateTimeFormatter.ofPattern(pattern);
-
+	ObservableList<Storage>								tabl				= FXCollections.observableArrayList();
+	int																	index	= -1;
 	@FXML
 	void initialize()
 	{
+		databaseHandler = new DatabaseHandler();
+		storage.setEditable(true);
+		storage.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		//showstorage();
+		UpdateTabl();
 		UpdateTable();
 		ChefSubmit.setOnAction(event -> { addOrder();
             reseet();});
+		StorageAddElement.setOnAction(event ->{
+			addelement();
+		});
+		StorageDeleteButton.setOnAction(event -> {
+			try {
+				Delete();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		});
 	}
 
 	private ObservableList<MenuTable> showMenu()
@@ -181,7 +206,7 @@ public class ChefFieldController2
 		PatientId.setCellValueFactory(new PropertyValueFactory<>("idpatientstable"));
 		patientbreakfast.setCellValueFactory(new PropertyValueFactory<>("breakfast"));
 		patientLunch.setCellValueFactory(new PropertyValueFactory<>("lunch"));
-		patientDinner.setCellValueFactory(new PropertyValueFactory<>("breakfast"));
+		patientDinner.setCellValueFactory(new PropertyValueFactory<>("dinner"));
 
 		menushown.setItems(tableau);
 		return tableau;
@@ -217,4 +242,126 @@ public class ChefFieldController2
         ChefReceptionDate.getEditor().clear();
         ChefQuantity.clear();
     }
+	private ObservableList<Storage> showstorage()
+	{
+		Connection con = null;
+		try
+		{
+			con = getDbConnection();
+		}
+		catch (ClassNotFoundException | SQLException e)
+		{
+			e.printStackTrace();
+		}
+		ResultSet rs = null;
+		try
+		{
+			rs = con
+					.createStatement()
+					.executeQuery("SELECT * FROM storagetable");
+		}
+		catch (SQLException throwables)
+		{
+			throwables.printStackTrace();
+		}
+		while (true)
+		{
+			try
+			{
+				if (!rs.next())
+					break;
+			}
+			catch (SQLException throwables)
+			{
+				throwables.printStackTrace();
+			}
+			try
+			{
+				tabl
+						.add(new Storage(rs.getInt("idelement"), rs.getString("element"), rs.getString("storagezone"), rs.getString("storagetype")));
+			}
+			catch (SQLException throwables)
+			{
+				throwables.printStackTrace();
+			}
+
+		}
+		StrorageIDElement.setCellValueFactory(new PropertyValueFactory<>("idelement"));
+		StrorageElement.setCellValueFactory(new PropertyValueFactory<>("element"));
+		StorageZone.setCellValueFactory(new PropertyValueFactory<>("storagezone"));
+		StorageType.setCellValueFactory(new PropertyValueFactory<>("storagetype"));
+
+		storage.setItems(tabl);
+		return tabl;
+	}
+	public void UpdateTabl()
+	{
+		StrorageIDElement.setCellValueFactory(new PropertyValueFactory<Storage, Integer>("idelement"));
+		StrorageElement.setCellValueFactory(new PropertyValueFactory<Storage, String>("element"));
+		StorageZone.setCellValueFactory(new PropertyValueFactory<Storage, String>("storagezone"));
+		StorageType.setCellValueFactory(new PropertyValueFactory<Storage, String>("storagetype"));
+
+		tabl = showstorage();
+		storage.setItems(tabl);
+	}
+	public void getSelected(javafx.scene.input.MouseEvent event)
+	{
+		index = storage.getSelectionModel().getSelectedIndex();
+		if (index <= -1)
+		{
+			return;
+		}
+		TextidElement.setText(String.valueOf(StrorageIDElement.getCellData(index)).toString());
+		Textelement.setText(StrorageElement.getCellData(index).toString());
+
+	}
+	@FXML
+	public void Delete() throws SQLException, ClassNotFoundException
+	{
+		conu = DatabaseHandler.getDbConnection();
+		String sql = "delete from storagetable where idelement = ?";
+		try
+		{
+			PreparedStatement pst = conu.prepareStatement(sql);
+			pst.setString(1, TextidElement.getText());
+			pst.execute();
+			JOptionPane.showMessageDialog(null, "that element have been deleted ");
+			UpdateTabl();
+		}
+		catch (Exception e)
+		{
+			JOptionPane.showMessageDialog(null, e);
+		}
+		UpdateTabl();
+
+	}
+	private void addelement()
+	{
+		String element = Textelement.getText().trim();
+		String elementzone = " ";
+		if(z1.isSelected()){
+			elementzone="test1";
+		}else{
+			elementzone=Textstoragezone.getText().trim();
+		}
+		String elementtype = " ";
+		if(z2.isSelected()){
+			elementtype="test2";
+
+		}else{
+			elementzone=Textstoragetype.getText().trim();
+		}
+
+
+		Storage storage = new Storage(
+				element,
+				elementzone,
+				elementtype
+		);
+
+		//storage.setDoctorId(LoginController.userConnectedId);
+
+		databaseHandler.addelement(storage);
+		UpdateTabl();
+	}
 }

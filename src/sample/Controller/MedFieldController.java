@@ -362,7 +362,7 @@ public class MedFieldController
 			}
 			if (!exists)
 			{
-				String sql = "UPDATE userstableau SET firstname = '" +
+				String sql = "UPDATE userstable SET firstname = '" +
 					v1 + "',lastname = '" + v2 + "',username = '" + v3 + "',password = '" + v4 +
 					"' WHERE userid = ?";
 				PreparedStatement psst = conu.prepareStatement(sql);
@@ -582,8 +582,8 @@ public class MedFieldController
 		leg3
 			.getItems()
 			.addAll(
-				"tomato",
-				"potato",
+				"tomatoes",
+				"potatoes",
 				"eggplant",
 				"green pepper",
 				"carrot",
@@ -595,7 +595,7 @@ public class MedFieldController
 		cereal1.getItems().addAll("bread", "cereal", "pasta", "oats", "corn", "aucun");
 		vvpolav.getItems().addAll("meat", "fish", "chicken", "aucun");
 		StatusBox.getItems().addAll("intesif care", "normal");
-		DietBox.getItems().addAll("sugar free", "full");
+		DietBox.getItems().addAll("sugar free","no Salt", "normal");
 	}
 
 	public void UpdateTable()

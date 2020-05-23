@@ -14,102 +14,91 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<TabPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.ChefFieldController2">
-   <tabs>
-      <Tab closable="false" text="Menu">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <TableView fx:id="menushown" prefHeight="335.0" prefWidth="738.0">
-                    <columns>
-                      <TableColumn fx:id="PatientId" prefWidth="175.0" text="patientid" />
-                      <TableColumn fx:id="patientbreakfast" prefWidth="185.0" text="breakfast" />
-                        <TableColumn fx:id="patientLunch" prefWidth="185.0" text="lunch" />
-                        <TableColumn fx:id="patientDinner" prefWidth="185.0" text="dinner" />
-                    </columns>
-                  </TableView>
-               </children>
-            </AnchorPane>
-        </content>
-      </Tab>
-      <Tab closable="false" text="Menu details">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-        </content>
-      </Tab>
-      <Tab closable="false" text="Gestion des commandes">
-         <content>
-            <AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #FFFFFF;">
-               <children>
-                  <Label layoutX="27.0" layoutY="14.0" prefHeight="34.0" prefWidth="134.0" text="New Order">
-                     <font>
-                        <Font name="Arial" size="18.0" />
-                     </font>
-                  </Label>
-                  <DatePicker fx:id="ChefOrderDate" editable="false" layoutX="125.0" layoutY="101.0" prefHeight="25.0" prefWidth="195.0" promptText="order date" />
-                  <DatePicker fx:id="ChefReceptionDate" editable="false" layoutX="125.0" layoutY="142.0" prefHeight="26.0" prefWidth="195.0" promptText="reception date" />
-                  <TextField fx:id="ChefQuantity" layoutX="124.0" layoutY="230.0" prefHeight="26.0" prefWidth="196.0" promptText="Quantity" />
-                  <Button fx:id="ChefSubmit" layoutX="258.0" layoutY="334.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="282.0" style="-fx-background-color: #abc1be;" text="submit" />
-                  <MenuButton fx:id="ChefOrder" layoutX="125.0" layoutY="187.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="195.0" text="Order">
-                    <items>
-                        <RadioMenuItem fx:id="ChefFraise" mnemonicParsing="false" text="fraise" />
-                        <RadioMenuItem fx:id="ChefPT" mnemonicParsing="false" text="pomme de terre" />
-                        <RadioMenuItem fx:id="viande" mnemonicParsing="false" text="viande" />
-                        <RadioMenuItem fx:id="autre" mnemonicParsing="false" text="autre" />
-                    </items>
-                  </MenuButton>
-                  <Line endX="417.0" layoutX="282.0" startX="-100.0" />
-                  <TextField fx:id="ChefOrdern" layoutX="124.0" layoutY="64.0" prefHeight="26.0" prefWidth="196.0" promptText="Order number" />
-               </children>
-            </AnchorPane>
-         </content>
-      </Tab>
-      <Tab closable="false" text="Gestion des Achats">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <TableView prefHeight="315.0" prefWidth="700.0">
-                    <columns>
-                      <TableColumn fx:id="StrorageIDElement" prefWidth="170.0" text="idelement" />
-                      <TableColumn fx:id="StrorageElement" prefWidth="180.0" text="element" />
-                        <TableColumn fx:id="StorageZone" prefWidth="170.0" text="storage zone" />
-                        <TableColumn fx:id="StorageType" prefWidth="170.0" text="storage type" />
-                    </columns>
-                  </TableView>
-                  <TextField fx:id="TextidElement" disable="true" layoutX="28.0" layoutY="324.0" prefHeight="25.0" prefWidth="25.0" promptText="id" />
-                  <TextField fx:id="Textelement" layoutX="73.0" layoutY="324.0" prefHeight="25.0" prefWidth="76.0" promptText="element" />
-                  <TextField fx:id="Textstoragetype" layoutX="533.0" layoutY="324.0" prefHeight="25.0" prefWidth="83.0" promptText="Storage type" />
-                  <TextField fx:id="Textstoragezone" layoutX="312.0" layoutY="324.0" prefHeight="25.0" prefWidth="83.0" promptText="storage zone" />
-                  <MenuButton fx:id="MenuZone" layoutX="235.0" layoutY="324.0" mnemonicParsing="false" text="Zone">
-                     <items>
-                        <RadioMenuItem mnemonicParsing="false" text="Unspecified Action" />
-                     </items>
-                  </MenuButton>
-                  <MenuButton fx:id="MenuType" layoutX="453.0" layoutY="324.0" mnemonicParsing="false" text="Type">
-                     <items>
-                        <RadioMenuItem mnemonicParsing="false" text="Unspecified Action" />
-                     </items>
-                  </MenuButton>
-                  <Button fx:id="StorageAddElement" layoutX="325.0" layoutY="361.0" mnemonicParsing="false" text="Add element" />
-                  <Button fx:id="StorageModifyButton" layoutX="427.0" layoutY="361.0" mnemonicParsing="false" text="Modify" />
-                  <Button fx:id="StorageDeleteButton" layoutX="260.0" layoutY="361.0" mnemonicParsing="false" text="Delete" />
-               </children></AnchorPane>
-        </content>
-      </Tab>
-      <Tab closable="false" text="entroposage">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-        </content>
-      </Tab>
-      <Tab closable="false" text="Gestion de stocks">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-        </content>
-      </Tab>
-      <Tab closable="false" text="Gestion des prélèvements">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-        </content>
-      </Tab>
-   </tabs>
-</TabPane>
+<AnchorPane maxWidth="900.0" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller.ChefFieldController2">
+   <children>
+      <TabPane prefHeight="600.0" prefWidth="900.0">
+         <tabs>
+            <Tab closable="false" text="Menu">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="menushown" layoutX="63.0" layoutY="14.0" prefHeight="335.0" prefWidth="738.0">
+                          <columns>
+                            <TableColumn fx:id="PatientId" prefWidth="175.0" text="patientid" />
+                            <TableColumn fx:id="patientbreakfast" prefWidth="185.0" text="breakfast" />
+                              <TableColumn fx:id="patientLunch" prefWidth="185.0" text="lunch" />
+                              <TableColumn fx:id="patientDinner" prefWidth="185.0" text="dinner" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab closable="false" text="Menu details">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+            <Tab closable="false" text="Gestion des Achats">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="900.0">
+                     <children>
+                        <TableView fx:id="storage" layoutX="10.0" layoutY="14.0" onMouseClicked="#getSelected" onMouseEntered="#getSelected" prefHeight="315.0" prefWidth="850.0">
+                          <columns>
+                            <TableColumn fx:id="StrorageIDElement" prefWidth="170.0" text="idelement" />
+                            <TableColumn fx:id="StrorageElement" prefWidth="180.0" text="element" />
+                              <TableColumn fx:id="StorageZone" prefWidth="243.0" text="storage zone" />
+                              <TableColumn fx:id="StorageType" prefWidth="256.0" text="storage type" />
+                          </columns>
+                        </TableView>
+                        <TextField fx:id="TextidElement" disable="true" layoutX="28.0" layoutY="337.0" prefHeight="25.0" prefWidth="25.0" promptText="id" />
+                        <TextField fx:id="Textelement" layoutX="70.0" layoutY="337.0" prefHeight="25.0" prefWidth="76.0" promptText="element" />
+                        <TextField fx:id="Textstoragetype" layoutX="533.0" layoutY="337.0" prefHeight="25.0" prefWidth="83.0" promptText="Storage type" />
+                        <TextField fx:id="Textstoragezone" layoutX="312.0" layoutY="337.0" prefHeight="25.0" prefWidth="83.0" promptText="storage zone" />
+                        <MenuButton fx:id="MenuZone" layoutX="231.0" layoutY="337.0" mnemonicParsing="false" text="Zone">
+                           <items>
+                              <RadioMenuItem fx:id="z1" mnemonicParsing="false" text="test1" />
+                           </items>
+                        </MenuButton>
+                        <MenuButton fx:id="MenuType" layoutX="452.0" layoutY="337.0" mnemonicParsing="false" text="Type">
+                           <items>
+                              <RadioMenuItem fx:id="z2" mnemonicParsing="false" text="test2" />
+                           </items>
+                        </MenuButton>
+                        <Button fx:id="StorageAddElement" layoutX="325.0" layoutY="374.0" mnemonicParsing="false" text="Add element" />
+                        <Button fx:id="StorageModifyButton" layoutX="425.0" layoutY="374.0" mnemonicParsing="false" text="Modify" />
+                        <Button fx:id="StorageDeleteButton" layoutX="235.0" layoutY="374.0" mnemonicParsing="false" text="Delete" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab closable="false" text="Gestion des commandes">
+               <content>
+                  <AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #FFFFFF;">
+                     <children>
+                        <Label layoutX="27.0" layoutY="14.0" prefHeight="34.0" prefWidth="134.0" text="New Order">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="ChefOrderDate" editable="false" layoutX="125.0" layoutY="101.0" prefHeight="25.0" prefWidth="195.0" promptText="order date" />
+                        <DatePicker fx:id="ChefReceptionDate" editable="false" layoutX="125.0" layoutY="142.0" prefHeight="26.0" prefWidth="195.0" promptText="reception date" />
+                        <TextField fx:id="ChefQuantity" layoutX="124.0" layoutY="230.0" prefHeight="26.0" prefWidth="196.0" promptText="Quantity" />
+                        <Button fx:id="ChefSubmit" layoutX="258.0" layoutY="334.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="282.0" style="-fx-background-color: #abc1be;" text="submit" />
+                        <MenuButton fx:id="ChefOrder" layoutX="125.0" layoutY="187.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="195.0" text="Order">
+                          <items>
+                              <RadioMenuItem fx:id="ChefFraise" mnemonicParsing="false" text="fraise" />
+                              <RadioMenuItem fx:id="ChefPT" mnemonicParsing="false" text="pomme de terre" />
+                              <RadioMenuItem fx:id="viande" mnemonicParsing="false" text="viande" />
+                              <RadioMenuItem fx:id="autre" mnemonicParsing="false" text="autre" />
+                          </items>
+                        </MenuButton>
+                        <Line endX="417.0" layoutX="282.0" startX="-100.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
