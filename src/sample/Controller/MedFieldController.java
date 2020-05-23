@@ -174,7 +174,7 @@ public class MedFieldController
 	private DatabaseHandler							databaseHandler;
 	Connection													conu	= null;
 	int																	index	= -1;
-	final ObservableList bf		= FXCollections.observableArrayList();
+	final ObservableList								bf		= FXCollections.observableArrayList();
 	//final ObservableList lc =FXCollections.observableArrayList();
 	//final ObservableList di =FXCollections.observableArrayList();
 
@@ -239,13 +239,8 @@ public class MedFieldController
 			SaveP();
 
 		});
-		addmealbutton.setOnAction(event -> {
-			AddPlat();
-			seethis();
-			testing();
-			resetValues();
-			showw();
-		});
+		addmealbutton
+			.setOnAction(event -> { AddPlat(); seethis(); testing(); resetValues(); showw(); });
 
 	}
 
@@ -652,6 +647,8 @@ public class MedFieldController
 		{
 			throwables.printStackTrace();
 		}
+		BreakfastBox.getItems().clear();
+
 		while (true)
 		{
 			try
@@ -666,7 +663,7 @@ public class MedFieldController
 			try
 			{
 				//BreakfastBox.getItems().clear();
-					BreakfastBox.getItems().addAll(rs.getString("name"));
+				BreakfastBox.getItems().addAll(rs.getString("name"));
 
 			}
 			catch (SQLException e)
@@ -687,7 +684,7 @@ public class MedFieldController
 			PreparedStatement prep = null;
 			try
 			{
-				prep = conu.prepareStatement("SELECT name from menutable WHERE menutable.plat='lunch'");
+				prep = conu.prepareStatement("SELECT  name from menutable WHERE menutable.plat='lunch'");
 			}
 			catch (SQLException throwables)
 			{
@@ -702,6 +699,8 @@ public class MedFieldController
 			{
 				throwables.printStackTrace();
 			}
+			LunchBox.getItems().clear();
+
 			while (true)
 			{
 				try
@@ -715,7 +714,7 @@ public class MedFieldController
 				}
 				try
 				{
-						LunchBox.getItems().addAll(res.getString("name"));
+					LunchBox.getItems().addAll(res.getString("name"));
 
 				}
 				catch (SQLException e)
@@ -728,7 +727,7 @@ public class MedFieldController
 			PreparedStatement prepr = null;
 			try
 			{
-				prepr = conu.prepareStatement("SELECT name from menutable WHERE menutable.plat='dinner'");
+				prepr = conu.prepareStatement("SELECT  name from menutable WHERE menutable.plat='dinner'");
 			}
 			catch (SQLException throwables)
 			{
@@ -743,6 +742,7 @@ public class MedFieldController
 			{
 				throwables.printStackTrace();
 			}
+			DinnerBox.getItems().clear();
 			while (true)
 			{
 				try

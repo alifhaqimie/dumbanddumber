@@ -24,7 +24,7 @@ public class DatabaseHandler extends Configs
 	{
 		String connectionString = "jdbc:mysql://" + "localhost" + ":" + "3306" + "/" + "active";
 		Class.forName("com.mysql.jdbc.Driver");
-		dbConnection = DriverManager.getConnection(connectionString, "root", "1337");
+		dbConnection = DriverManager.getConnection(connectionString, "root", "12345");
 
 		return dbConnection;
 	}
@@ -62,10 +62,10 @@ public class DatabaseHandler extends Configs
 		String insert = "INSERT INTO " +
 			Const.Order_Table + "(" + Const.Order_date + "," + Const.Order_rdate + "," +
 
-			Const.Order_commande + "," + Const.Order_quantity +  ")" + "Values(?,?,?,?)";
+			Const.Order_commande + "," + Const.Order_quantity + ")" + "Values(?,?,?,?)";
 
-			//Const.Order_commande + "," + Const.Order_quantity + "," + Const.Order_number + ")" +
-			//"Values(?,?,?,?,?)";
+		//Const.Order_commande + "," + Const.Order_quantity + "," + Const.Order_number + ")" +
+		//"Values(?,?,?,?,?)";
 
 		try
 		{
