@@ -20,7 +20,7 @@
                <children>
                   <AnchorPane prefHeight="169.0" prefWidth="900.0" style="-fx-background-color: #abd1b5;">
                      <children>
-                        <Text layoutX="401.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Orders" wrappingWidth="98.82421875">
+                        <Text fill="WHITE" layoutX="401.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Orders" wrappingWidth="98.82421875">
                            <font>
                               <Font name="Bell MT Italic" size="34.0" />
                            </font>
@@ -36,15 +36,16 @@
                   </AnchorPane>
                   <TableView fx:id="orderstable" layoutX="47.0" layoutY="125.0" prefHeight="355.0" prefWidth="807.0">
                     <columns>
-                      <TableColumn fx:id="orderID" prefWidth="175.0" style="-fx-background-color: #abd1b5;" text="OrderID" />
-                      <TableColumn fx:id="orderDate" prefWidth="190.0" style="-fx-background-color: #abd1b5;" text="Date" />
-                        <TableColumn fx:id="orderCommande" prefWidth="216.0" style="-fx-background-color: #abd1b5;" text="Commande" />
-                        <TableColumn fx:id="orderQuantity" prefWidth="225.0" style="-fx-background-color: #abd1b5;" text="Quantity" />
+                      <TableColumn fx:id="orderID" prefWidth="175.0" style="-fx-background-color: E8E8F8;" text="OrderID" />
+                      <TableColumn fx:id="orderDate" prefWidth="190.0" style="-fx-background-color: #E8E8F8;" text="Date" />
+                        <TableColumn fx:id="orderCommande" prefWidth="216.0" style="-fx-background-color: #E8E8F8;" text="Commande" />
+                        <TableColumn fx:id="orderQuantity" prefWidth="225.0" style="-fx-background-color: #E8E8F8;" text="Quantity" />
                     </columns>
                      <effect>
                         <DropShadow />
                      </effect>
                   </TableView>
+                  <Button fx:id="ORDERSUPDATE" layoutX="423.0" layoutY="508.0" mnemonicParsing="false" text="Refresh" />
                </children>
             </AnchorPane>
          </content>
@@ -53,16 +54,23 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="salesFn" layoutX="264.0" layoutY="61.0" />
-                  <TextField fx:id="salesLn" layoutX="264.0" layoutY="97.0" />
-                  <TextField fx:id="salesUn" disable="true" layoutX="264.0" layoutY="135.0" />
-                  <TextField fx:id="salesUn1" layoutX="264.0" layoutY="176.0" />
-                  <TextField fx:id="salesPw" layoutX="264.0" layoutY="237.0" />
-                  <Text layoutX="188.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First name" />
-                  <Text layoutX="188.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last name" />
-                  <Text layoutX="188.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
-                  <Text layoutX="188.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
-                  <Button fx:id="ordersSave" layoutX="264.0" layoutY="313.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="181.0" text="Save" />
+                  <AnchorPane layoutX="232.0" layoutY="77.0" prefHeight="367.0" prefWidth="436.0" style="-fx-background-color: #FFFFFF;">
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                     <children>
+                        <Button fx:id="ordersSave" layoutX="128.0" layoutY="301.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="181.0" text="Save" />
+                     </children>
+                  </AnchorPane>
+                  <TextField fx:id="salesFn" layoutX="353.0" layoutY="99.0" />
+                  <TextField fx:id="salesLn" layoutX="353.0" layoutY="135.0" />
+                  <TextField fx:id="salesUn" disable="true" layoutX="353.0" layoutY="173.0" />
+                  <TextField fx:id="salesUn1" layoutX="353.0" layoutY="214.0" />
+                  <TextField fx:id="salesPw" layoutX="353.0" layoutY="275.0" />
+                  <Text layoutX="277.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First name" />
+                  <Text layoutX="277.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last name" />
+                  <Text layoutX="277.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
+                  <Text layoutX="277.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
                </children>
             </AnchorPane>
         </content>

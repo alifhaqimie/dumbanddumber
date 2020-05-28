@@ -54,7 +54,7 @@ public class Const
 	public static final String Quantity_initial="quantiteinitial";
 	public static final String Quantity_consumed="quantiteconsome";
 	public static final String Quantity_ordered="quantitecommande";
-	public static final String Quantity_present="quantitepresente";
+	public static final String Quantity_present="quantitepresent";
 
 	public static final String Breakfast_Table="breakfast";
 	//Column names

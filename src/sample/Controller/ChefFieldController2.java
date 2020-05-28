@@ -2,6 +2,7 @@ package sample.Controller;
 
 import static sample.Database.DatabaseHandler.getDbConnection;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,22 +11,69 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
-
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import sample.Database.DatabaseHandler;
-import sample.Model.MenuTable;
-import sample.Model.OrderTable;
-import sample.Model.Patient;
-import sample.Model.Storage;
+import sample.Model.*;
 
 import javax.swing.*;
 
 public class ChefFieldController2
 {
+	@FXML
+	private ComboBox<String> menunames;
+
+	@FXML
+	private TextField gras1;
+
+	@FXML
+	private TextField fr1;
+
+	@FXML
+	private TextField leg1;
+
+	@FXML
+	private TextField cereal;
+
+	@FXML
+	private TextField gras2;
+
+	@FXML
+	private TextField fr2;
+
+	@FXML
+	private TextField leg2;
+
+	@FXML
+	private TextField cereal1;
+
+	@FXML
+	private TextField boi;
+
+	@FXML
+	private TextField fr3;
+
+	@FXML
+	private TextField leg3;
+
+	@FXML
+	private TextField vvpolav;
 
 	@FXML
 	private ResourceBundle									resources;
@@ -50,6 +98,33 @@ public class ChefFieldController2
 
 	@FXML
 	private DatePicker											ChefOrderDate;
+	@FXML
+	private ComboBox<String> MenuButton;
+
+	@FXML
+	private RadioMenuItem viande;
+
+	@FXML
+	private RadioMenuItem fraise;
+
+	@FXML
+	private TextField ConsumedQuantity;
+
+	@FXML
+	private TextField OrderedQuantity;
+
+	@FXML
+	private TextField PresentQuantity;
+
+	@FXML
+	private Button RefreshButton;
+
+	@FXML
+	private TextField InitialQuantity;
+
+	@FXML
+	private DatePicker DatePicker;
+
 
 	@FXML
 	private DatePicker											ChefReceptionDate;
@@ -73,7 +148,7 @@ public class ChefFieldController2
 	private RadioMenuItem										ChefPT;
 
 	@FXML
-	private RadioMenuItem										viande;
+	private RadioMenuItem										viandee;
 
 	@FXML
 	private RadioMenuItem										autre;
@@ -125,24 +200,83 @@ public class ChefFieldController2
 	private RadioMenuItem z1;
 	@FXML
 	private RadioMenuItem z2;
+	@FXML
+	private RadioMenuItem z11;
+	@FXML
+	private RadioMenuItem z21;
+	@FXML
+	private Button LOGOUT;
+	@FXML
+	private Button RefreshM;
 
 	@FXML
-	private Button													StorageDeleteButton;
+	private Button StorageDeleteButton;
 	Connection													conu	= null;
 	ObservableList<MenuTable>								tableau				= FXCollections.observableArrayList();
 	String																	pattern				= "yyyy-MM-dd";
 	DateTimeFormatter												dateFormatter	= DateTimeFormatter.ofPattern(pattern);
-	ObservableList<Storage>								tabl				= FXCollections.observableArrayList();
+	ObservableList<Storage>								tabl;
 	int																	index	= -1;
 	@FXML
 	void initialize()
 	{
 		databaseHandler = new DatabaseHandler();
-		storage.setEditable(true);
-		storage.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		Connection con = null;
+		try {
+			con = DatabaseHandler.getDbConnection();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+		ResultSet rs = null;
+
+		PreparedStatement prp = null;
+		try {
+			prp = con.prepareStatement("SELECT element FROM storagetable");
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+
+		try {
+			rs = prp.executeQuery();
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+		while (true)
+		{
+			try
+			{
+				if (!rs.next())
+					break;
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+			//Storage usr = new Storage();
+			//String naam = rs.getString("element");
+			//usr.setElement(naam);
+			//MenuItem temp = new MenuItem(naam);
+			try {
+				MenuButton.getItems().addAll(rs.getString("element"));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		RefreshButton.setOnAction(event ->{
+			AddData();
+		});
+		RefreshM.setOnAction(event -> {
+			UpdateTable();
+		});
 		//showstorage();
 		UpdateTabl();
 		UpdateTable();
+		UpdateComboBox();
+		storage.setEditable(true);
+		storage.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		databaseHandler = new DatabaseHandler();
 		ChefSubmit.setOnAction(event -> { addOrder();
             reseet();});
 		StorageAddElement.setOnAction(event ->{
@@ -156,6 +290,71 @@ public class ChefFieldController2
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
+		});
+		StorageModifyButton.setOnAction(event -> {
+			Edit();
+		});
+		menunames.setOnAction(event->{
+			String query="SELECT * FROM menutable WHERE name=?";
+			Connection conu = null;
+			try {
+				conu = DatabaseHandler.getDbConnection();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException throwables) {
+				throwables.printStackTrace();
+			}
+			ResultSet ris = null;
+			PreparedStatement prip = null;
+			try {
+				prip=conu.prepareStatement(query);
+			} catch (SQLException throwables) {
+				throwables.printStackTrace();
+			}
+			try {
+				prip.setString(1,(String)menunames.getSelectionModel().getSelectedItem());
+				ris = prip.executeQuery();
+				while (ris.next()){
+					gras1.setText(ris.getString("gras"));
+					gras2.setText(ris.getString("gras1"));
+					boi.setText(ris.getString("boi"));
+					fr1.setText(ris.getString("fruit1"));
+					fr2.setText(ris.getString("fruit2"));
+					fr3.setText(ris.getString("fruit3"));
+					leg1.setText(ris.getString("leg1"));
+					leg2.setText(ris.getString("leg2"));
+					leg3.setText(ris.getString("leg3"));
+					cereal.setText(ris.getString("cereal1"));
+					cereal1.setText(ris.getString("cereal2"));
+					vvpolav.setText(ris.getString("vvpolav"));
+				}
+				prip.close();
+				ris.close();
+			} catch (SQLException throwables) {
+				throwables.printStackTrace();
+			}
+
+		});
+		LOGOUT.setOnAction(event ->
+
+		{
+			LoginController.setUserConnectedId(null);
+			LOGOUT.getScene().getWindow().hide();
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/sample/view/Login.fxml"));
+			try
+			{
+				loader.load();
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+			Parent root = loader.getRoot();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.show();
+
 		});
 	}
 
@@ -254,6 +453,7 @@ public class ChefFieldController2
 			e.printStackTrace();
 		}
 		ResultSet rs = null;
+		ObservableList<Storage> tabl = FXCollections.observableArrayList();
 		try
 		{
 			rs = con
@@ -313,7 +513,8 @@ public class ChefFieldController2
 		}
 		TextidElement.setText(String.valueOf(StrorageIDElement.getCellData(index)).toString());
 		Textelement.setText(StrorageElement.getCellData(index).toString());
-
+		Textstoragezone.setText(StorageZone.getCellData(index).toString());
+		Textstoragetype.setText(StorageType.getCellData(index).toString());
 	}
 	@FXML
 	public void Delete() throws SQLException, ClassNotFoundException
@@ -335,18 +536,22 @@ public class ChefFieldController2
 		UpdateTabl();
 
 	}
-	private void addelement()
-	{
+	private void addelement() {
 		String element = Textelement.getText().trim();
 		String elementzone = " ";
-		if(z1.isSelected()){
-			elementzone="test1";
+		if (z1.isSelected()) {
+			elementzone = "A";
+		}
+		else if(z11.isSelected()){
+			elementzone= "B";
 		}else{
 			elementzone=Textstoragezone.getText().trim();
 		}
 		String elementtype = " ";
-		if(z2.isSelected()){
-			elementtype="test2";
+		if(z2.isSelected()) {
+			elementtype = "Cold";
+		}else if (z21.isSelected()){
+			elementtype = "Warm";
 
 		}else{
 			elementzone=Textstoragetype.getText().trim();
@@ -363,5 +568,87 @@ public class ChefFieldController2
 
 		databaseHandler.addelement(storage);
 		UpdateTabl();
+	}
+	public void Edit()
+	{
+		try
+		{
+			String tmp;
+			conu = DatabaseHandler.getDbConnection();
+
+			String val= TextidElement.getText();
+			String Value0= Textelement.getText();
+			String Value1 = Textstoragezone.getText();
+			String Value2 = Textstoragetype.getText();
+
+
+			String sql = "UPDATE storagetable SET element = '" +
+					Value0 + "',storagezone = '" + Value1 + "',storagetype = '" + Value2  + "' WHERE idelement = '"+val+"' ";
+			PreparedStatement psst = conu.prepareStatement(sql);
+			System.out.println(sql);
+			psst.execute();
+			UpdateTabl();
+		}
+		catch (SQLException | ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	private void UpdateComboBox() {
+		Connection con = null;
+		try {
+			con = DatabaseHandler.getDbConnection();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+		ResultSet rs = null;
+
+		PreparedStatement prp = null;
+		try {
+			prp = con.prepareStatement("SELECT name from menutable ");
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+
+		try {
+			rs = prp.executeQuery();
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+		while (true)
+		{
+			try
+			{
+				if (!rs.next())
+					break;
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+			try
+			{   menunames.getItems().addAll(rs.getString("name"));
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+
+	}
+	private void AddData() {
+		DatabaseHandler databaseHandler = new DatabaseHandler();
+
+		String elemnt = MenuButton.getValue().toString();
+		int initial = Integer.parseInt(InitialQuantity.getText());
+		int consumed = Integer.parseInt(ConsumedQuantity.getText());
+		int ordered = Integer.parseInt(OrderedQuantity.getText());
+		int present = Integer.parseInt(PresentQuantity.getText());
+
+		Quantity quantity = new Quantity(elemnt,initial,consumed,ordered,present);
+
+		databaseHandler.getQuantity(quantity);
 	}
 }

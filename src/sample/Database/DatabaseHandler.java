@@ -297,7 +297,7 @@ public class DatabaseHandler extends Configs
 	{
 		ResultSet resultSet = null;
 		List<String> list = new ArrayList();
-		String query = "SELECT name  FROM menutable Where plat = 'breakfast';";
+		String query = "SELECT name  FROM menutable ;";
 
 		PreparedStatement preparedStatement;
 		try

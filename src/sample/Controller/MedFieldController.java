@@ -6,13 +6,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
 import javax.swing.JOptionPane;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -41,6 +46,9 @@ public class MedFieldController
 
 	@FXML
 	private URL													location;
+
+	@FXML
+	private TextField searchField;
 
 	@FXML
 	private TableView<Table>						patientsTable;
@@ -167,6 +175,8 @@ public class MedFieldController
 
 	@FXML
 	private ComboBox<String>						cereal1;
+	@FXML
+	private Button Refreshbutton;
 
 	@FXML
 	private Button											logout;
@@ -178,10 +188,10 @@ public class MedFieldController
 	//final ObservableList lc =FXCollections.observableArrayList();
 	//final ObservableList di =FXCollections.observableArrayList();
 
+
 	@FXML
 	void initialize()
 	{
-		databaseHandler = new DatabaseHandler();
 		fill();
 		Connection con = null;
 		seethis();
@@ -213,6 +223,26 @@ public class MedFieldController
 				e.printStackTrace();
 			}
 		});
+		FilteredList<Table> filteredData = new FilteredList<>(oblist, event-> true);
+		searchField.setOnKeyPressed(event-> {
+					searchField.textProperty().addListener((observableValue, oldValue, newValue) -> {
+						filteredData.setPredicate((Predicate<? super Table>) table -> {
+							if (newValue == null || newValue.isEmpty()) {
+								return true;
+							}
+							String lowerCaseFilter = newValue.toLowerCase();
+							if (table.getFullname().toLowerCase().contains(lowerCaseFilter)) {
+								return true;
+							}
+							return false;
+						});
+					});
+			SortedList<Table> sortedData = new SortedList<>(filteredData);
+			sortedData.comparatorProperty().bind(patientsTable.comparatorProperty());
+			patientsTable.setItems(sortedData);
+
+		});
+
 
 		logout.setOnAction(event ->
 
@@ -241,7 +271,6 @@ public class MedFieldController
 		});
 		addmealbutton
 			.setOnAction(event -> { AddPlat(); seethis(); testing(); resetValues(); showw(); });
-
 	}
 
 	private void AddPlat()
@@ -293,7 +322,7 @@ public class MedFieldController
 		);
 
 		if (
-			(menus.equalsIgnoreCase("breakfast") &&
+			(//menus.equalsIgnoreCase("breakfast") &&
 				this.databaseHandler.getBreakfastNames().contains(name1)) ||
 				menus.equalsIgnoreCase("lunch") && this.databaseHandler.getLunchNames().contains(name1) || menus.equalsIgnoreCase("dinner") && this.databaseHandler.getDinnerNames().contains(name1)
 		)
