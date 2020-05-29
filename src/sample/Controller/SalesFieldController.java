@@ -102,6 +102,7 @@ public class SalesFieldController
 			SaveP();
 		});
 		ORDERSUPDATE.setOnAction(event -> {
+			oblista.removeAll(oblista);
 			UpdateTable();
 		});
 	}

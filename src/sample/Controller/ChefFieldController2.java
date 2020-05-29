@@ -268,6 +268,7 @@ public class ChefFieldController2
 			AddData();
 		});
 		RefreshM.setOnAction(event -> {
+			tableau.removeAll(tableau);
 			UpdateTable();
 		});
 		//showstorage();

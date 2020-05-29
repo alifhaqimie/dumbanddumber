@@ -9,6 +9,7 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -34,18 +35,21 @@
                            </effect></Button>
                      </children>
                   </AnchorPane>
-                  <TableView fx:id="orderstable" layoutX="47.0" layoutY="125.0" prefHeight="355.0" prefWidth="807.0">
+                  <TableView fx:id="orderstable" layoutX="47.0" layoutY="125.0" prefHeight="355.0" prefWidth="807.0" style="-fx-background-color: #FFFFFF;">
                     <columns>
-                      <TableColumn fx:id="orderID" prefWidth="175.0" style="-fx-background-color: E8E8F8;" text="OrderID" />
-                      <TableColumn fx:id="orderDate" prefWidth="190.0" style="-fx-background-color: #E8E8F8;" text="Date" />
-                        <TableColumn fx:id="orderCommande" prefWidth="216.0" style="-fx-background-color: #E8E8F8;" text="Commande" />
-                        <TableColumn fx:id="orderQuantity" prefWidth="225.0" style="-fx-background-color: #E8E8F8;" text="Quantity" />
+                      <TableColumn fx:id="orderID" prefWidth="175.0" style="-fx-background-color: #FFFFFF; -fx-text-fill: black;" text="OrderID" />
+                      <TableColumn fx:id="orderDate" prefWidth="190.0" style="-fx-background-color: #FFFFFF; -fx-text-fill: black;" text="Date" />
+                        <TableColumn fx:id="orderCommande" prefWidth="216.0" style="-fx-background-color: #FFFFFF; -fx-text-fill: black;" text="Commande" />
+                        <TableColumn fx:id="orderQuantity" prefWidth="225.0" style="-fx-background-color: #FFFFFF; -fx-text-fill: black;" text="Quantity" />
                     </columns>
                      <effect>
                         <DropShadow />
                      </effect>
                   </TableView>
-                  <Button fx:id="ORDERSUPDATE" layoutX="423.0" layoutY="508.0" mnemonicParsing="false" text="Refresh" />
+                  <Button fx:id="ORDERSUPDATE" layoutX="403.0" layoutY="514.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="94.0" style="-fx-background-color: #abd1b5; -fx-background-radius: 25;" text="Refresh">
+                     <effect>
+                        <DropShadow />
+                     </effect></Button>
                </children>
             </AnchorPane>
          </content>
@@ -54,22 +58,30 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <AnchorPane layoutX="232.0" layoutY="77.0" prefHeight="367.0" prefWidth="436.0" style="-fx-background-color: #FFFFFF;">
+                  <AnchorPane layoutX="204.0" layoutY="77.0" prefHeight="367.0" prefWidth="402.0" style="-fx-background-color: #FFFFFF;">
                      <effect>
                         <DropShadow />
                      </effect>
                      <children>
-                        <Button fx:id="ordersSave" layoutX="128.0" layoutY="301.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="181.0" text="Save" />
+                        <Button fx:id="ordersSave" layoutX="117.0" layoutY="301.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="181.0" style="-fx-background-color: #abd1b5;" text="Save" />
                      </children>
                   </AnchorPane>
-                  <TextField fx:id="salesFn" layoutX="353.0" layoutY="99.0" />
-                  <TextField fx:id="salesLn" layoutX="353.0" layoutY="135.0" />
-                  <TextField fx:id="salesUn" disable="true" layoutX="353.0" layoutY="173.0" />
-                  <TextField fx:id="salesUn1" layoutX="353.0" layoutY="214.0" />
+                  <VBox layoutX="353.0" layoutY="99.0" spacing="10.0">
+                     <children>
+                        <TextField fx:id="salesFn" />
+                        <TextField fx:id="salesLn" />
+                        <TextField fx:id="salesUn" disable="true" />
+                        <TextField fx:id="salesUn1" />
+                     </children>
+                  </VBox>
                   <TextField fx:id="salesPw" layoutX="353.0" layoutY="275.0" />
-                  <Text layoutX="277.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First name" />
-                  <Text layoutX="277.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last name" />
-                  <Text layoutX="277.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
+                  <VBox layoutX="277.0" layoutY="103.05078125" spacing="20.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First name" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last name" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
+                     </children>
+                  </VBox>
                   <Text layoutX="277.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
                </children>
             </AnchorPane>

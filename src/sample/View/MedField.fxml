@@ -13,7 +13,6 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -138,28 +137,24 @@
                               <DropShadow />
                            </effect>
                            <children>
-                              <HBox layoutX="54.0" layoutY="60.0" spacing="200.0">
-                                 <children>
-                                            <RadioButton fx:id="BreakfastCheckBox" mnemonicParsing="false" prefHeight="17.0" prefWidth="85.0" text="Breakfast" textFill="WHITE">
-                                                <font>
-                                                    <Font name="System Bold" size="13.0" />
-                                                </font>
-                                       <toggleGroup>
-                                                    <ToggleGroup fx:id="lolo" />
-                                       </toggleGroup>
-                                            </RadioButton>
-                                            <RadioButton fx:id="LunchCheckBox" mnemonicParsing="false" text="Lunch" textFill="#fffafa" toggleGroup="$lolo">
-                                                <font>
-                                                    <Font name="System Bold" size="13.0" />
-                                                </font>
-                                            </RadioButton>
-                                            <RadioButton fx:id="DinnerCheckBox" mnemonicParsing="false" text="Dinner" textFill="WHITE" toggleGroup="$lolo">
-                                                <font>
-                                                    <Font name="System Bold" size="13.0" />
-                                                </font>
-                                            </RadioButton>
-                                 </children>
-                              </HBox>
+                                      <RadioButton fx:id="BreakfastCheckBox" layoutX="38.0" layoutY="60.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="85.0" text="Breakfast" textFill="WHITE">
+                                          <font>
+                                              <Font name="System Bold" size="13.0" />
+                                          </font>
+                                 <toggleGroup>
+                                              <ToggleGroup fx:id="lolo" />
+                                 </toggleGroup>
+                                      </RadioButton>
+                                      <RadioButton fx:id="LunchCheckBox" layoutX="304.0" layoutY="60.0" mnemonicParsing="false" text="Lunch" textFill="#fffafa" toggleGroup="$lolo">
+                                          <font>
+                                              <Font name="System Bold" size="13.0" />
+                                          </font>
+                                      </RadioButton>
+                                      <RadioButton fx:id="DinnerCheckBox" layoutX="551.0" layoutY="60.0" mnemonicParsing="false" text="Dinner" textFill="WHITE" toggleGroup="$lolo">
+                                          <font>
+                                              <Font name="System Bold" size="13.0" />
+                                          </font>
+                                      </RadioButton>
                               <VBox layoutX="282.0" layoutY="102.0" spacing="15.0">
                                  <children>
                                     <ComboBox fx:id="gras2" prefHeight="25.0" prefWidth="150.0" promptText="Matiere grasse" style="-fx-background-color: #FFFFFF;" />

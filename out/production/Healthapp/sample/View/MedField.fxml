@@ -13,6 +13,7 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -99,19 +100,27 @@
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;">
                             <children>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="573.0" layoutX="-1.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: #abd1b5;" width="228.0" />
-                        <AnchorPane layoutX="178.0" layoutY="99.0" prefHeight="360.0" prefWidth="545.0" style="-fx-background-color: #FFFFFF;">
+                        <AnchorPane layoutX="178.0" layoutY="99.0" prefHeight="360.0" prefWidth="545.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 25;">
                            <effect>
                               <DropShadow />
                            </effect>
                            <children>
-                                      <Text layoutX="100.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First name" wrappingWidth="93.13671875" />
-                                      <Text layoutX="100.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last name" wrappingWidth="93.13671875" />
-                                      <Text layoutX="100.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="93.13671875" />
+                              <VBox layoutX="100.0" layoutY="28.05078125" spacing="20.0">
+                                 <children>
+                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First name" wrappingWidth="93.13671875" />
+                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last name" wrappingWidth="93.13671875" />
+                                            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="93.13671875" />
+                                 </children>
+                              </VBox>
                                       <Text layoutX="100.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="93.13671875" />
-                                      <TextField fx:id="medFName" layoutX="220.0" layoutY="24.0" />
-                                      <TextField fx:id="medLName" layoutX="220.0" layoutY="59.0" />
-                                      <TextField fx:id="medUsername" disable="true" layoutX="220.0" layoutY="94.0" />
-                                      <TextField fx:id="medUsername1" layoutX="220.0" layoutY="130.0" promptText="new username" />
+                              <VBox layoutX="220.0" layoutY="24.0" spacing="10.0">
+                                 <children>
+                                            <TextField fx:id="medFName" />
+                                            <TextField fx:id="medLName" />
+                                            <TextField fx:id="medUsername" disable="true" />
+                                            <TextField fx:id="medUsername1" promptText="new username" />
+                                 </children>
+                              </VBox>
                                       <PasswordField fx:id="medPw" layoutX="220.0" layoutY="194.0" />
                                       <Button fx:id="medSaveB" layoutX="152.0" layoutY="280.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="259.0" style="-fx-background-color: #abd1b5; -fx-background-radius: 25PX;" text="Save" />
                            </children>
@@ -124,45 +133,69 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;">
                             <children>
-                        <AnchorPane layoutX="95.0" layoutY="45.0" prefHeight="447.0" prefWidth="711.0" style="-fx-background-color: #FFFFFF;">
+                        <AnchorPane layoutX="95.0" layoutY="45.0" prefHeight="447.0" prefWidth="711.0" style="-fx-background-color: #abd1b5; -fx-background-radius: 30;">
                            <effect>
                               <DropShadow />
                            </effect>
                            <children>
-                                      <RadioButton fx:id="DinnerCheckBox" layoutX="547.0" layoutY="25.0" mnemonicParsing="false" text="Dinner">
-                                          <font>
-                                              <Font size="13.0" />
-                                          </font>
-                                 <toggleGroup>
-                                              <ToggleGroup fx:id="lolo" />
-                                 </toggleGroup>
-                                      </RadioButton>
-                                      <RadioButton fx:id="LunchCheckBox" layoutX="334.0" layoutY="25.0" mnemonicParsing="false" text="Lunch" toggleGroup="$lolo">
-                                          <font>
-                                              <Font size="13.0" />
-                                          </font>
-                                      </RadioButton>
-                                      <RadioButton fx:id="BreakfastCheckBox" layoutX="99.0" layoutY="25.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="85.0" text="Breakfast" toggleGroup="$lolo">
-                                          <font>
-                                              <Font size="13.0" />
-                                          </font>
-                                      </RadioButton>
-                                      <ComboBox fx:id="fruit2" layoutX="297.0" layoutY="186.0" prefWidth="150.0" promptText="Fruit" />
-                                      <ComboBox fx:id="leg2" layoutX="297.0" layoutY="140.0" prefWidth="150.0" promptText="Legumes" />
-                                      <ComboBox fx:id="cereal2" layoutX="24.0" layoutY="231.0" prefWidth="150.0" promptText="produits cerealiser" />
-                                      <ComboBox fx:id="vvpolav" layoutX="535.0" layoutY="186.0" prefHeight="25.0" prefWidth="150.0" promptText="vvpolav" />
-                                      <ComboBox fx:id="boi" layoutX="535.0" layoutY="84.0" prefHeight="25.0" prefWidth="150.0" promptText="Boissons" />
-                              <ComboBox fx:id="fruit3" layoutX="535.0" layoutY="140.0" prefHeight="25.0" prefWidth="150.0" promptText="fruit" />
-                                      <ComboBox fx:id="leg3" layoutX="535.0" layoutY="231.0" prefHeight="25.0" prefWidth="150.0" promptText="Legumes" />
-                              <ComboBox fx:id="gras2" layoutX="297.0" layoutY="84.0" prefHeight="25.0" prefWidth="150.0" promptText="Matiere grasse" />
-                                      <ComboBox fx:id="frui1" layoutX="24.0" layoutY="140.0" prefWidth="150.0" promptText="Fruit" />
-                                      <ComboBox fx:id="leg1" layoutX="24.0" layoutY="186.0" prefWidth="150.0" promptText="Legumes" />
-                              <ComboBox fx:id="cereal1" layoutX="297.0" layoutY="231.0" prefWidth="150.0" promptText="produits cerealiser" />
-                                      <ComboBox fx:id="gras1" layoutX="24.0" layoutY="84.0" prefWidth="150.0" promptText="Matiere grasse" />
-                                      <TextField fx:id="name" alignment="CENTER" layoutX="262.0" layoutY="322.0" prefHeight="25.0" prefWidth="221.0" promptText="Name it" />
+                              <HBox layoutX="54.0" layoutY="60.0" spacing="200.0">
+                                 <children>
+                                            <RadioButton fx:id="BreakfastCheckBox" mnemonicParsing="false" prefHeight="17.0" prefWidth="85.0" text="Breakfast" textFill="WHITE">
+                                                <font>
+                                                    <Font name="System Bold" size="13.0" />
+                                                </font>
+                                       <toggleGroup>
+                                                    <ToggleGroup fx:id="lolo" />
+                                       </toggleGroup>
+                                            </RadioButton>
+                                            <RadioButton fx:id="LunchCheckBox" mnemonicParsing="false" text="Lunch" textFill="#fffafa" toggleGroup="$lolo">
+                                                <font>
+                                                    <Font name="System Bold" size="13.0" />
+                                                </font>
+                                            </RadioButton>
+                                            <RadioButton fx:id="DinnerCheckBox" mnemonicParsing="false" text="Dinner" textFill="WHITE" toggleGroup="$lolo">
+                                                <font>
+                                                    <Font name="System Bold" size="13.0" />
+                                                </font>
+                                            </RadioButton>
+                                 </children>
+                              </HBox>
+                              <VBox layoutX="282.0" layoutY="102.0" spacing="15.0">
+                                 <children>
+                                    <ComboBox fx:id="gras2" prefHeight="25.0" prefWidth="150.0" promptText="Matiere grasse" style="-fx-background-color: #FFFFFF;" />
+                                            <ComboBox fx:id="leg2" prefWidth="150.0" promptText="Legume" style="-fx-background-color: #FFFFFF;" />
+                                            <ComboBox fx:id="fruit2" prefWidth="150.0" promptText="Fruit" style="-fx-background-color: #FFFFFF;" />
+                                    <ComboBox fx:id="cereal1" prefWidth="150.0" promptText="Produit cerealisé" style="-fx-background-color: #FFFFFF;" />
+                                 </children>
+                              </VBox>
+                              <VBox layoutX="24.0" layoutY="102.0" spacing="15.0">
+                                 <children>
+                                            <ComboBox fx:id="gras1" prefWidth="150.0" promptText="Matiere grasse" style="-fx-background-color: #FFFFFF;" />
+                                            <ComboBox fx:id="frui1" prefWidth="150.0" promptText="Fruit" style="-fx-background-color: #FFFFFF;" />
+                                            <ComboBox fx:id="leg1" prefWidth="150.0" promptText="Legumes" style="-fx-background-color: #FFFFFF;" />
+                                            <ComboBox fx:id="cereal2" prefWidth="150.0" promptText="Produit cerealisé" style="-fx-background-color: #FFFFFF;" />
+                                 </children>
+                              </VBox>
+                              <VBox layoutX="535.0" layoutY="102.0" spacing="15.0">
+                                 <children>
+                                            <ComboBox fx:id="boi" prefHeight="25.0" prefWidth="150.0" promptText="Boisson" style="-fx-background-color: #FFFFFF;" />
+                                    <ComboBox fx:id="fruit3" prefHeight="25.0" prefWidth="150.0" promptText="Fruit" style="-fx-background-color: #FFFFFF;" />
+                                            <ComboBox fx:id="vvpolav" prefHeight="25.0" prefWidth="150.0" promptText="Vvpolav" style="-fx-background-color: #FFFFFF;" />
+                                            <ComboBox fx:id="leg3" prefHeight="25.0" prefWidth="150.0" promptText="Legume" style="-fx-background-color: #FFFFFF;" />
+                                 </children>
+                              </VBox>
+                              <VBox layoutX="245.0" layoutY="322.0" spacing="15.0">
+                                 <children>
+                                            <TextField fx:id="name" alignment="CENTER" prefHeight="25.0" prefWidth="221.0" promptText="Name it" style="-fx-background-radius: 25;" />
+                                            <Button fx:id="addmealbutton" mnemonicParsing="false" prefHeight="25.0" prefWidth="224.0" style="-fx-background-radius: 24PX; -fx-background-color: #FFFFFF;" text="Add meal">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                    </Button>
+                                 </children>
+                              </VBox>
                            </children>
                         </AnchorPane>
-                                <Button fx:id="addmealbutton" layoutX="346.0" layoutY="428.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="240.0" style="-fx-background-radius: 24PX; -fx-background-color: #abd1b5;" text="Add meal" />
                             </children>
                         </AnchorPane>
                     </content>
