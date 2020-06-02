@@ -1,7 +1,9 @@
 <component name="ProjectDictionaryState">
-  <dictionary name="dell">
+  <dictionary name="DeLL">
     <words>
-      <w>loginup</w>
+      <w>loginusername</w>
+      <w>signupbutton</w>
+      <w>signupusername</w>
     </words>
   </dictionary>
 </component>

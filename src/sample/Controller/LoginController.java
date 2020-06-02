@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import sample.Animation.Shaker;
 import sample.Database.DatabaseHandler;
 import sample.Model.User;
+import javafx.stage.StageStyle;
 
 public class LoginController
 {
@@ -141,6 +142,7 @@ public class LoginController
 			}
 			Parent root = loader.getRoot();
 			Stage stage = new Stage();
+			stage.setResizable(false);
 			stage.setScene(new Scene(root));
 			stage.showAndWait();
 
@@ -178,6 +180,7 @@ public class LoginController
 		}
 		Parent root = loader.getRoot();
 		Stage stage = new Stage();
+		stage.setResizable(false);
 		stage.setScene(new Scene(root));
 		stage.showAndWait();
 
@@ -188,7 +191,7 @@ public class LoginController
 	{
 		registerbutton.getScene().getWindow().hide();
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/sample/view/ChefField2.fxml"));
+		loader.setLocation(getClass().getResource("/sample/view/ChefField.fxml"));
 		try
 		{
 			loader.load();
@@ -199,6 +202,7 @@ public class LoginController
 		}
 		Parent root = loader.getRoot();
 		Stage stage = new Stage();
+		stage.setResizable(false);
 		stage.setScene(new Scene(root));
 		stage.showAndWait();
 
@@ -220,6 +224,7 @@ public class LoginController
 		}
 		Parent root = loader.getRoot();
 		Stage stage = new Stage();
+		stage.setResizable(false);
 		stage.setScene(new Scene(root));
 		stage.showAndWait();
 

@@ -1,8 +1,10 @@
 package sample.Model;
 
-public class Quantity {
-    String element;
+import java.time.LocalDate;
 
+public class Quantity {
+    LocalDate date;
+    String element;
     int initial;
     int consumed;
     int ordered;
@@ -11,14 +13,23 @@ public class Quantity {
     public Quantity() {
     }
 
-    public Quantity(String element, int initial, int consumed, int ordered, int present) {
+    public Quantity(LocalDate date, String element, int initial, int consumed, int ordered, int present) {
+        this.date = date;
         this.element = element;
-
         this.initial = initial;
         this.consumed = consumed;
         this.ordered = ordered;
         this.present = present;
     }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     public String getElement() {
         return element;
     }
@@ -26,6 +37,7 @@ public class Quantity {
     public void setElement(String element) {
         this.element = element;
     }
+
     public int getInitial() {
         return initial;
     }

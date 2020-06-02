@@ -183,22 +183,36 @@ public class SalesFieldController
 		try
 		{
 			String tmp;
+			int a=0;
 			conu = DatabaseHandler.getDbConnection();
 			String v1 = salesFn.getText();
 			String v2 = salesLn.getText();
-			String v3 = salesLn.getText();
+			String v3 = salesUn1.getText();
+			if(v3.isEmpty()){
+				a=1;
+				v3=salesUn.getText().trim();
+			}
 			String v4 = salesPw.getText();
 			boolean exists = false;
 			List<String> listUsernames = databaseHandler.getListUsernames();
-			for (String user : listUsernames)
-			{
-				if (user.equalsIgnoreCase(v3))
-				{
-					exists = true;
-					Shaker userNameShaker = new Shaker(salesUn);
-					userNameShaker.shake();
-					break;
+			if (a==0) {
+				for (String user : listUsernames) {
+					if (user.equalsIgnoreCase(v3)) {
+						exists = true;
+						Shaker userNameShaker = new Shaker(salesUn1);
+						userNameShaker.shake();
+						break;
+					}
 				}
+			}
+			if(a==1){
+				String sql = "UPDATE userstable SET firstname = '" +
+						v1 + "',lastname = '" + v2 + "',password = '" + v4 +
+						"' WHERE userid = ?";
+				PreparedStatement psst = conu.prepareStatement(sql);
+				psst.setInt(1, LoginController.userConnectedId);
+				psst.execute();
+
 			}
 			if (!exists)
 			{
